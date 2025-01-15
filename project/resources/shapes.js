@@ -168,3 +168,30 @@ function drawShapeModel(gl, program, cameraMatrix, modelMatrix, n, transform) {
   // Render
   gl.drawElements(gl.TRIANGLES, n, gl.UNSIGNED_SHORT, 0);
 }
+
+/**
+ *
+ * @param {WebGLRenderingContext} gl
+ * @param {WebGLProgram} program
+ * @param cameraMatrix
+ * @param modelMatrix
+ * @param n
+ */
+function drawModel(gl, program, cameraMatrix, modelMatrix, n) {
+  // Set the model matrix (add the custom scale if any)
+  const model = gl.getUniformLocation(program, 'model');
+  gl.uniformMatrix4fv(model, false, modelMatrix.toFloat32Array());
+
+  // Set the cube's mvp matrix (camera x model)
+  const mvpMatrix = (new DOMMatrix(modelMatrix)).preMultiplySelf(cameraMatrix);
+  const mvp = gl.getUniformLocation(program, 'mvp');
+  gl.uniformMatrix4fv(mvp, false, mvpMatrix.toFloat32Array());
+
+  // Set the inverse transpose of the model matrix
+  const inverseTransposeMatrix = transpose((new DOMMatrix(modelMatrix)).invertSelf());
+  const inverseTranspose = gl.getUniformLocation(program, 'inverseTranspose');
+  gl.uniformMatrix4fv(inverseTranspose, false, inverseTransposeMatrix.toFloat32Array());
+
+  // Render
+  gl.drawElements(gl.TRIANGLES, n, gl.UNSIGNED_SHORT, 0);
+}
