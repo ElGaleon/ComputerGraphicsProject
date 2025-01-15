@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Computer Graphic Project</title>
   <link rel="stylesheet" href="./css/style.css">
   <meta name="description" content="">
 
@@ -23,11 +23,65 @@
 </head>
 
 <body>
+  <canvas id="gl-canvas" height="720" width="720">
+    HTML5 is not supported in your browser.
+  </canvas>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="./js/app.js"></script>
+  <script id="vertex-source" type="x-shader/x-vertex">
+    attribute vec4 position;
+    attribute vec4 color;
+    attribute vec4 normal;
+    uniform mat4 mvp;
+    uniform mat4 model;            // model matrix
+    uniform mat4 inverseTranspose; // inversed transposed model matrix
+    varying vec4 v_color;
+    varying vec3 v_normal;
+    varying vec3 v_position;
+    void main() {
 
+      // Apply the model matrix and the camera matrix to the vertex position
+      gl_Position = mvp * position;
+
+      // Set varying position for the fragment shader
+      v_position = vec3(model * position);
+
+      // Recompute the face normal
+      v_normal = normalize(vec3(inverseTranspose * normal));
+
+      // Set the color
+      v_color = color;
+    }
+  </script>
+  <script id="fragment-source" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec3 lightColor;
+    uniform vec3 lightPosition;
+    uniform vec3 ambientLight;
+    varying vec3 v_normal;
+    varying vec3 v_position;
+    varying vec4 v_color;
+    void main() {
+
+      // Compute direction between the light and the current point
+      vec3 lightDirection = normalize(lightPosition - v_position);
+
+      // Compute angle between the normal and that direction
+      float nDotL = max(dot(lightDirection, v_normal), 0.0);
+
+      // Compute diffuse light proportional to this angle
+      vec3 diffuse = lightColor * v_color.rgb * nDotL;
+
+      // Compute ambient light
+      vec3 ambient = ambientLight * v_color.rgb;
+
+      // Compute total light (diffuse + ambient)
+      gl_FragColor = vec4(diffuse + ambient, 1.0);
+    }
+  </script>
+  <script src="./js/app.js" type="module"></script>
+  <script src="./resources/boilerplate.js"></script>
+  <script src="./resources/gl-camera.js"></script>
+  <script src="./resources/shapes.js"></script>
 </body>
 
 </html>

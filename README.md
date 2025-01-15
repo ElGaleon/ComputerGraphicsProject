@@ -25,7 +25,7 @@ Si progetti e implementi un'applicazione 3D interattiva composta da almeno un og
 
 ## Elementi di Giudizio
 Elementi qualificanti il progetto saranno l'originalità delle scelte (tipo di applicazione, oggetti, scenografia, texture, ecc.) e le funzionalità dal punto di vista grafico del codice realizzato. Si rammenti che il progetto è sulla grafica 3D.
-Consegna
+### Consegna
 Si richiede di consegnare un archivio **cognome.zip** (file zippato) contenente due cartelle:
 - la prima si chiami "**project**" e contenga il codice;
 - la seconda si chiami "doc" e contenga una relazione in html sul progetto realizzato (descrizione dell'applicazione e suo utilizzo, spiegazione delle scelte effettuate, funzionalità WebGL utilizzate, particolarità). <br/>
