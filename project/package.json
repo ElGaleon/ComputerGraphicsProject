@@ -6,9 +6,7 @@
   "license": "",
   "author": "Christian Galeone",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/.bin/webpack serve --open --config webpack.config.dev.js",
-    "build": "node_modules/.bin/webpack --config webpack.config.prod.js"
+    "start": "webpack --watch"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",

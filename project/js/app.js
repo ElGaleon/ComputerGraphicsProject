@@ -1,184 +1,168 @@
-const canvas = initCanvas('#gl-canvas');
-const gl = initWebGLContext(canvas);
-
-const arm = document.getElementById('arm');
-const hand = document.getElementById('hand');
-
 const vertexShaderSource = `
-    attribute vec4 position;
-attribute vec4 color;
-attribute vec4 normal;
-uniform mat4 mvp;
-uniform mat4 model;            // model matrix
-uniform mat4 inverseTranspose; // inversed transposed model matrix
-varying vec4 v_color;
-varying vec3 v_normal;
-varying vec3 v_position;
-void main() {
+            attribute vec3 aPosition;
+            attribute vec2 aTexCoord;
+            uniform mat4 uModelViewMatrix;
+            uniform mat4 uProjectionMatrix;
+            varying vec2 vTexCoord;
 
-  // Apply the model matrix and the camera matrix to the vertex position
-  gl_Position = mvp * position;
-
-  // Set varying position for the fragment shader
-  v_position = vec3(model * position);
-
-  // Recompute the face normal
-  v_normal = normalize(vec3(inverseTranspose * normal));
-
-  // Set the color
-  v_color = color;
-}`;
+            void main() {
+                gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aPosition, 1.0);
+                vTexCoord = aTexCoord;
+            }
+        `;
 
 const fragmentShaderSource = `
-    precision mediump float;
-uniform vec3 lightColor;
-uniform vec3 lightPosition;
-uniform vec3 ambientLight;
-varying vec3 v_normal;
-varying vec3 v_position;
-varying vec4 v_color;
-void main() {
+            precision mediump float;
+            varying vec2 vTexCoord;
+            uniform sampler2D uSampler;
 
-  // Compute direction between the light and the current point
-  vec3 lightDirection = normalize(lightPosition - v_position);
+            void main() {
+                gl_FragColor = texture2D(uSampler, vTexCoord);
+            }
+        `;
 
-  // Compute angle between the normal and that direction
-  float nDotL = max(dot(lightDirection, v_normal), 0.0);
+function createShader(gl, type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
 
-  // Compute diffuse light proportional to this angle
-  vec3 diffuse = lightColor * v_color.rgb * nDotL;
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error("Shader compile error: " + gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
 
-  // Compute ambient light
-  vec3 ambient = ambientLight * v_color.rgb;
-
-  // Compute total light (diffuse + ambient)
-  gl_FragColor = vec4(diffuse + ambient, 1.0);
-}
-  `;
-
-// Compile program
-const program = compileProgram(gl, vertexShaderSource, fragmentShaderSource);
-
-// Initialize a cube
-const cube = new Cube();
-// Count vertices
-var n = cube.indices.length;
-
-// Set position, normal buffers
-compileBuffer(gl, cube.vertices, program, 'position', 3, gl.FLOAT);
-compileBuffer(gl, cube.normals, program, 'normal', 3, gl.FLOAT);
-
-// Set indices
-const indexBuffer = gl.createBuffer();
-gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, cube.indices, gl.STATIC_DRAW);
-
-// Set cube color
-const color = gl.getAttribLocation(program, 'color');
-gl.vertexAttrib3f(color, 1, 0, 0);
-
-// Set the clear color and enable the depth test
-gl.clearColor(0, 0, 0, 1);
-gl.enable(gl.DEPTH_TEST);
-
-// Set the camera
-const cameraMatrix = perspective({fov: 30, aspect: 1, near: 1, far: 100});
-cameraMatrix.translateSelf(0, 0, -15);
-
-// Set the point light color and position
-const lightColor = gl.getUniformLocation(program, 'lightColor');
-gl.uniform3f(lightColor, 1, 0, 1);
-
-const lightPosition = gl.getUniformLocation(program, 'lightPosition');
-gl.uniform3fv(lightPosition, new Float32Array([0, 0, 2]));
-
-// Set the ambient light color
-const ambientLight = gl.getUniformLocation(program, 'ambientLight');
-gl.uniform3f(ambientLight, .35, .1, .1);
-
-// Click the buttons to update the arm/hand angles
-const ANGLE_STEP = 3;
-let armAngle = 180;
-let handAngle = 45;
-
-let armClicked = 0;
-
-arm.onmousedown = () => {
-  armClicked = 1;
+  return shader;
 }
 
-arm.onmouseup = () => {
-  armClicked = 0;
+function createProgram(gl, vertexShader, fragmentShader) {
+  const program = gl.createProgram();
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragmentShader);
+  gl.linkProgram(program);
+
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    console.error("Program link error: " + gl.getProgramInfoLog(program));
+    gl.deleteProgram(program);
+    return null;
+  }
+
+  return program;
 }
 
-let handClicked = 0;
+function createSphere(radius, segments) {
+  const positions = [];
+  const texCoords = [];
+  const indices = [];
 
-hand.onmousedown = () => {
-  handClicked = 1;
+  for (let y = 0; y <= segments; y++) {
+    const theta = y * Math.PI / segments;
+    const sinTheta = Math.sin(theta);
+    const cosTheta = Math.cos(theta);
+
+    for (let x = 0; x <= segments; x++) {
+      const phi = x * 2 * Math.PI / segments;
+      const sinPhi = Math.sin(phi);
+      const cosPhi = Math.cos(phi);
+
+      const u = x / segments;
+      const v = y / segments;
+
+      const px = radius * cosPhi * sinTheta;
+      const py = radius * cosTheta;
+      const pz = radius * sinPhi * sinTheta;
+
+      positions.push(px, py, pz);
+      texCoords.push(u, v);
+    }
+  }
+
+  for (let y = 0; y < segments; y++) {
+    for (let x = 0; x < segments; x++) {
+      const a = y * (segments + 1) + x;
+      const b = a + segments + 1;
+
+      indices.push(a, b, a + 1);
+      indices.push(b, b + 1, a + 1);
+    }
+  }
+
+  return { positions, texCoords, indices };
 }
 
-hand.onmouseup = () => {
-  handClicked = 0;
+function main() {
+  const canvas = document.getElementById('gl-canvas');
+  const gl = canvas.getContext('webgl');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  if (!gl) {
+    console.error("WebGL not supported.");
+    return;
+  }
+
+  // Compile shaders and create a program
+  const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+  const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+  const program = createProgram(gl, vertexShader, fragmentShader);
+
+  gl.useProgram(program);
+
+  // Create sphere data
+  const sphere = createSphere(1, 32);
+
+  // Create buffers
+  const positionBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(sphere.positions), gl.STATIC_DRAW);
+
+  const texCoordBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(sphere.texCoords), gl.STATIC_DRAW);
+
+  const indexBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(sphere.indices), gl.STATIC_DRAW);
+
+  // Set attributes
+  const aPosition = gl.getAttribLocation(program, 'aPosition');
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
+  gl.enableVertexAttribArray(aPosition);
+
+  const aTexCoord = gl.getAttribLocation(program, 'aTexCoord');
+  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+  gl.vertexAttribPointer(aTexCoord, 2, gl.FLOAT, false, 0, 0);
+  gl.enableVertexAttribArray(aTexCoord);
+
+  // Set uniforms
+  const uModelViewMatrix = gl.getUniformLocation(program, 'uModelViewMatrix');
+  const uProjectionMatrix = gl.getUniformLocation(program, 'uProjectionMatrix');
+
+  const modelViewMatrix = m4.perspective(Math.PI / 4, canvas.width / canvas.height, 0.1, 100);
+  m4.translate(modelViewMatrix, modelViewMatrix, [0, 0, -3]);
+
+  const projectionMatrix = m4.perspective(Math.PI / 4, canvas.width / canvas.height, 0.1, 100);
+
+  gl.uniformMatrix4fv(uModelViewMatrix, false, modelViewMatrix);
+  gl.uniformMatrix4fv(uProjectionMatrix, false, projectionMatrix);
+
+  webglUtils.setBuffersAndAttributes(gl, program, sphere);
+
+  // Render loop
+  function render() {
+    gl.clearColor(0, 0, 0, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    gl.enable(gl.DEPTH_TEST);
+
+    gl.drawElements(gl.TRIANGLES, sphere.indices.length, gl.UNSIGNED_SHORT, 0);
+
+    requestAnimationFrame(render);
+  }
+
+  render();
 }
 
-/**
- *
- * @param {WebGLRenderingContext} gl
- * @param {number} n
- * @param {DOMMatrix} cameraMatrix
- */
-// Draw the complete arm
-function drawArm (gl, n, cameraMatrix) {
-
-  // Clear color and depth buffer
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-  // Shoulder
-  const shoulderModelMatrix = new DOMMatrix();
-  shoulderModelMatrix.rotateSelf(90, 0, 0).translateSelf(-3, 0, 0).scaleSelf(2, 1, 1);
-  drawModel(gl, program, cameraMatrix, shoulderModelMatrix, n);
-
-  // Arm
-  const modelMatrix = new DOMMatrix();
-  modelMatrix.rotateSelf(armAngle, 0, 0).translateSelf(0, -2, 0).scaleSelf(1, 3, 1);
-  drawModel(gl, program, cameraMatrix, modelMatrix, n);
-
-  // Hand (reuse the same matrix!)
-  modelMatrix.rotateSelf(0, handAngle, 0).translateSelf(0, -1, 0).scaleSelf(2, .1, 2);
-  drawModel(gl, program, cameraMatrix, modelMatrix, n);
-}
-
-// Update the angles and redraw the arm at each frame
-setInterval(() => {
-  if(armClicked){ armAngle = (armAngle + ANGLE_STEP) % 360; }
-  if(handClicked){ handAngle = (handAngle + ANGLE_STEP) % 360; }
-  drawArm(gl, n, cameraMatrix);
-}, 100);
-
-
-/*
-/**
- *
- * @param {WebGLRenderingContext} gl
- * @param {number} n
- * @param {DOMMatrix} cameraMatrix
-
-function drawArm(gl, n, cameraMatrix) {
-  // Clear color and depth buffer
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-  // Shoulder
-  const shoulderModelMatrix = new DOMMatrix();
-  shoulderModelMatrix.rotateSelf(45, 0, 0).translateSelf(-3,0,0).scaleSelf(2,1,1);
-  drawModel(gl, program, cameraMatrix, shoulderModelMatrix, n);
-
-  // Arm
-  const armModelMatrix =  new DOMMatrix();
-  armModelMatrix.rotateSelf(armAngle, 0, 0).translateSelf(0,-2,0).scaleSelf(1,3,1);
-  drawModel(gl, program, cameraMatrix, armModelMatrix, n);
-
-  // Hand - reuse the same matrix
-  armModelMatrix.rotateSelf(0, handAngle, 0).translateSelf(0,-1,0).scaleSelf(2,.1,2);
-  drawModel(gl, program, cameraMatrix, armModelMatrix, n);
-}
- */
+main();
