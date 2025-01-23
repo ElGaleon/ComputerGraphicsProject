@@ -6,6 +6,7 @@
   "license": "",
   "author": "Christian Galeone",
   "scripts": {
+    "build": "webpack",
     "start": "webpack --watch"
   },
   "devDependencies": {
@@ -15,5 +16,10 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
     "webpack-merge": "^5.10.0"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^4.0.0"
   }
 }

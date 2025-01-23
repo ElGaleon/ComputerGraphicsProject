@@ -18,20 +18,21 @@ function initCanvas(canvasName) {
  * @returns {WebGLRenderingContext}
  */
 function initWebGLContext(canvas) {
-  let gl = canvas.getContext('webgl');
-
+  // Check context
+  const gl = canvas.getContext('webgl');
   if (!gl) {
     throw new Error('WebGL is not supported on this device - try using a different device or browser');
   }
+
+  // Check Depth Texture
+  const ext = gl.getExtension('WEBGL_depth_texture');
+  if (!ext) {
+    throw new Error('Need WEBGL_depth_texture');  // eslint-disable-line
+  }
+
+  // Set viewport
   gl.viewport(0,0, canvas.width, canvas.height);
-  canvas.addEventListener('webglcontextlost', function (event) {
-    event.preventDefault();
-    console.log('WebGL Context Lost');
-  }, false);
-  canvas.addEventListener('webglcontextrestored', function (event) {
-    event.preventDefault();
-    console.log('WebGL Context Restored');
-  }, false);
+
   return gl;
 }
 

@@ -57,7 +57,7 @@ const fragmentShaderSource = `
 const program = compileProgram(gl, vertexShaderSource, fragmentShaderSource);
 
 // Initialize a cube
-const cube = new Cube;
+const cube = new Plane();
 
 // Set position, normal buffers
 compileBuffer(gl, cube.vertices, program, 'position', 3, gl.FLOAT);
@@ -98,7 +98,8 @@ gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 const renderCube = (tx, ty, tz, sx, sy, sz) => {
     // Set the model matrix
     const modelMatrix = new DOMMatrix();
-    modelMatrix.translateSelf(tx, ty, tz).rotateSelf(0, 90, 90).rotateSelf(0, 30, 0).scaleSelf(sx, sy, sz)
+    modelMatrix.scaleSelf(3,3,0);
+    // modelMatrix.translateSelf(tx, ty, tz).rotateSelf(0, 90, 90).rotateSelf(0, 30, 0).scaleSelf(sx, sy, sz)
     const model = gl.getUniformLocation(program, 'model');
     gl.uniformMatrix4fv(model, false, modelMatrix.toFloat32Array());
 

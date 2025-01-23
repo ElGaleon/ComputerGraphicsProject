@@ -47,7 +47,7 @@
 
 var arr = [];
 
-var getProto = Object.getPrototypeOf;
+var getProto = MeshObj.getPrototypeOf;
 
 var slice = arr.slice;
 
@@ -70,7 +70,7 @@ var hasOwn = class2type.hasOwnProperty;
 
 var fnToString = hasOwn.toString;
 
-var ObjectFunctionString = fnToString.call( Object );
+var ObjectFunctionString = fnToString.call( MeshObj );
 
 var support = {};
 
@@ -290,7 +290,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 			for ( name in options ) {
 				copy = options[ name ];
 
-				// Prevent Object.prototype pollution
+				// Prevent MeshObj.prototype pollution
 				// Prevent never-ending loop
 				if ( name === "__proto__" || target === copy ) {
 					continue;
@@ -345,18 +345,18 @@ jQuery.extend( {
 
 		// Detect obvious negatives
 		// Use toString instead of jQuery.type to catch host objects
-		if ( !obj || toString.call( obj ) !== "[object Object]" ) {
+		if ( !obj || toString.call( obj ) !== "[object MeshObj]" ) {
 			return false;
 		}
 
 		proto = getProto( obj );
 
-		// Objects with no prototype (e.g., `Object.create( null )`) are plain
+		// Objects with no prototype (e.g., `MeshObj.create( null )`) are plain
 		if ( !proto ) {
 			return true;
 		}
 
-		// Objects with prototype are plain iff they were constructed by a global Object function
+		// Objects with prototype are plain iff they were constructed by a global MeshObj function
 		Ctor = hasOwn.call( proto, "constructor" ) && proto.constructor;
 		return typeof Ctor === "function" && fnToString.call( Ctor ) === ObjectFunctionString;
 	},
@@ -402,7 +402,7 @@ jQuery.extend( {
 		var ret = results || [];
 
 		if ( arr != null ) {
-			if ( isArrayLike( Object( arr ) ) ) {
+			if ( isArrayLike( MeshObj( arr ) ) ) {
 				jQuery.merge( ret,
 					typeof arr === "string" ?
 						[ arr ] : arr
@@ -499,7 +499,7 @@ if ( typeof Symbol === "function" ) {
 }
 
 // Populate the class2type map
-jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
+jQuery.each( "Boolean Number String Function Array Date RegExp MeshObj Error Symbol".split( " " ),
 	function( _i, name ) {
 		class2type[ "[object " + name + "]" ] = name.toLowerCase();
 	} );
@@ -900,7 +900,7 @@ function Sizzle( selector, context, results, seed ) {
 
 /**
  * Create key-value caches of limited size
- * @returns {function(string, object)} Returns the Object data after storing it on itself with
+ * @returns {function(string, object)} Returns the MeshObj data after storing it on itself with
  *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
  *	deleting the oldest entry
  */
@@ -1096,8 +1096,8 @@ function createPositionalPseudo( fn ) {
 
 /**
  * Checks a node for validity as a Sizzle context
- * @param {Element|Object=} context
- * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
+ * @param {Element|MeshObj=} context
+ * @returns {Element|MeshObj|Boolean} The input node if acceptable, otherwise a falsy value
  */
 function testContext( context ) {
 	return context && typeof context.getElementsByTagName !== "undefined" && context;
@@ -1108,7 +1108,7 @@ support = Sizzle.support = {};
 
 /**
  * Detects XML nodes
- * @param {Element|Object} elem An element or a document
+ * @param {Element|MeshObj} elem An element or a document
  * @returns {Boolean} True iff elem is a non-HTML XML node
  */
 isXML = Sizzle.isXML = function( elem ) {
@@ -1123,8 +1123,8 @@ isXML = Sizzle.isXML = function( elem ) {
 
 /**
  * Sets document-related variables once based on the current document
- * @param {Element|Object} [doc] An element or document object to use to set the document
- * @returns {Object} Returns the current document
+ * @param {Element|MeshObj} [doc] An element or document object to use to set the document
+ * @returns {MeshObj} Returns the current document
  */
 setDocument = Sizzle.setDocument = function( node ) {
 	var hasCompare, subWindow,
@@ -1659,7 +1659,7 @@ Sizzle.attr = function( elem, name ) {
 
 	var fn = Expr.attrHandle[ name.toLowerCase() ],
 
-		// Don't get fooled by Object.prototype properties (jQuery #13807)
+		// Don't get fooled by MeshObj.prototype properties (jQuery #13807)
 		val = fn && hasOwn.call( Expr.attrHandle, name.toLowerCase() ) ?
 			fn( elem, name, !documentIsHTML ) :
 			undefined;
@@ -3423,7 +3423,7 @@ var rnothtmlwhite = ( /[^\x20\t\r\n\f]+/g );
 
 
 
-// Convert String-formatted options into Object-formatted ones
+// Convert String-formatted options into MeshObj-formatted ones
 function createOptions( options ) {
 	var object = {};
 	jQuery.each( options.match( rnothtmlwhite ) || [], function( _, flag ) {
@@ -3456,7 +3456,7 @@ function createOptions( options ) {
  */
 jQuery.Callbacks = function( options ) {
 
-	// Convert options from String-formatted to Object-formatted if needed
+	// Convert options from String-formatted to MeshObj-formatted if needed
 	// (we check in cache first)
 	options = typeof options === "string" ?
 		createOptions( options ) :
@@ -4225,7 +4225,7 @@ var acceptData = function( owner ) {
 	//  - Node
 	//    - Node.ELEMENT_NODE
 	//    - Node.DOCUMENT_NODE
-	//  - Object
+	//  - MeshObj
 	//    - Any
 	return owner.nodeType === 1 || owner.nodeType === 9 || !( +owner.nodeType );
 };
@@ -4264,7 +4264,7 @@ Data.prototype = {
 				// configurable must be true to allow the property to be
 				// deleted when data is removed
 				} else {
-					Object.defineProperty( owner, this.expando, {
+					MeshObj.defineProperty( owner, this.expando, {
 						value: value,
 						configurable: true
 					} );
@@ -5128,10 +5128,10 @@ function on( elem, types, selector, data, fn, one ) {
 	// Types can be a map of types/handlers
 	if ( typeof types === "object" ) {
 
-		// ( types-Object, selector, data )
+		// ( types-MeshObj, selector, data )
 		if ( typeof selector !== "string" ) {
 
-			// ( types-Object, data )
+			// ( types-MeshObj, data )
 			data = data || selector;
 			selector = undefined;
 		}
@@ -5223,7 +5223,7 @@ jQuery.event = {
 
 		// Init the element's event structure and main handler, if this is the first
 		if ( !( events = elemData.events ) ) {
-			events = elemData.events = Object.create( null );
+			events = elemData.events = MeshObj.create( null );
 		}
 		if ( !( eventHandle = elemData.handle ) ) {
 			eventHandle = elemData.handle = function( e ) {
@@ -5388,7 +5388,7 @@ jQuery.event = {
 			event = jQuery.event.fix( nativeEvent ),
 
 			handlers = (
-				dataPriv.get( this, "events" ) || Object.create( null )
+				dataPriv.get( this, "events" ) || MeshObj.create( null )
 			)[ event.type ] || [],
 			special = jQuery.event.special[ event.type ] || {};
 
@@ -5477,7 +5477,7 @@ jQuery.event = {
 					for ( i = 0; i < delegateCount; i++ ) {
 						handleObj = handlers[ i ];
 
-						// Don't conflict with Object.prototype properties (#13203)
+						// Don't conflict with MeshObj.prototype properties (#13203)
 						sel = handleObj.selector + " ";
 
 						if ( matchedSelectors[ sel ] === undefined ) {
@@ -5506,7 +5506,7 @@ jQuery.event = {
 	},
 
 	addProp: function( name, hook ) {
-		Object.defineProperty( jQuery.Event.prototype, name, {
+		MeshObj.defineProperty( jQuery.Event.prototype, name, {
 			enumerable: true,
 			configurable: true,
 
@@ -5523,7 +5523,7 @@ jQuery.event = {
 				},
 
 			set: function( value ) {
-				Object.defineProperty( this, name, {
+				MeshObj.defineProperty( this, name, {
 					enumerable: true,
 					configurable: true,
 					writable: true,
@@ -8656,7 +8656,7 @@ jQuery.extend( jQuery.event, {
 		}
 		ontype = type.indexOf( ":" ) < 0 && "on" + type;
 
-		// Caller can pass in a jQuery.Event object, Object, or just an event type string
+		// Caller can pass in a jQuery.Event object, MeshObj, or just an event type string
 		event = event[ jQuery.expando ] ?
 			event :
 			new jQuery.Event( type, typeof event === "object" && event );
@@ -8713,7 +8713,7 @@ jQuery.extend( jQuery.event, {
 				special.bindType || type;
 
 			// jQuery handler
-			handle = ( dataPriv.get( cur, "events" ) || Object.create( null ) )[ event.type ] &&
+			handle = ( dataPriv.get( cur, "events" ) || MeshObj.create( null ) )[ event.type ] &&
 				dataPriv.get( cur, "handle" );
 			if ( handle ) {
 				handle.apply( cur, data );

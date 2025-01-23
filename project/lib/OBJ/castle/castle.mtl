@@ -1,0 +1,172 @@
+# Blender 4.3.2 MTL File: 'castle-floor0.blend'
+# www.blender.org
+
+newmtl Base
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.013457 0.013457 0.013457
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Ceil_texture
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd /home/christian/Desktop/Peachs Castle 1F/48F5B267_c.png
+map_d /home/christian/Desktop/Peachs Castle 1F/48F5B267_c.png
+
+newmtl Curb_Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd /home/christian/Desktop/Peachs Castle 1F/777F0E0B_c.png
+map_d /home/christian/Desktop/Peachs Castle 1F/777F0E0B_c.png
+
+newmtl Door
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#FD820701#0#2_all.png
+map_d /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#FD820701#0#2_all.png
+
+newmtl Flooring
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd /home/christian/Desktop/checked.png
+map_d /home/christian/Desktop/checked.png
+
+newmtl Key
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#BBC6B061#0#2_all.png
+
+newmtl Knob
+Ns 1000.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.735975 0.052321
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Material.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.002
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Stairs.002
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/christian/Desktop/3F Floor bowserroom/3C96C6A_c.png
+
+newmtl Star
+Ns 360.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Star_3
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#F2897E05#0#2_all.png
+map_d /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#F2897E05#0#2_all.png
+
+newmtl Sun_Rug.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd /home/christian/Desktop/sun rug.png
+map_d /home/christian/Desktop/sun rug.png
+
+newmtl Wall_Filler_Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.125610 0.352051 0.542480
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Wall_Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/christian/Desktop/wall_texture.png
+
+newmtl Wood
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/christian/Desktop/Peachs Castle 1F/6B88A261_c.png
+
+newmtl mona_lisa
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2

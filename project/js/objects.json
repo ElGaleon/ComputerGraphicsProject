@@ -1,0 +1,10 @@
+{
+  "meshes":[
+    {
+      "name": "Castle",
+      "objSource": "../lib/OBJ/castle/castle.obj",
+      "mtlSource": "../lib/OBJ/castle/castle.mtl",
+      "position": [0,0,0]
+    }
+  ]
+}

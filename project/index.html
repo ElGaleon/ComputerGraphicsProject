@@ -1,11 +1,11 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html lang="it-IT">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Computer Graphic Project</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <title>Super Mario 64</title>
+  <link rel="stylesheet" href="./css/output.css">
   <meta name="description" content="">
 
   <meta property="og:title" content="">
@@ -23,17 +23,289 @@
 </head>
 
 <body>
-  <canvas id="gl-canvas" height="720" width="720">
-    HTML5 is not supported in your browser.
-  </canvas>
-  <label for="alphaRange">Alpha</label><input type="range" id="alphaRange" min="0" max="10" value="5" onchange="updateTextInput(this.value)"><span id="alphaValue">0.5</span>
-  <script src="./js/app.js" type="module"></script>
-  <script src="../lib/boilerplate.js"></script>
-  <script src="../lib/functions.js"></script>
-  <script src="../lib/gl-math.js"></script>
-  <script src="../lib/shapes.js"></script>
+<!-- Grid -->
+<div class="grid grid-cols-3 gap-2 p-2">
+  <!-- Header -->
+  <div class="col-span-3 flex items-center justify-center w-full">
+    <img class="w-2/5" src="./img/logo.png" alt="Super Mario 64 Logo">
+  </div>
+  <!-- Scene -->
+  <div class="col-span-2 bg-red-400 rounded-md h-full p-2">
+    SCENE
+    <!-- Canvas -->
+    <canvas id="gl-canvas" height="720" width="720">
+      HTML5 is not supported in your browser.
+    </canvas>
+  </div>
+  <!-- Controls -->
+  <div class="controls bg-amber-300 rounded-md p-2">
+    CONTROLS
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+      <img class="w-full" src="./img/img.png" alt="Sunset in the mountains">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+        <p class="text-gray-700 text-base">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+        </p>
+      </div>
+      <div class="px-6 pt-4 pb-2">
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+      </div>
+    </div>
+  </div>
+  <!-- Credits -->
+  <div class="credits col-span-3 bg-blue-500 rounded-md">
+    Christian Galeone
+  </div>
+</div>
+
+<!-- Audio -->
+<audio controls autoplay>
+  <source src="./audio/castle.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+  <!-- Libraries -->
+  <script src="./lib/boilerplate.js"></script>
+  <script src="./lib/functions.js"></script>
+  <script src="./lib/gl-math.js"></script>
+  <script src="./lib/shapes.js"></script>
+  <script src="./lib/canvas-utils.js"></script>
+  <script src="./lib/file-utils.js"></script>
+
+  <!-- External Resources -->
+  <script src="./resources/dat_gui.js"></script>
   <script src="./resources/gl-camera.js"></script>
+  <script src="./resources/glm_utils.js"></script>
+  <script src="./resources/jquery-3.6.0.js"></script>
+  <script src="./resources/load_mesh.js"></script>
   <script src="./resources/m4.js"></script>
-  <script src="./resources/webgl-utils.js" type="module"></script>
+  <script src="./resources/mesh_utils.js"></script>
+  <script src="./resources/webgl-utils.js"></script>
+
+
+  <!-- JS -->
+  <script src="./js/app.js" type="module"></script>
+  <script src="./js/camera.js"></script>
+  <script src="./js/shadows.js"></script>
+  <script src="./js/mesh.js"></script>
+  <script src="./js/scene.js"></script>
+  <script src="./js/render.js"></script>
+
+  <!-- Shaders -->
+<script id="base-vertex-shader" type="x-shader/x-vertex">
+  attribute vec4 a_position;
+  attribute vec3 a_normal;
+  attribute vec2 a_texcoord;
+  attribute vec4 a_color;
+
+  uniform mat4 u_projection;          // Projection Matrix
+  uniform mat4 u_view;				// Camera View Matrix
+  uniform mat4 u_world;				// World matrix
+  uniform vec3 u_viewWorldPosition;	// Camera position
+
+  varying vec3 v_normal;
+  varying vec3 v_surfaceToView;
+  varying vec2 v_texcoord;
+  varying vec4 v_color;
+
+
+  void main() {
+    vec4 world_position = u_world * a_position;  // World transform
+    gl_Position = u_projection * u_view * world_position; // Transform the location of the vertex
+    v_surfaceToView = u_viewWorldPosition - world_position.xyz;
+    v_normal = mat3(u_world) * a_normal;
+    v_texcoord = a_texcoord;
+    v_color = a_color;
+  }
+</script>
+<script id="base-fragment-shader" type="x-shader/x-fragment">
+  precision highp float;
+
+  varying vec3 v_normal;
+  varying vec2 v_texcoord;
+  varying vec4 v_color;
+  varying vec3 v_surfaceToView;
+
+
+  // Material Properties
+  uniform sampler2D diffuseMap;
+  uniform sampler2D normalMap;
+  uniform vec3 diffuse;
+  uniform vec3 ambient;
+  uniform vec3 emissive;
+  uniform vec3 specular;
+  uniform float shininess;
+  uniform float opacity;
+
+  // Light Properties
+  uniform vec3 u_lightDirection;
+  uniform vec3 u_lightColor;
+  uniform vec3 u_ambientLight;
+
+  void main () {
+    vec3 normal = normalize(v_normal) * ( float( gl_FrontFacing ) * 2.0 - 1.0 );
+
+    vec3 surfaceToViewDirection = normalize(v_surfaceToView);
+    vec3 halfVector = normalize(u_lightDirection + surfaceToViewDirection);
+
+    float fakeLight = dot(u_lightDirection, normal) * .5 + .5;
+    float specularLight = clamp(dot(normal, halfVector), 0.0, 1.0);
+
+    vec4 diffuseMapColor = texture2D(diffuseMap, v_texcoord);
+    vec3 effectiveDiffuse = diffuse * diffuseMapColor.rgb * u_lightColor.rgb * v_color.rgb;
+    float effectiveOpacity = opacity * diffuseMapColor.a * v_color.a;
+
+    gl_FragColor = vec4(
+    emissive +
+    ambient * u_ambientLight +
+    effectiveDiffuse * fakeLight +
+    specular * pow(specularLight, shininess),
+    effectiveOpacity);
+  }
+</script>
+
+
+<script id="skybox-vertex-shader" type="x-shader/x-vertex">
+  attribute vec4 a_position;
+  varying vec4 v_position;
+
+  void main() {
+    v_position = a_position;
+    gl_Position = vec4(a_position.xy, 1, 1);
+  }
+</script>
+<script id="skybox-fragment-shader" type="x-shader/x-fragment">
+  precision mediump float;
+
+  uniform samplerCube u_skybox;
+  uniform mat4 u_viewDirectionProjectionInverse;
+
+  uniform vec3 u_lightColor;
+
+  varying vec4 v_position;
+  void main() {
+    vec4 t = u_viewDirectionProjectionInverse * v_position;
+    gl_FragColor = textureCube(u_skybox, normalize(t.xyz / t.w)) * vec4(u_lightColor,1);
+  }
+</script>
+
+
+<script  id="vertex-shader-3d" type="x-shader/x-vertex">
+  attribute vec4 a_position;
+  attribute vec2 a_texcoord;
+  attribute vec3 a_normal;
+  attribute vec4 a_color;
+
+
+  uniform mat4 u_projection;
+  uniform mat4 u_view;
+  uniform mat4 u_world;
+  uniform mat4 u_textureMatrix;
+
+  varying vec2 v_texcoord;
+  varying vec4 v_projectedTexcoord;
+  varying vec3 v_normal;
+  varying vec4 v_color;
+
+  void main() {
+    // Multiply the position by the matrix.
+    vec4 worldPosition = u_world * a_position;
+
+    gl_Position = u_projection * u_view * worldPosition;
+
+    // Pass the texture coord to the fragment shader.
+    v_texcoord = a_texcoord;
+
+    v_projectedTexcoord = u_textureMatrix * worldPosition;
+
+    // orient the normals and pass to the fragment shader
+    v_normal = mat3(u_world) * a_normal;
+
+    v_color = a_color;
+  }
+</script>
+<script  id="fragment-shader-3d" type="x-shader/x-fragment">
+  precision mediump float;
+
+  // Passed in from the vertex shader.
+  varying vec2 v_texcoord;
+  varying vec4 v_projectedTexcoord;
+  varying vec3 v_normal;
+  varying vec4 v_color;
+
+  uniform vec4 u_colorMult;
+  uniform sampler2D u_texture;
+  uniform sampler2D u_projectedTexture;
+  uniform float u_bias;
+  uniform vec3 u_reverseLightDirection;
+
+  // Material Properties
+  uniform sampler2D diffuseMap;
+  uniform sampler2D normalMap;
+  uniform vec3 diffuse;
+  uniform vec3 ambient;
+  uniform vec3 emissive;
+  uniform vec3 specular;
+  uniform float shininess;
+  uniform float opacity;
+
+  void main() {
+    // because v_normal is a varying it's interpolated
+    // so it will not be a unit vector. Normalizing it
+    // will make it a unit vector again
+    vec3 normal = normalize(v_normal);
+
+    float light = dot(normal, u_reverseLightDirection);
+
+    vec3 projectedTexcoord = v_projectedTexcoord.xyz / v_projectedTexcoord.w;
+    float currentDepth = projectedTexcoord.z + u_bias;
+
+    bool inRange =
+    projectedTexcoord.x >= 0.0 &&
+    projectedTexcoord.x <= 1.0 &&
+    projectedTexcoord.y >= 0.0 &&
+    projectedTexcoord.y <= 1.0;
+
+    // the 'r' channel has the depth values
+    float projectedDepth = texture2D(u_projectedTexture, projectedTexcoord.xy).r;
+    float shadowLight = (inRange && projectedDepth <= currentDepth) ? 0.0 : 1.0;
+
+    vec4 diffuseMapColor = texture2D(diffuseMap, v_texcoord);
+    vec3 effectiveDiffuse = diffuse * diffuseMapColor.rgb  * v_color.rgb;
+    float effectiveOpacity = opacity * diffuseMapColor.a * v_color.a;
+
+    vec4 texColor = texture2D(u_texture, v_texcoord) * u_colorMult;
+
+    gl_FragColor = vec4(
+    effectiveDiffuse.rgb * light * shadowLight,
+    effectiveOpacity);
+  }
+</script>
+
+
+<script  id="color-vertex-shader" type="x-shader/x-vertex">
+  attribute vec4 a_position;
+
+  uniform mat4 u_projection;
+  uniform mat4 u_view;
+  uniform mat4 u_world;
+
+  void main() {
+    // Multiply the position by the matrices.
+    gl_Position = u_projection * u_view * u_world * a_position;
+  }
+</script>
+<script  id="color-fragment-shader" type="x-shader/x-fragment">
+  precision mediump float;
+
+  uniform vec4 u_color;
+  void main() {
+    gl_FragColor = u_color;
+  }
+</script>
+
 </body>
 </html>
