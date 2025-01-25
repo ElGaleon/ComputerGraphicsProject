@@ -1,8 +1,3 @@
-const CameraAction = {
-  ROTATE: 'rotate',
-  MOVE: 'move',
-}
-
 const Direction = {
   UP: 'up',
   RIGHT: 'right',
@@ -28,66 +23,6 @@ class Camera {
   }
 
   /**
-   * Rotate the camera's view up or down
-   * This rotates about a camera's u axis.
-   * @param {number} step
-   */
-  tilt(step) {
-    const rotation = m4.axisRotation(this.right, (step / 2));
-    this.#rotate([Direction.FORWARD, Direction.UP], rotation);
-  }
-
-  /**
-   * Rotate the camera horizontally
-   * This rotates about a camera's v axis.
-   * @param {number} step
-   */
-  pan(step) {
-    const rotation = m4.axisRotation(this.up, (step));
-    this.#rotate([Direction.FORWARD, Direction.RIGHT], rotation);
-  }
-
-  // Tilts a camera sideways while maintaining its location and viewing direction.
-  // You can cant left and cant right.
-  // This is a rotation about a camera’s n axis.
-  /**
-   * Tilts a camera sideways while maintaining its location and viewing direction.
-   * This is a rotation about a camera’s n axis.
-   * @param {number} step
-   */
-  cant(step){
-    let rotation = m4.axisRotation(this.forward, (step / 2));
-    this.#rotate([Direction.RIGHT, Direction.UP], rotation);
-  }
-
-  /**
-   * Elevates or lowers a camera on its stand.
-   * This is a translation along a camera’s v axis.
-   * @param {number} distance
-   */
-  pedestal(distance) {
-    this.#move([Direction.UP], distance);
-  }
-
-  /**
-   * Moves a camera closer to, or further from, the location it is looking at.
-   * This is a translation along a camera’s n axis.
-   * @param {number} distance
-   */
-  dolly(distance) {
-    this.#move([Direction.FORWARD], distance);
-  }
-
-  /**
-   * Moves a camera’s location laterally(left or right) while the camera’s direction of view is unchanged.
-   * This is a translation along a camera’s u axis.
-   * @param {number} distance
-   */
-  truck(distance) {
-    this.#move([Direction.RIGHT], distance);
-  }
-
-  /**
    *
    * @param {Direction[]} movements
    * @param {Matrix4} rotation
@@ -109,6 +44,16 @@ class Camera {
           break;
       }
     }
+  }
+
+  /**
+   * Rotate the camera's view up or down
+   * This rotates about a camera's u axis.
+   * @param {number} step
+   */
+  tilt(step) {
+    const rotation = m4.axisRotation(this.right, (step / 2));
+    this.#rotate([Direction.FORWARD, Direction.UP], rotation);
   }
 
   /**
@@ -139,15 +84,58 @@ class Camera {
   }
 
   /**
-   * Reset camera to given values
-   * @param {Vector3} up
-   * @param {number} forwardY
+   * Rotate the camera horizontally
+   * This rotates about a camera's v axis.
+   * @param {number} step
    */
-  reset(up = [0, 1, 0], forwardY = 0) {
-    this.up = up;
-    this.forward[1] = forwardY;
-    this.right = m4.normalize(m4.cross(this.forward, this.up));
+  pan(step) {
+    const rotation = m4.axisRotation(this.up, (step));
+    this.#rotate([Direction.FORWARD, Direction.RIGHT], rotation);
   }
+
+  /**
+   * Tilts a camera sideways while maintaining its location and viewing direction.
+   * This is a rotation about a camera’s n axis.
+   * @param {number} step
+   */
+  cant(step){
+    let rotation = m4.axisRotation(this.forward, (step / 2));
+    this.#rotate([Direction.RIGHT, Direction.UP], rotation);
+  }
+
+  /**
+   * Moves a camera’s location laterally(left or right) while the camera’s direction of view is unchanged.
+   * This is a translation along a camera’s u axis.
+   * @param {number} distance
+   */
+  truck(distance) {
+    this.#move([Direction.RIGHT], distance);
+  }
+
+  /**
+   * Elevates or lowers a camera on its stand.
+   * This is a translation along a camera’s v axis.
+   * @param {number} distance
+   */
+  pedestal(distance) {
+    this.#move([Direction.UP], distance);
+  }
+
+  /**
+   * Moves a camera closer to, or further from, the location it is looking at.
+   * This is a translation along a camera’s n axis.
+   * @param {number} distance
+   */
+  dolly(distance) {
+    this.#move([Direction.FORWARD], distance);
+  }
+
+    // Realign the camera
+    align(){
+        this.up=[0,1,0];
+        this.forward[1] = 0;
+        this.right = m4.normalize(m4.cross(this.forward, this.up));
+    }
 
   get viewMatrix() {
     const look = m4.addVectors(this.position, this.forward);
@@ -159,4 +147,21 @@ class Camera {
     const look = m4.addVectors(this.position, this.forward);
     return m4.lookAt(this.position, look, this.up);
   }
+
+  /**
+   * Reset camera to given values
+   * @param {Vector3} up
+   * @param {number} forwardY
+   */
+  reset(up = [0, 1, 0], forwardY = 0) {
+    this.up = up;
+    this.forward[1] = forwardY;
+    this.right = m4.normalize(m4.cross(this.forward, this.up));
+  }
+
+    // Return this.position
+    getPosition(){
+        return this.position
+    }
+
 }

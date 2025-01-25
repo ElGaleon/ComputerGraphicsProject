@@ -1,4 +1,4 @@
-class Mesh {
+class NoMesh {
   name;
   objSource;
   mtlSource;
@@ -9,27 +9,26 @@ class Mesh {
   isReady;
   /**
    *
-   * @param {any} object
    * @param {WebGLRenderingContext} gl
+   * @param {any} object
    */
-  constructor(object, gl) {
-    console.log("OBJECT: " + object);
-    this.name = object.name;
-    this.objSource = object.objSource;
-    this.mtlSource = object.mtlSource;
-    this.position = object.position;
-    //
-    this.mesh = [];
-    this.mesh.sourceMesh = this.objSource;
-    this.mesh.fileMTL = this.mtlSource;
+  constructor(gl, object) {
+    this.name = object.name;               // Obj name, used only for debugging
+    this.obj_source = object.objSource;   // Path to obj file
+    this.mtl_source = object.mtlSource;   // Path to mtl file
+    this.position = object.position;       // Where to move the mesh once loaded
 
-    if (object.rotate) {
+    this.mesh = {};                         // This object stores all the mesh information
+    this.mesh.sourceMesh = this.obj_source; // .sourceMesh is used in load_mesh.js
+    this.mesh.fileMTL = this.mtl_source;    // .fileMTL is used in load_mesh.js
+
+    if (object.rotate){ // Used for world matrix transform
       this.rotate = object.rotate;
       this.angle = 0;
     }
 
     this.isReady = false;
-    console.log(this.mesh);
+    console.log("LOAD MESH CALLED FOR: " + this.mesh.sourceMesh);
     LoadMesh(gl, this.mesh).then(() => {
      this.composeMesh(gl).then(() => {});
       this.isReady = true;

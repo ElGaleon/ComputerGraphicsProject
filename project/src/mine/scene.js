@@ -1,4 +1,4 @@
-class Scene {
+class NoScene {
   /**
    * @type { Mesh[]}
    */
@@ -186,7 +186,7 @@ class Scene {
       );
 
       const lightProjectionMatrix = m4.perspective(
-        degToRad(this.shadows.fov),
+        degToRad(this.shadows.fieldOfView),
         this.shadows.projectionWidth / this.shadows.projectionHeight,
         0.5,                        // near
         this.shadows.zFarProjection);     // far
@@ -297,6 +297,8 @@ class Scene {
         this.meshes.forEach(m => {
           m.render(this.gl, this.program, sharedUniforms);
         });
+
+        console.log('SUCCESS');
       }
 
     }

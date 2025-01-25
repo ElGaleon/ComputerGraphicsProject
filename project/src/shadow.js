@@ -1,4 +1,4 @@
-class Shadows {
+class Shadow {
   value;
   colorProgramInfo;
   textureProgramInfo;
@@ -12,6 +12,7 @@ class Shadows {
   zFarProjection;
   bias;
   showFrustum;
+
   /**
    *
    * @param {WebGLRenderingContext} gl
@@ -32,15 +33,15 @@ class Shadows {
     this.depthTextureSize = 2048;
     gl.bindTexture(gl.TEXTURE_2D, this.depthTexture);
     gl.texImage2D(
-      gl.TEXTURE_2D,                 // target
-      0,                             // mip level
-      gl.DEPTH_COMPONENT,            // internal format
-      this.depthTextureSize,       // width
-      this.depthTextureSize,       // height
-      0,                             // border
-      gl.DEPTH_COMPONENT,            // format
-      gl.UNSIGNED_INT,               // type
-      null);                         // models
+      gl.TEXTURE_2D,                  // target
+      0,                        // mip level
+      gl.DEPTH_COMPONENT,             // internal format
+      this.depthTextureSize,          // width
+      this.depthTextureSize,          // height
+      0,                       // border
+      gl.DEPTH_COMPONENT,             // format
+      gl.UNSIGNED_INT,                // type
+      null);                    // models
 
     this.depthFrameBuffer = gl.createFramebuffer();
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.depthFrameBuffer);

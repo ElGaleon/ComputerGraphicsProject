@@ -1,5 +1,6 @@
 /*========== Loading and storing the geometry ==========*/
 async function LoadMesh(gl,mesh) {
+  console.log("MESH: " + mesh);
   await retrieveDataFromSource(mesh);
 
   mesh.textures =[];
@@ -44,17 +45,17 @@ async function retrieveDataFromSource(mesh){
 //Funzione che utilizza la libreria glm_utils per leggere un file OBJ
 //contenente la definizione della mesh
 async function loadMeshFromOBJ(mesh) {
-  console.log("MESH: "+ mesh);
+  console.log("SOURCE MESH: "+ mesh.sourceMesh);
   return $.ajax({
     type: "GET",
     url: mesh.sourceMesh,
     dataType: "text",
     async: false,
-    success: parseobjFile,
+    success: parseObjFile,
     error: handleError,
   });
 
-  function parseobjFile(result){
+  function parseObjFile(result){
     mesh.data = parseOBJ(result)
   }
 

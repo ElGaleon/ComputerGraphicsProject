@@ -1,0 +1,12 @@
+{
+  "meshes":[
+    {
+      "name": "bomb",
+      "objSource": "./lib/OBJ/bomb/bomb-omb.obj",
+      "mtlSource": "./lib/OBJ/bomb/bomb-omb.mtl",
+      "position": [0, 0, 0],
+      "rotate": false,
+      "skybox": "../lib/OBJ/bomb/skybox.png"
+    }
+  ]
+}

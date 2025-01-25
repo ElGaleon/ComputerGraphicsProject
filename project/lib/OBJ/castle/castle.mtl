@@ -18,8 +18,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd /home/christian/Desktop/Peachs Castle 1F/48F5B267_c.png
-map_d /home/christian/Desktop/Peachs Castle 1F/48F5B267_c.png
+map_Kd ceil.png
+map_d ceil.png
 
 newmtl Curb_Material
 Ns 250.000000
@@ -28,8 +28,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd /home/christian/Desktop/Peachs Castle 1F/777F0E0B_c.png
-map_d /home/christian/Desktop/Peachs Castle 1F/777F0E0B_c.png
+map_Kd curb.png
+map_d curb.png
 
 newmtl Door
 Ns 250.000000
@@ -38,8 +38,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#FD820701#0#2_all.png
-map_d /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#FD820701#0#2_all.png
+map_Kd door.png
+map_d door.png
 
 newmtl Flooring
 Ns 250.000000
@@ -59,7 +59,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#BBC6B061#0#2_all.png
+map_Kd key.png
 
 newmtl Knob
 Ns 1000.000000
@@ -71,26 +71,6 @@ Ni 1.500000
 d 1.000000
 illum 2
 
-newmtl Material.001
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-
-newmtl Material.002
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-
 newmtl Stairs.002
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
@@ -99,7 +79,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd /home/christian/Desktop/3F Floor bowserroom/3C96C6A_c.png
+map_Kd moquette.png
 
 newmtl Star
 Ns 360.000000
@@ -118,8 +98,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#F2897E05#0#2_all.png
-map_d /home/christian/Downloads/Super Mario 64/Objects/Different Surfaces/SUPER MARIO 64#F2897E05#0#2_all.png
+map_Kd star.png
+map_d star.png
 
 newmtl Sun_Rug.001
 Ns 250.000000
@@ -128,8 +108,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd /home/christian/Desktop/sun rug.png
-map_d /home/christian/Desktop/sun rug.png
+map_Kd sun_rug.png
+map_d sun_rug.png
 
 newmtl Wall_Filler_Material
 Ns 250.000000
@@ -149,7 +129,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd /home/christian/Desktop/wall_texture.png
+map_Kd wall_texture.png
 
 newmtl Wood
 Ns 250.000000
@@ -159,14 +139,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd /home/christian/Desktop/Peachs Castle 1F/6B88A261_c.png
-
-newmtl mona_lisa
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
+map_Kd entrance.png
