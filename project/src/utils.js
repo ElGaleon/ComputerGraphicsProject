@@ -1,11 +1,6 @@
 function add_dat_gui(scene){
   let gui = new dat.gui.GUI({autoPlace: false});
 
-  scene['Change Scene'] = function () {
-    change_scene();
-  };
-  gui.add(scene, 'Change Scene');
-
   scene['Switch camera'] = function () {
     scene.switchCamera();
   };
@@ -21,37 +16,36 @@ function add_dat_gui(scene){
   };
   gui.add(scene, 'Toggle shadows');
 
-  let light_folder = gui.addFolder('Light');
+  let lightFolder = gui.addFolder('Light');
 
-  let light_position =  light_folder.addFolder('Position');
-  light_position.add(scene.light.position, 0).min(-10).max(10).step(0.25);
-  light_position.add(scene.light.position, 1).min(0).max(10).step(0.25);
-  light_position.add(scene.light.position, 2).min(-10).max(10).step(0.25);
+  let lightPosition =  lightFolder.addFolder('Position');
+  lightPosition.add(scene.light.position, 0).min(-10).max(10).step(0.25);
+  lightPosition.add(scene.light.position, 1).min(0).max(10).step(0.25);
+  lightPosition.add(scene.light.position, 2).min(-10).max(10).step(0.25);
 
-  let light_direction =  light_folder.addFolder('Direction');
-  light_direction.add(scene.light.direction, 0).min(-10).max(10).step(0.25);
-  light_direction.add(scene.light.direction, 1).min(-10).max(10).step(0.25);
-  light_direction.add(scene.light.direction, 2).min(-10).max(10).step(0.25);
+  let lightDirection =  lightFolder.addFolder('Direction');
+  lightDirection.add(scene.light.direction, 0).min(-10).max(10).step(0.25);
+  lightDirection.add(scene.light.direction, 1).min(-10).max(10).step(0.25);
+  lightDirection.add(scene.light.direction, 2).min(-10).max(10).step(0.25);
 
-  let light_color =  light_folder.addFolder('Color');
-  light_color.add(scene.light.color, 0).min(0.1).max(1).step(0.05);
-  light_color.add(scene.light.color, 1).min(0.1).max(1).step(0.05);
-  light_color.add(scene.light.color, 2).min(0.1).max(1).step(0.05);
+  let lightColor =  lightFolder.addFolder('Color');
+  lightColor.add(scene.light.color, 0).min(0.1).max(1).step(0.05);
+  lightColor.add(scene.light.color, 1).min(0.1).max(1).step(0.05);
+  lightColor.add(scene.light.color, 2).min(0.1).max(1).step(0.05);
 
-  let shadow_folder = gui.addFolder('Shadow frustum');
-  shadow_folder.add(scene.shadow, "fieldOfView").min(30).max(180).step(15);
-  shadow_folder.add(scene.shadow, "projectionWidth").min(1).max(10).step(1);
-  shadow_folder.add(scene.shadow, "projectionHeight").min(1).max(10).step(1);
-  shadow_folder.add(scene.shadow, "zFarProjection").min(1).max(30).step(1);
-  shadow_folder.add(scene.shadow, "bias").min(-0.001).max(0).step(0.0001);
+  let shadowFolder = gui.addFolder('Shadow frustum');
+  shadowFolder.add(scene.shadow, "fieldOfView").min(30).max(180).step(15);
+  shadowFolder.add(scene.shadow, "projectionWidth").min(1).max(10).step(1);
+  shadowFolder.add(scene.shadow, "projectionHeight").min(1).max(10).step(1);
+  shadowFolder.add(scene.shadow, "zFarProjection").min(1).max(30).step(1);
+  shadowFolder.add(scene.shadow, "bias").min(-0.001).max(0).step(0.0001);
 
   scene['Toggle frustum'] = function () {
     scene.shadow.showFrustum = !scene.shadow.showFrustum;
   };
-  shadow_folder.add(scene, 'Toggle frustum');
+  shadowFolder.add(scene, 'Toggle frustum');
 
-  document.getElementById("gui").append(gui.domElement)
-
+  document.getElementById("gui").append(gui.domElement);
 }
 
 function add_touch_canvas(scene){
@@ -173,16 +167,6 @@ function canvas2DController(){
   canvas.addEventListener('touchend',touchUp,false);
   canvas.onmousedown=touchDown;
   canvas.onmouseup=touchUp;
-}
-
-function change_scene(){
-  if (scene.path === "./scene/scene1.json"){
-    scene.path = "./scene/scene2.json"
-    scene.loadScene().then(() => {})
-  }else{
-    scene.path = "./scene/scene1.json"
-    scene.loadScene().then(() => {})
-  }
 }
 
 

@@ -15,7 +15,7 @@ class Camera {
    * @param {Vector3} lookAt
    * @param {Vector3} up
    */
-  constructor(position, lookAt, up) {
+  constructor(position = [0, 0, 0], lookAt = [0, 0, 0], up= [0, 0, 0]) {
     this.position = position;
     this.forward = m4.normalize(m4.subtractVectors(lookAt, position));
     this.right = m4.normalize(m4.cross(this.forward, up));

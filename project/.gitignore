@@ -7,3 +7,4 @@ dist
 ../examples
 ./resources/gl-camera.js
 ./resources/xem/
+./src/mine/

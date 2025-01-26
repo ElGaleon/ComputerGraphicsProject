@@ -1,0 +1,56 @@
+{
+  "skybox": {
+    "px": "",
+    "py": "",
+    "pz": "",
+    "nx": "",
+    "ny": "",
+    "nz": ""
+  },
+  "camera" : {
+    "position": [2.5, 1, 0],
+    "target": [0,1,0],
+    "up": [0,1,0]
+  },
+  "audio": "./assets/audio/castle.mp3",
+  "light": {
+    "position": [10, 5, 2],
+    "direction": [4.8, 2.8, 0],
+    "ambient": [0.1, 0.1, 0.1],
+    "color": [1, 1, 1]
+  },
+  "meshes":[
+    {
+      "name": "Castle",
+      "objSource": "./lib/OBJ/castle/castle.obj",
+      "mtlSource": "./lib/OBJ/castle/castle.mtl",
+      "position": [0, 0, 0],
+      "rotate": false
+    },
+    {
+      "name": "Mario",
+      "objSource": "./assets/obj/mario/mario.obj",
+      "mtlSource": "./assets/obj/mario/mario.mtl",
+      "position": [0, 0, 2],
+      "rotate": false
+    },
+    {
+      "name": "Frame",
+      "objSource": "./assets/obj/frame/frame.obj",
+      "mtlSource": "./assets/obj/frame/frame.mtl",
+      "position": [0, -2, -3],
+      "initialRotation" : {
+        "z" : 270
+      }
+    },
+    {
+      "name": "Star",
+      "objSource": "./assets/obj/star/star.obj",
+      "mtlSource": "./assets/obj/star/star.mtl",
+      "position": [0, -3, 2],
+      "initialRotation" : {
+        "y" : 90
+      }
+    }
+  ]
+}

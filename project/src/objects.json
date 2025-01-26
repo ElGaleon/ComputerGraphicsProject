@@ -1,12 +1,28 @@
 {
+  "skybox": "../lib/OBJ/bomb/skybox.png",
   "meshes":[
     {
-      "name": "bomb",
+      "name": "Bomb",
       "objSource": "./lib/OBJ/bomb/bomb-omb.obj",
       "mtlSource": "./lib/OBJ/bomb/bomb-omb.mtl",
       "position": [0, 0, 0],
-      "rotate": false,
-      "skybox": "../lib/OBJ/bomb/skybox.png"
+      "rotate": false
+    },
+    {
+      "name": "Mario",
+      "objSource": "./assets/obj/mario/mario.obj",
+      "mtlSource": "./assets/obj/mario/mario.mtl",
+      "position": [0, 0, 0],
+      "rotate": false
+    },
+    {
+      "name": "Frame",
+      "objSource": "./assets/obj/frame/frame.obj",
+      "mtlSource": "./assets/obj/frame/frame.mtl",
+      "position": [0, -2, -3],
+      "initialRotation" : {
+        "z" : 270
+      }
     }
   ]
 }

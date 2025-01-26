@@ -106,6 +106,7 @@ class NoMesh {
     // Compute the world matrix
     let uWorld = m4.identity();
     if (this.rotate === true && uniforms.u_textureMatrix !== m4.identity()) {
+      uWorld = m4.zRotate(uWorld, degToRad(this.angle));
       uWorld = m4.yRotate(uWorld, degToRad(this.angle));
       this.angle = this.angle === 360 ? 0 : this.angle + 5;
     }

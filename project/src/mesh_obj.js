@@ -4,6 +4,7 @@ class MeshObj {
   mtlSource;
   position;
   mesh;
+  initialRotation;
   rotate;
   angle;
   isReady;
@@ -17,6 +18,10 @@ class MeshObj {
         this.mesh.sourceMesh = this.objSource; // .sourceMesh is used in load_mesh.js
         this.mesh.fileMTL = this.mtlSource;    // .fileMTL is used in load_mesh.js
 
+      if (obj.initialRotation) {
+        this.initialRotation = obj.initialRotation;
+      }
+
         if (obj.rotate){ // Used for world matrix transform
             this.rotate = obj.rotate;
             this.angle = 0;
@@ -29,7 +34,7 @@ class MeshObj {
             this.isReady = true; // now the mesh is ready to be rendered
         });
     }
-    
+
     /**
    *
    * @param {WebGLRenderingContext} gl
@@ -93,12 +98,22 @@ class MeshObj {
         if (!this.isReady) {
           return;
         }
-
         gl.useProgram(programInfo.program);
         webglUtils.setUniforms(programInfo, uniforms);
 
         // compute the world matrix
         let u_world = m4.identity()
+
+        if (this.initialRotation?.x) {
+          u_world = m4.xRotate(u_world, degToRad(this.initialRotation.x));
+        }
+        if (this.initialRotation?.y) {
+          u_world = m4.yRotate(u_world, degToRad(this.initialRotation.y));
+        }
+        if (this.initialRotation?.z) {
+          u_world = m4.zRotate(u_world, degToRad(this.initialRotation.z));
+        }
+
 
         if (this.rotate === true && uniforms.u_textureMatrix !== m4.identity() ){
             u_world = m4.yRotate(u_world, degToRad(this.angle));

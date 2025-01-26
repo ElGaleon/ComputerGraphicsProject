@@ -25,7 +25,7 @@
 
 <body>
 <!-- Grid -->
-<div class="grid grid-cols-3 gap-4 p-2">
+<div class="grid grid-cols-3 gap-2 p-2">
   <!-- Header -->
   <div class="col-span-3 flex items-center justify-center w-full">
     <img class="w-2/5" src="./img/logo.png" alt="Super Mario 64 Logo">
@@ -34,35 +34,66 @@
   <!-- Scene -->
   <div class="col-span-2 rounded-md flex flex-col p-2 w-full h-fit bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-2">
     <div class="scene-header flex-row items-start place-content-between">
-      <h3 class="section-header">SCENE</h3>
+      <h3 class="section-header text-red-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">SCENE</h3>
     </div>
 
 
     <!-- Canvas -->
-    <div class="canvas-scene relative">
-      <canvas id="canvas" class="w-full h-96">
+    <div class="canvas-scene relative pb-8">
+      <canvas id="canvas" class="w-full h-96 rounded-md">
         HTML5 is not supported in your browser.
       </canvas>
-      <img src="./assets/images/mario.png" alt="mario" height="32" width="28" class="absolute top-2 left-4">
+      <!-- Life Indicator -->
+      <div class="indicator absolute top-2 left-4">
+        <img src="./assets/images/mario.png" alt="mario" height="32" width="28">
+        <img src="./assets/images/text_and_numbers/X.png" alt="x" height="32" width="28">
+        <img src="./assets/images/text_and_numbers/3.png" alt="3" height="32" width="28">
+      </div>
+      <!-- Power Meter -->
       <img src="./assets/images/power-meter.png" alt="power-meter" height="46" width="50" class="absolute top-2 left-48">
-      <img src="./assets/images/coin.png" alt="coin" height="32" width="28" class="absolute top-2 left-96">
-      <img src="./assets/images/star.png" alt="star" height="32" width="28" class="absolute top-2 right-16">
+      <!-- Coin Indicator -->
+      <div class="indicator absolute top-2 left-96">
+        <img src="./assets/images/coin.png" alt="coin" height="32" width="28">
+        <img src="./assets/images/text_and_numbers/X.png" alt="x" height="32" width="28">
+        <img src="./assets/images/text_and_numbers/8.png" alt="8" height="32" width="28">
+      </div>
+      <!-- Star Indicator -->
+      <div class="indicator absolute top-2 right-4">
+        <img src="./assets/images/star.png" alt="star" height="36" width="32" class="">
+        <img src="./assets/images/text_and_numbers/X.png" alt="x" height="36" width="28">
+        <img src="./assets/images/text_and_numbers/1.png" alt="1" height="36" width="28">
+      </div>
+
+      <!-- Audio -->
+      <audio controls id="music" class="absolute bottom-0 flex justify-center ">
+        <source id="music-src" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
     </div>
 
     <!-- Scene Selection -->
-    <div class="scene-selection bg-red-500 rounded-md p-2">
-      <h3>Select Scene</h3>
-      <div class="flex-row items-center justify-center">
-        <span id="bomb" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700" onclick="scene.loadScene(id)">Bomb-omb</span>
-        <span id="castle" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700" onclick="scene.loadScene(id)">Peach Castle</span>
-        <span id="bowser" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700" onclick="scene.loadScene(id)">Bowser to the sky</span>
+    <div class="scene-selection bg-amber-500 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15 border border-amber-400 rounded-md p-2 flex-col gap-4">
+      <h3 class="text-amber-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">Select Scene</h3>
+      <div class="scenes flex-row items-center justify-center">
+        <div id="bomb" class="scene rounded-md p-2 border border-amber-400">
+          <span class="scene inline-block bg-amber-500 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Bomb-omb</span>
+          <img src="./assets/images/bomb-omb-room.png" alt="Bomb-omb Battlefield" class="h-24 w-24">
+        </div>
+        <div id="castle" class="scene p-2 rounded-md">
+          <span class="scene inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Peach Castle</span>
+          <img src="./assets/images/peach-castle.jpeg" alt="Peach Castle" class="h-24 w-24">
+        </div>
+        <div id="bowser" class="scene p-2 rounded-md">
+          <span class="scene inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Bowser to the sky</span>
+          <img src="./assets/images/bowser-in-the-sky.png" alt="Bowser in the sky" class="h-24 w-24">
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Controls -->
-  <div class="controls bg-amber-300 rounded-md p-2">
-    <span class="section-header">CONTROLS</span>
+  <div class="controls rounded-md flex flex-col p-2 w-full bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-2">
+    <span class="section-header text-green-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">CONTROLS</span>
     <div class="menu column2">
       <details>
         <summary class="title">
@@ -80,12 +111,6 @@
   </div>
 </div>
 
-<!-- Audio -->
-<audio controls>
-  <source src="./assets/audio/castle.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
   <!-- Libraries -->
   <script src="./lib/boilerplate.js"></script>
   <script src="./lib/functions.js"></script>
@@ -93,6 +118,7 @@
   <script src="./lib/shapes.js"></script>
   <script src="./lib/canvas-utils.js"></script>
   <script src="./lib/file-utils.js"></script>
+  <script src="./lib/shaders-utils.js"></script>
 
   <!-- External Resources -->
   <script src="./resources/dat_gui.js"></script>
@@ -111,7 +137,8 @@
   <script src="./src/camera.js"></script>
   <script src="./src/shadow.js"></script>
   <script src="./src/skybox.js"></script>
-  <script src="./src/lights.js"></script>
+  <script src="./src/light.js"></script>
+  <script src="./src/shaders.js"></script>
   <script src="./src/controllers/key_controller.js"></script>
   <script src="./src/controllers/touch_controller.js"></script>
   <script src="./src/controllers/mouse_controller.js"></script>
@@ -122,7 +149,7 @@
   <script src="./src/mine/scene.js"></script>
   <script src="./src/mine/render.js"></script>
 
-  <!-- Shaders -->
+<!-- Shaders -->
 <script id="base-vertex-shader" type="x-shader/x-vertex">
   attribute vec4 a_position;
   attribute vec3 a_normal;

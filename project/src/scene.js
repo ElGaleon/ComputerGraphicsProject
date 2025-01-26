@@ -39,14 +39,31 @@ class Scene {
    * @type {KeyController}
    */
   keyController;
+  /**
+   * @type {MouseController}
+   */
+  mouseController;
+  /**
+   * @type {TouchController}
+   */
+  touchController;
+  /**
+   * @type {JSON}
+   */
+  json;
 
+  /**
+   *
+   * @param {string} canvasId
+   * @param {string} sceneId
+   * @param {JSON} json
+   */
   // Scene constructor
-  constructor(canvas_id, json_path) {
+  constructor(canvasId, sceneId, json) {
     // Getting WebGL context from canvas
-    this.canvas = initCanvas(canvas_id);
+    this.canvas = initCanvas(canvasId);
     this.gl = initWebGLContext(canvas);
-
-    this.path = json_path;
+    this.sceneId = sceneId;
 
     this.gl.enable(this.gl.DEPTH_TEST);
 
@@ -56,24 +73,18 @@ class Scene {
     this.shadow = new Shadow(this.gl);
 
     this.meshes = []; // Array used to store all the mesh used in the scene
-    this.#loadMeshFromJson(json_path).then(() => {});
+    json?.meshes.forEach(obj => this.meshes.push(new MeshObj(obj, this.gl)));
 
     // Creating a camera for this scene
-    const position = [10, 2, 10], target = [0, 2, 0], up = [0, 1, 0];
-    this.camera = new Camera(position, target, up);
+    this.camera = new Camera(json?.camera?.position, json?.camera?.target, json?.camera?.up);
     this.keys = {};
 
     // Light used in the scene
-    this.light = {position: [10, 5, 2], direction: [1, 1, 10], color: [1.0, 1.0, 1.0], ambient: [0.1, 0.1, 0.1]};
+    this.light = new Light(json?.light?.position,json?.light?.direction,json?.light?.color,json?.light?.ambient);
     this.keyController = new KeyController(this.camera, 0.5);
-  }
 
-  // Function that loads a list of meshes from a json file
-  // and then creates all the  mesh objects that will be used.
-  async #loadMeshFromJson(json_path) {
-    const response = await fetch(json_path);
-    const json = await response.json();
-    json.meshes.forEach(obj => this.meshes.push(new MeshObj(obj, this.gl)));
+    this.mouseController = new MouseController(this.camera);
+    this.touchController = new TouchController(this.camera);
   }
 
   // Compute the projection matrix
@@ -93,18 +104,6 @@ class Scene {
       this.camera = new AnimatedCamera();
     }
   }
-
-  /**
-   * Load scene by a given id
-   * @param {string} id
-   * @returns {Promise<void>}
-   */
-  async loadScene(id) {
-    console.log('selected scene: ' + id);
-    this.meshes = [];
-    await this.#loadMeshFromJson(this.path);
-  }
-
 
   #bindFrameBufferNull() {
     // draw scene to the canvas projecting the depth texture into the scene
@@ -248,8 +247,8 @@ class Scene {
       u_ambientLight: this.light.ambient,                      // Ambient
       u_lightDirection: m4.normalize(this.light.direction),    // Light Direction
       u_lightColor: this.light.color,                          // Light Color
-      u_view: this.camera.viewMatrix,                     // View Matrix
-      u_projection: this.projectionMatrix,                   // Projection Matrix
+      u_view: this.camera.viewMatrix,                          // View Matrix
+      u_projection: this.projectionMatrix,                     // Projection Matrix
       u_viewWorldPosition: this.camera.getPosition(),          // Camera position
       u_lightPosition: (this.light.position),
     };
@@ -311,10 +310,10 @@ function draw() {
     scene.gl.clear(scene.gl.COLOR_BUFFER_BIT | scene.gl.DEPTH_BUFFER_BIT);
 
     scene.meshes.forEach(m => {
-      m.render(scene.gl, scene.colorProgramInfo, sharedUniforms);
+      m.render(scene.gl, scene.shadow.colorProgramInfo, sharedUniforms);
     });
 
-    bindFrameBufferNull()
+    bindFrameBufferNull();
 
     let textureMatrix = m4.identity();
     textureMatrix = m4.translate(textureMatrix, 0.5, 0.5, 0.5);
@@ -339,11 +338,11 @@ function draw() {
     };
 
     scene.meshes.forEach(m => {
-      m.render(scene.gl, scene.textureProgramInfo, sharedUniforms);
+      m.render(scene.gl, scene.shadow.textureProgramInfo, sharedUniforms);
     });
 
     if (scene.shadow.showFrustum) {
-      scene.gl.useProgram(scene.colorProgramInfo.program);
+      scene.gl.useProgram(scene.shadow.colorProgramInfo.program);
       const cubeLinesBufferInfo = webglUtils.createBufferInfoFromArrays(scene.gl, {
         position: [
           -1, -1, -1,
@@ -373,12 +372,12 @@ function draw() {
         ],
       });
 
-      webglUtils.setBuffersAndAttributes(scene.gl, scene.colorProgramInfo, cubeLinesBufferInfo);
+      webglUtils.setBuffersAndAttributes(scene.gl, scene.shadow.colorProgramInfo, cubeLinesBufferInfo);
 
       const mat = m4.multiply(
         lightWorldMatrix, m4.inverse(lightProjectionMatrix));
 
-      webglUtils.setUniforms(scene.colorProgramInfo, {
+      webglUtils.setUniforms(scene.shadow.colorProgramInfo, {
         u_color: [1, 1, 1, 1],
         u_view: view,
         u_projection: proj,
