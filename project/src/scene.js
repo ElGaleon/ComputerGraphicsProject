@@ -69,7 +69,9 @@ class Scene {
 
     this.program = webglUtils.createProgramInfo(this.gl, ["base-vertex-shader", "base-fragment-shader"]);
 
-    this.skybox = new SkyBox(this.gl, this);
+    if (json?.skybox) {
+      this.skybox = new SkyBox(this.gl, this, json.skybox);
+    }
     this.shadow = new Shadow(this.gl);
 
     this.meshes = []; // Array used to store all the mesh used in the scene
@@ -84,7 +86,7 @@ class Scene {
     this.keyController = new KeyController(this.camera, 0.5);
 
     this.mouseController = new MouseController(this.camera);
-    this.touchController = new TouchController(this.camera);
+    this.touchController = new TouchController(this.keyController);
   }
 
   // Compute the projection matrix

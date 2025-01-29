@@ -1,5 +1,13 @@
 class TouchController {
   /**
+   * @type KeyController
+   */
+  keyController;
+  /**
+   * @type number
+   */
+  step;
+  /**
    * @type boolean
    */
   drag;
@@ -14,14 +22,16 @@ class TouchController {
 
   /**
    *
-   * @param {Camera} camera
+   * @param {KeyController} keyController
+   * @param {number} step
    */
-  constructor(camera) {
-    this.camera = camera;
+  constructor(keyController, step = 0.05) {
+    this.keyController = keyController;
+    this.step = step;
     // Aggiungi gli event listener per i tasti
-    window.addEventListener("touchstart", (event) => this.touchStart(event));
-    window.addEventListener("touchend", () => this.touchEnd());
-    window.addEventListener("touchmove", (event) => this.touchMove(event));
+    canvas.addEventListener("touchstart", (event) => this.touchStart(event));
+    canvas.addEventListener("touchend", () => this.touchEnd());
+    canvas.addEventListener("touchmove", (event) => this.touchMove(event));
   }
 
   /**
@@ -62,4 +72,10 @@ class TouchController {
     this.oldY=event.pageY;
     event.preventDefault();
   }
+
+  onKeyClick(id){
+    this.keyController.keyDown({code: id}, false);
+  }
 }
+
+

@@ -5,6 +5,7 @@ class MeshObj {
   position;
   mesh;
   initialRotation;
+  initialScale;
   rotate;
   angle;
   isReady;
@@ -20,6 +21,10 @@ class MeshObj {
 
       if (obj.initialRotation) {
         this.initialRotation = obj.initialRotation;
+      }
+
+      if (obj.initialScale) {
+        this.initialScale = obj.initialScale;
       }
 
         if (obj.rotate){ // Used for world matrix transform
@@ -104,6 +109,7 @@ class MeshObj {
         // compute the world matrix
         let u_world = m4.identity()
 
+        // Set initial rotation
         if (this.initialRotation?.x) {
           u_world = m4.xRotate(u_world, degToRad(this.initialRotation.x));
         }
@@ -112,6 +118,11 @@ class MeshObj {
         }
         if (this.initialRotation?.z) {
           u_world = m4.zRotate(u_world, degToRad(this.initialRotation.z));
+        }
+
+        // Set initial scaling
+        if (this.initialScale) {
+          m4.scaling(this.initialScale, this.initialScale, this.initialScale, u_world);
         }
 
 

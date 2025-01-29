@@ -9,7 +9,6 @@
  * @returns {Promise<JSON>}
  */
 async function loadScene(sceneId) {
-  console.log(sceneId);
   try {
     const scenePath = `./assets/json/${sceneId}.json`;
     const response = await fetch(scenePath);
@@ -33,19 +32,15 @@ function loadMusic(path) {
 
 async function renderSceneById(sceneId) {
   const jsonScene = await loadScene(sceneId);
-  console.log(jsonScene);
   loadMusic(jsonScene.audio);
   window["scene"] = new Scene("canvas", sceneId, jsonScene);
 
-  // canvas2DController()
   add_dat_gui(scene);
-  // add_touch_canvas(scene);
   scene.render();
 }
 
 async function main(){
   await renderSceneById('bomb');
-
 }
 
 document.getElementById('bomb').addEventListener("click", async () => {
@@ -61,38 +56,43 @@ document.getElementById('bowser').addEventListener("click", async () => {
 });
 
 $(document).ready(function(){
+  const bomb = $("#bomb");
+  const bombSpan = $("#bomb > span");
+  const castle = $("#castle");
+  const castleSpan = $("#castle > span");
+  const bowser = $("#bowser");
+  const bowserSpan = $("#bowser > span");
+
   function resetButtons() {
-    $("#bomb").removeClass("border border-amber-400");
-    $("#bomb > span").removeClass("bg-amber-500").addClass("bg-gray-200");
+    bomb.removeClass("border border-amber-400");
+    bombSpan.removeClass("bg-amber-500").addClass("bg-gray-200");
 
-    $("#castle").removeClass("border border-amber-400");
-    $("#castle > span").removeClass("bg-amber-500").addClass("bg-gray-200");
+    castleSpan.removeClass("border border-amber-400");
+    castleSpan.removeClass("bg-amber-500").addClass("bg-gray-200");
 
-    $("#bowser").removeClass("border border-amber-400");
-    $("#bowser > span").removeClass("bg-amber-500").addClass("bg-gray-200");
+    bowser.removeClass("border border-amber-400");
+    bowserSpan.removeClass("bg-amber-500").addClass("bg-gray-200");
   }
 
-  $("#bomb").click(function() {
-    console.log("Scene is bomb");
+  bomb.click(function() {
     resetButtons();
     $(this).addClass("border border-amber-400");
-    $("#bomb > span").removeClass("bg-gray-200").addClass("bg-amber-500");
+    bombSpan.removeClass("bg-gray-200").addClass("bg-amber-500");
   });
 
-  $("#castle").click(function() {
-    console.log("Scene is castle");
+  castle.click(function() {
     resetButtons();
     $(this).addClass("border border-amber-400");
-    $("#castle > span").removeClass("bg-gray-200").addClass("bg-amber-500");
+    castleSpan.removeClass("bg-gray-200").addClass("bg-amber-500");
   });
 
-  $("#bowser").click(function() {
-    console.log("Scene is bowser");
+  bowser.click(function() {
     resetButtons();
     $(this).addClass("border border-amber-400");
-    $("#bowser > span").removeClass("bg-gray-200").addClass("bg-amber-500");
+    bowserSpan.removeClass("bg-gray-200").addClass("bg-amber-500");
   });
 });
+
 
 await main();
 

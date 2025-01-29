@@ -237,7 +237,7 @@
     dst[1] = u[1] * v[1];
     dst[2] = u[2] * v[2];
     dst[3] = u[3] * v[3];
-    
+
     return dst;
   }
 
@@ -984,15 +984,15 @@
     // return multiply(m, scaling(sx, sy, sz), dst);
     dst = dst || new MatType(16);
 
-    dst[ 0] = sx * m[0 * 4 + 0];
-    dst[ 1] = sx * m[0 * 4 + 1];
-    dst[ 2] = sx * m[0 * 4 + 2];
-    dst[ 3] = sx * m[0 * 4 + 3];
-    dst[ 4] = sy * m[1 * 4 + 0];
-    dst[ 5] = sy * m[1 * 4 + 1];
-    dst[ 6] = sy * m[1 * 4 + 2];
-    dst[ 7] = sy * m[1 * 4 + 3];
-    dst[ 8] = sz * m[2 * 4 + 0];
+    dst[ 0] = sx * m[0];
+    dst[ 1] = sx * m[1];
+    dst[ 2] = sx * m[2];
+    dst[ 3] = sx * m[3];
+    dst[ 4] = sy * m[4];
+    dst[ 5] = sy * m[4 + 1];
+    dst[ 6] = sy * m[4 + 2];
+    dst[ 7] = sy * m[4 + 3];
+    dst[ 8] = sz * m[2 * 4];
     dst[ 9] = sz * m[2 * 4 + 1];
     dst[10] = sz * m[2 * 4 + 2];
     dst[11] = sz * m[2 * 4 + 3];

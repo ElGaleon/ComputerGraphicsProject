@@ -25,9 +25,10 @@ class KeyController {
   /**
    * Init and assign every key to a camera action
    * @param {any} event
+   * @param {boolean} isKeyboardGenerated
    * @return void
    */
-  keyDown(event) {
+  keyDown(event, isKeyboardGenerated = true) {
     // Imposta il tasto come premuto
     this.keys[event.key] = true;
     switch (event.code) {
@@ -53,19 +54,27 @@ class KeyController {
         this.camera.reset();
         break;
       case 'ArrowUp':
-        event.preventDefault();
+        if (isKeyboardGenerated) {
+          event.preventDefault();
+        }
         this.camera.tilt(this.step);
         break;
       case 'ArrowLeft':
-        event.preventDefault();
+        if (isKeyboardGenerated) {
+          event.preventDefault();
+        }
         this.camera.pan(this.step);
         break;
       case 'ArrowRight':
-        event.preventDefault();
+        if (isKeyboardGenerated) {
+          event.preventDefault();
+        }
         this.camera.pan(-this.step);
         break;
       case 'ArrowDown':
-        event.preventDefault();
+        if (isKeyboardGenerated) {
+          event.preventDefault();
+        }
         this.camera.tilt(-this.step);
         break;
     }

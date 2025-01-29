@@ -7,8 +7,9 @@ class SkyBox {
    *
    * @param {WebGLRenderingContext} gl
    * @param {Scene} scene
+   * @param skybox
    */
-  constructor(gl, scene) {
+  constructor(gl, scene, skybox = null) {
     this.programInfo = webglUtils.createProgramInfo(gl, ["skybox-vertex-shader", "skybox-fragment-shader"]);
     const arrays = this.#createXYQuadVertices(null,  Array.prototype.slice.call(arguments, 1));
     this.quadBufferInfo = webglUtils.createBufferInfoFromArrays(gl, arrays);
@@ -18,27 +19,27 @@ class SkyBox {
     const faceInfos = [
       {
         target: gl.TEXTURE_CUBE_MAP_POSITIVE_X,
-        url: './data/skybox/pos-x.jpg',
+        url: skybox.px,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
-        url: './data/skybox/neg-x.jpg',
+        url: skybox.px,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
-        url: './data/skybox/pos-y.jpg',
+        url: skybox.px,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
-        url: './data/skybox/neg-y.jpg',
+        url: skybox.px,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
-        url: './data/skybox/pos-z.jpg',
+        url: skybox.px,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
-        url: './data/skybox/neg-z.jpg',
+        url: skybox.px,
       },
 
     ];
@@ -66,7 +67,7 @@ class SkyBox {
     });
     gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
     gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-    this.enable = true;
+    this.enable = !!skybox;
   }
 
   toggle() {

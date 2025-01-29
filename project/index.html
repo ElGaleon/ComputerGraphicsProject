@@ -5,9 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Super Mario 64</title>
+  <meta name="description" content="Super Mario 64 rendered with WebGL">
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="./css/output.css">
   <link rel="stylesheet" href="./css/style.css">
-  <meta name="description" content="Super Mario 64 rendered with WebGL">
 
   <meta property="og:title" content="Super Mario 64">
   <meta property="og:type" content="WebGL Site">
@@ -75,25 +76,122 @@
     <div class="scene-selection bg-amber-500 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15 border border-amber-400 rounded-md p-2 flex-col gap-4">
       <h3 class="text-amber-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">Select Scene</h3>
       <div class="scenes flex-row items-center justify-center">
-        <div id="bomb" class="scene rounded-md p-2 border border-amber-400">
-          <span class="scene inline-block bg-amber-500 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Bomb-omb</span>
+        <div id="bomb" class="scene rounded-md p-2 border border-amber-400 w-1/3">
+          <span class="scene inline-block bg-amber-500 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 text-center">Bomb-omb</span>
           <img src="./assets/images/bomb-omb-room.png" alt="Bomb-omb Battlefield" class="h-24 w-24">
         </div>
-        <div id="castle" class="scene p-2 rounded-md">
-          <span class="scene inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Peach Castle</span>
+        <div id="castle" class="scene p-2 rounded-md w-1/3">
+          <span class="scene inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 text-center">Peach Castle</span>
           <img src="./assets/images/peach-castle.jpeg" alt="Peach Castle" class="h-24 w-24">
         </div>
-        <div id="bowser" class="scene p-2 rounded-md">
-          <span class="scene inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Bowser to the sky</span>
+        <div id="bowser" class="scene p-2 rounded-md w-1/3">
+          <span class="scene inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 text-center">Bowser to the sky</span>
           <img src="./assets/images/bowser-in-the-sky.png" alt="Bowser in the sky" class="h-24 w-24">
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Controls -->
-  <div class="controls rounded-md flex flex-col p-2 w-full bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-2">
+  <!-- Right Side -->
+  <div class="flex flex-col p-2 w-full rounded-md bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-4">
+
+    <div class="touch-keyboard rounded-md flex flex-col p-2 w-fullbg-green-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 gap-4 border border-green-400">
+      <h3 class="text-green-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">Touch Keyboard</h3>
+      <!-- Touch Keyboard -->
+      <div class="flex flex-col px-2 py-4 gap-2">
+        <div class="flex flex-row justify-evenly">
+          <!-- WASD Keys -->
+          <div class="flex flex-col gap-0.5">
+            <div class="flex w-full justify-center">
+              <kbd id="KeyW" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">W</kbd>
+            </div>
+            <div class="flex w-full justify-center gap-0.5">
+              <kbd id="KeyA" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">A</kbd>
+              <kbd id="KeyS" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">S</kbd>
+              <kbd id="KeyD" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">D</kbd>
+            </div>
+          </div>
+
+          <!-- Arrow Keys -->
+          <div class="flex flex-col gap-0.5">
+            <div class="flex w-full justify-center">
+              <kbd id="ArrowUp" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">▲</kbd>
+            </div>
+            <div class="flex w-full justify-center gap-0.5">
+              <kbd id="ArrowLeft" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">◀︎</kbd>
+              <kbd id="ArrowDown" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">▼</kbd>
+              <kbd id="ArrowRight" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">▶︎</kbd>
+            </div>
+          </div>
+
+        </div>
+        <!-- QER Keyboard -->
+        <div class="flex w-full justify-center gap-0.5">
+          <kbd id="KeyQ" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">Q</kbd>
+          <kbd id="KeyE" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">E</kbd>
+          <kbd id="KeyR" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">R</kbd>
+        </div>
+      </div>
+    </div>
+
+    <div class="touch-keyboard rounded-md flex flex-col p-2 w-full bg-green-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-4 border border-green-400">
+
     <span class="section-header text-green-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">CONTROLS</span>
+
+    <!-- Keyboard Menu -->
+    <div class="keyboard text-gray-800">
+      <!-- W -->
+      <div class="keyboard-control">
+        <kbd class="kbd">W</kbd> Forward
+      </div>
+      <!-- S -->
+      <div class="keyboard-control">
+        <kbd class="kbd">S</kbd> Back
+      </div>
+      <!-- A -->
+      <div class="keyboard-control">
+        <kbd class="kbd">A</kbd> Left
+      </div>
+      <!-- D -->
+      <div class="keyboard-control">
+        <kbd class="kbd">D</kbd> Right
+      </div>
+      <!-- Divider -->
+      <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+      <!-- Q -->
+      <div class="keyboard-control">
+        <kbd class="kbd">Q</kbd> Up
+      </div>
+      <!-- E -->
+      <div class="keyboard-control">
+        <kbd class="kbd">E</kbd> Down
+      </div>
+      <!-- Divider -->
+      <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+      <!-- Arrow Up -->
+      <div class="keyboard-control">
+        <kbd class="kbd">▲</kbd> Rotate up
+      </div>
+      <!-- Arrow Down -->
+      <div class="keyboard-control">
+        <kbd class="kbd">▼</kbd> Rotate down
+      </div>
+      <!-- Arrow Left -->
+      <div class="keyboard-control">
+        <kbd class="kbd">◀︎</kbd> Rotate left
+      </div>
+      <!-- Arrow Right -->
+      <div class="keyboard-control">
+        <kbd class="kbd">▶︎</kbd> Rotate right
+      </div>
+      <!-- R -->
+      <div class="keyboard-control">
+        <kbd class="kbd">R</kbd> Reset
+      </div>
+    </div>
+    </div>
+
+    <!-- Control Menu -->
     <div class="menu column2">
       <details>
         <summary class="title">
@@ -144,10 +242,6 @@
   <script src="./src/controllers/mouse_controller.js"></script>
   <script src="./src/animated_camera.js"></script>
   <script src="./src/mesh_obj.js"></script>
-  <script src="./src/mine/shadows.js"></script>
-  <script src="./src/mine/mesh.js"></script>
-  <script src="./src/mine/scene.js"></script>
-  <script src="./src/mine/render.js"></script>
 
 <!-- Shaders -->
 <script id="base-vertex-shader" type="x-shader/x-vertex">

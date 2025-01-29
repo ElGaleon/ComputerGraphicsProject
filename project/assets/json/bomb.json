@@ -42,15 +42,6 @@
       "initialRotation" : {
         "z" : 270
       }
-    },
-    {
-      "name": "Star",
-      "objSource": "./assets/obj/star/star.obj",
-      "mtlSource": "./assets/obj/star/star.mtl",
-      "position": [0, -3, 2],
-      "initialRotation" : {
-        "y" : 90
-      }
     }
   ]
 }

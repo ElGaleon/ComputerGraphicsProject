@@ -19,9 +19,9 @@ class MouseController {
   constructor(camera) {
     this.camera = camera;
     // Aggiungi gli event listener per i tasti
-    window.addEventListener("mousedown", (event) => this.mouseDown(event));
-    window.addEventListener("mouseup", () => this.mouseUp());
-    window.addEventListener("mousemove", (event) => this.mouseMove(event));
+    canvas.addEventListener("mousedown", (event) => this.mouseDown(event));
+    canvas.addEventListener("mouseup", () => this.mouseUp());
+    canvas.addEventListener("mousemove", (event) => this.mouseMove(event));
   }
 
   /**

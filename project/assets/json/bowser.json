@@ -1,0 +1,64 @@
+{
+  "skybox": {
+    "px": "./assets/images/skybox/bowser/bowser_px.png",
+    "py": "./assets/images/skybox/bowser/bowser_py.png",
+    "pz": "./assets/images/skybox/bowser/bowser_pz.png",
+    "nx": "./assets/images/skybox/bowser/bowser_nx.png",
+    "ny": "./assets/images/skybox/bowser/bowser_ny.png",
+    "nz": "./assets/images/skybox/bowser/bowser_nz.png"
+  },
+  "camera" : {
+    "position": [2.5, 1, 0],
+    "target": [0,0,0],
+    "up": [0,2,0]
+  },
+  "audio": "./assets/audio/bowser.mp3",
+  "light": {
+    "position": [10, 5, 2],
+    "direction": [4.8, 2.8, 0],
+    "ambient": [0.1, 0.1, 0.1],
+    "color": [1, 1, 1]
+  },
+  "meshes":[
+    {
+      "name": "Bowser",
+      "objSource": "./lib/OBJ/bowser/bowser.obj",
+      "mtlSource": "./lib/OBJ/bowser/bowser.mtl",
+      "position": [0, 0, 0],
+      "rotate": false,
+      "initialScale": 1
+    },
+    {
+      "name": "Column 1",
+      "objSource": "./assets/obj/column/column.obj",
+      "mtlSource": "../assets/obj/column/column.mtl",
+      "position": [-6, -2, 1.5],
+      "rotate": false,
+      "initialScale": 0.1
+    },
+    {
+      "name": "Column 2",
+      "objSource": "./assets/obj/column/column.obj",
+      "mtlSource": "./assets/obj/column/column.mtl",
+      "position": [6, -2, 1.5],
+      "rotate": false,
+      "initialScale": 0.1
+    },
+    {
+      "name": "Column 3",
+      "objSource": "./assets/obj/column/column.obj",
+      "mtlSource": "../assets/obj/column/column.mtl",
+      "position": [4, 4, 1],
+      "rotate": false,
+      "initialScale": 0.1
+    },
+    {
+      "name": "Column 4",
+      "objSource": "./assets/obj/column/column.obj",
+      "mtlSource": "./assets/obj/column/column.mtl",
+      "position": [-4, 4, 1],
+      "rotate": false,
+      "initialScale": 0.1
+    }
+  ]
+}
