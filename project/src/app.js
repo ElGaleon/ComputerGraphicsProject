@@ -37,6 +37,7 @@ async function renderSceneById(sceneId) {
   scene.gui = new GUI(scene);
   // add_dat_gui(scene);
   scene.render();
+  // draw(scene);
   return scene;
 }
 

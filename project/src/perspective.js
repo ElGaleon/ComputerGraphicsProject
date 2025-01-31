@@ -1,5 +1,4 @@
 class Perspective{
-  value;
   fieldOfView;
   projectionWidth;
   projectionHeight;

@@ -6,17 +6,20 @@ const Direction = {
 
 class Camera {
   position;
+  target;
   forward;
   right;
   up;
   /**
    *
    * @param {Vector3} position
+   * @param {Vector3} target
    * @param {Vector3} lookAt
    * @param {Vector3} up
    */
-  constructor(position = [0, 0, 0], lookAt = [0, 0, 0], up= [0, 0, 0]) {
+  constructor(position = [0, 0, 0], target = [0,0,0], lookAt = [0, 0, 0], up= [0, 0, 0]) {
     this.position = position;
+    this.target = target
     this.forward = m4.normalize(m4.subtractVectors(lookAt, position));
     this.right = m4.normalize(m4.cross(this.forward, up));
     this.up = m4.normalize(m4.cross(this.right, this.forward));

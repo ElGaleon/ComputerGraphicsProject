@@ -8,8 +8,8 @@
     "nz": ""
   },
   "camera" : {
-    "position": [2.5, 1, 0],
-    "target": [0,1,0],
+    "position": [6, 6, -2],
+    "target": [0,6,0],
     "up": [0,1,0]
   },
   "audio": "./assets/audio/castle.mp3",
@@ -35,15 +35,32 @@
       "rotate": false
     },
     {
-      "name": "Coin",
+      "name": "Coin Left",
       "objSource": "./assets/obj/coin/coin.obj",
       "mtlSource": "./assets/obj/coin/coin.mtl",
-      "position": [0, -3, 2],
-      "initialScale": 1,
+      "position": [-4, 4.5, 3.5],
+      "initialScale": 0.5,
       "initialRotation" : {
-        "y" : 90
+        "x": 0,
+        "z" : 0
       },
-      "rotate": true
+      "rotate" : {
+        "y": true
+      }
+    },
+    {
+      "name": "Coin Right",
+      "objSource": "./assets/obj/coin/coin.obj",
+      "mtlSource": "./assets/obj/coin/coin.mtl",
+      "position": [-4, 4.5, -3.5],
+      "initialScale": 0.5,
+      "initialRotation" : {
+        "x": 0,
+        "z" : 0
+      },
+      "rotate" : {
+        "y": true
+      }
     }
   ]
 }

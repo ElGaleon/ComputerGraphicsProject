@@ -12,10 +12,13 @@ class Shadow {
    * @param {WebGLRenderingContext} gl
    * @param {number} bias
    */
-  constructor(gl, bias = -0.001) {
+  constructor(gl, bias = -0.005) {
+    // Program info
     this.colorProgramInfo = webglUtils.createProgramInfo(gl, ['color-vertex-shader', 'color-fragment-shader']);
     this.textureProgramInfo = webglUtils.createProgramInfo(gl, ['vertex-shader-3d', 'fragment-shader-3d']);
+
     this.bias = bias;
+    // Depth Texture
     this.depthTexture = gl.createTexture();
     this.depthTextureSize = 2048;
     gl.bindTexture(gl.TEXTURE_2D, this.depthTexture);
@@ -28,7 +31,11 @@ class Shadow {
       0,                       // border
       gl.DEPTH_COMPONENT,             // format
       gl.UNSIGNED_INT,                // type
-      null);                    // models
+      null);                    // data
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
     this.depthFrameBuffer = gl.createFramebuffer();
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.depthFrameBuffer);
@@ -38,6 +45,35 @@ class Shadow {
       gl.TEXTURE_2D,
       this.depthTexture,
       0
+    );
+
+    // create a color texture of the same size as the depth texture
+    this.colorTexture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, this.colorTexture);
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      this.depthTextureSize,
+      this.depthTextureSize,
+      0,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      null,
+    );
+
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+    // Attach to the framebuffer
+    gl.framebufferTexture2D(
+      gl.FRAMEBUFFER,
+      gl.COLOR_ATTACHMENT0,
+      gl.TEXTURE_2D,
+      this.colorTexture,
+      0,
     );
 
     this.enabled = false;

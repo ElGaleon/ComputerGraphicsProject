@@ -25,7 +25,6 @@ class GUI {
    */
   constructor(scene) {
     this.scene = scene;
-    this.folders = [];
     this.gui = new dat.gui.GUI({autoPlace: false});
     // Projection
     this.perspectiveFolder = this.#initPerspectiveFolder();
@@ -36,7 +35,6 @@ class GUI {
     // Lights
     this.lightFolder = this.#initLightFolder();
     document.getElementById("gui").append(this.gui.domElement);
-    console.log(this.__controllers);
   }
 
 #initPerspectiveFolder() {
@@ -52,16 +50,15 @@ class GUI {
 
   #initLightFolder() {
     const lightFolder = this.gui.addFolder('Light');
-    this.folders.push(lightFolder);
     this.#initLightPositionFolder(lightFolder);
     this.#initLightDirectionFolder(lightFolder);
     this.#initLightColorFolder(lightFolder);
+    this.#initLightProjectionFolder(lightFolder);
     return lightFolder;
   }
 
   #initLightPositionFolder(lightFolder) {
     const lightPosition =  lightFolder.addFolder('Position');
-    this.folders.push(lightPosition);
     lightPosition.add(scene.light.position, 0).min(-10).max(10).step(0.25).name("X").listen();
     lightPosition.add(scene.light.position, 1).min(0).max(10).step(0.25).name("Y").listen();
     lightPosition.add(scene.light.position, 2).min(-10).max(10).step(0.25).name("Z").listen();
@@ -69,7 +66,6 @@ class GUI {
 
   #initLightDirectionFolder(lightFolder) {
     const lightDirection =  lightFolder.addFolder('Direction');
-    this.folders.push(lightDirection);
     lightDirection.add(scene.light.direction, 0).min(-10).max(10).step(0.25).name("X").listen();
     lightDirection.add(scene.light.direction, 1).min(-10).max(10).step(0.25).name("Y").listen();
     lightDirection.add(scene.light.direction, 2).min(-10).max(10).step(0.25).name("Z").listen();
@@ -77,10 +73,18 @@ class GUI {
 
   #initLightColorFolder(lightFolder) {
     const lightColor = lightFolder.addFolder('Color');
-    this.folders.push(lightColor);
     lightColor.add(scene.light.color, 0).min(0.1).max(1).step(0.05).name("R").listen();
     lightColor.add(scene.light.color, 1).min(0.1).max(1).step(0.05).name("G").listen();
     lightColor.add(scene.light.color, 2).min(0.1).max(1).step(0.05).name("B").listen();
+  }
+
+  #initLightProjectionFolder(lightFolder) {
+    const lightProjection = lightFolder.addFolder('Projection');
+    lightProjection.add(scene.light, "fieldOfView").min(0).max(180).step(15).name("Field of View (FOV)").listen();
+    lightProjection.add(scene.light, "projectionWidth").min(0).max(2).step(0.1).name("Projection Width").listen();
+    lightProjection.add(scene.light, "projectionHeight").min(0).max(2).step(0.1).name("Projection Height").listen();
+    lightProjection.add(scene.light, "zNear").min(1).max(30).step(1).name("z Near Projection").listen();
+    lightProjection.add(scene.light, "zFar").min(1).max(30).step(1).name("z Far Projection").listen();
   }
 
   #initShadowFolder(){
@@ -91,7 +95,7 @@ class GUI {
 
   #initToggleShadow(shadowFolder) {
     this.scene['Toggle shadows'] = function () {
-      scene.shadow.toggle();
+      scene.shadows.toggle();
     };
     shadowFolder.add(this.scene, 'Toggle shadows');
   }

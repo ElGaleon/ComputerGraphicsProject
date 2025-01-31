@@ -1,12 +1,4 @@
 {
-  "skybox": {
-    "px": "./assets/images/skybox/bowser/bowser_px.png",
-    "py": "./assets/images/skybox/bowser/bowser_py.png",
-    "pz": "./assets/images/skybox/bowser/bowser_pz.png",
-    "nx": "./assets/images/skybox/bowser/bowser_nx.png",
-    "ny": "./assets/images/skybox/bowser/bowser_ny.png",
-    "nz": "./assets/images/skybox/bowser/bowser_nz.png"
-  },
   "perspective": {
     "fieldOfView": 75,
     "projectionWidth": 2,
@@ -15,7 +7,7 @@
     "zFar": 30
   },
   "camera" : {
-    "position": [2.5, 1, 0],
+    "position": [3, 1, -2],
     "target": [0,0,0],
     "up": [0,2,0]
   },
@@ -65,6 +57,14 @@
       "mtlSource": "./assets/obj/column/column.mtl",
       "position": [-4, 4, 1],
       "rotate": false,
+      "initialScale": 0.1
+    },
+    {
+      "name": "Red coin",
+      "objSource": "./assets/obj/coin/red-coin.obj",
+      "mtlSource": "./assets/obj/coin/red-coin.mtl",
+      "position": [2, 0, 1.5],
+      "rotate": true,
       "initialScale": 0.1
     }
   ]
