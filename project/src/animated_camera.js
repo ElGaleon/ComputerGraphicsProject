@@ -34,7 +34,7 @@ class AnimatedCamera extends Camera{
         this.radius -=degToRad(step * 100 );
     }
 
-    getViewMatrix() {
+    get viewMatrix() {
         this.#move();
 
         const look = [0,1,0] // the camera is always looking at the same point

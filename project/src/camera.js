@@ -143,6 +143,10 @@ class Camera {
     return m4.inverse(cameraMatrix);
   }
 
+  get worldMatrix() {
+    return m4.inverse(this.viewMatrix);
+  }
+
   get lookAt() {
     const look = m4.addVectors(this.position, this.forward);
     return m4.lookAt(this.position, look, this.up);

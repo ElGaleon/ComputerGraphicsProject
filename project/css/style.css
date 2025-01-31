@@ -65,5 +65,10 @@ body {
 }
 
 .kbd{
+  cursor: pointer;
   @apply px-3 py-2 text-sm font-semibold text-gray-900 bg-white border border-gray-200 rounded-lg;
+}
+
+.dg .main {
+  @apply w-full;
 }

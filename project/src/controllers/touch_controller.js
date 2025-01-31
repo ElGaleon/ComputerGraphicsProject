@@ -1,8 +1,8 @@
 class TouchController {
   /**
-   * @type KeyController
+   * @type Scene
    */
-  keyController;
+  scene;
   /**
    * @type number
    */
@@ -12,69 +12,103 @@ class TouchController {
    */
   drag;
   /**
-   * @type number
+   * @type
    */
-  oldX;
+  touchStart;
   /**
-   * @type number
+   * @type boolean
    */
-  oldY;
+  isPinching;
+  /**
+   * @type boolean
+   */
+  isScaling;
+
+
 
   /**
-   *
-   * @param {KeyController} keyController
+   * @param {Scene} scene
    * @param {number} step
    */
-  constructor(keyController, step = 0.05) {
-    this.keyController = keyController;
+  constructor(scene, step = 0.05) {
+    this.scene = scene;
+    this.touchStart = {x: 0, y:0};
+    this.isTouching = false;
+    this.isPinching = false;
+    this.pinchDistance = 0;
     this.step = step;
     // Aggiungi gli event listener per i tasti
-    canvas.addEventListener("touchstart", (event) => this.touchStart(event));
-    canvas.addEventListener("touchend", () => this.touchEnd());
-    canvas.addEventListener("touchmove", (event) => this.touchMove(event));
+    canvas.addEventListener("touchstart", (event) => this.onTouchStart(event), false);
+    canvas.addEventListener("touchend", () => this.onTouchEnd(), false);
+    canvas.addEventListener("touchmove", (event) => this.onTouchMove(event), false);
   }
 
   /**
-   * Init and assign every key to a camera action
-   * @param {any} event
+   * Handle touch start
+   * @param {TouchEvent} event
    * @return void
    */
-  touchStart(event) {
-    this.drag = true;
-    this.oldX = event.pageX;
-    this.oldY = event.pageY;
-    event.preventDefault();
+  onTouchStart(event) {
+    console.log(event.touches)
+    if (event.touches.length === 1) {
+      console.log("one");
+      this.isTouching = true;
+      this.touchStart.x = event.touches[0].clientX;
+      this.touchStart.y = event.touches[0].clientY;
+    }
+    if (event.touches.length === 2) {
+      console.log("two");
+      this.isPinching = true;
+      this.touchStart.x = event.touches[0].clientX - event.touches[1].clientX;
+      this.touchStart.y = event.touches[0].clientY - event.touches[1].clientY;
+      this.pinchDistance = Math.sqrt(this.touchStart.x * this.touchStart.x + this.touchStart.y * this.touchStart.y);
+    }
   }
 
   /**
    * @return void
    */
-  touchEnd() {
-    this.drag = false;
+  onTouchEnd() {
+    this.isTouching = false;
+    this.isScaling = false;
   }
 
   /**
-   *
-   * @param {any} event
+   * Handles the touch movement
+   * @param {TouchEvent} event
    * @return void
    */
-  touchMove(event) {
-    if (!this.drag){
-      return;
+  onTouchMove(event) {
+    if (this.isTouching && event.touches.length === 1)
+    {
+      const touch = event.touches[0];
+      const deltaX = touch.clientX - this.touchStart.x;
+      const deltaY = touch.clientY - this.touchStart.y;
+
+      if (deltaX) {
+        this.scene.camera.pan(deltaX * 0.005);
+      }
+      if (deltaY) {
+        this.scene.camera.tilt(deltaY * 0.005);
+      }
+      // Aggiorna la posizione iniziale del tocco
+      this.touchStart.x = touch.clientX;
+      this.touchStart.y = touch.clientY;
+    } else if (this.isPinching && event.touches.length === 2) {
+      const zoomFactor = this.pinchDistance / this.lastDistance;
+
+      this.zoom *= zoomFactor;
+      this.zoom = Math.min(Math.max(this.zoom, 0.5), 3.0); // Limita lo zoom
+
+      this.lastDistance = this.pinchDistance;
+      this.applyZoom();
     }
 
-    const deltaX=-(event.pageX-this.oldX)*2*Math.PI/scene.canvas.width;
-    this.camera.pan(-deltaX * 0.2);
-    const deltaY=-(event.pageY-this.oldY)*2*Math.PI/scene.canvas.height;
-    scene.camera.tilt(-deltaY * 0.2);
-
-    this.oldX=event.pageX;
-    this.oldY=event.pageY;
-    event.preventDefault();
+    event.preventDefault(); // Previene il comportamento di default del touch
   }
 
   onKeyClick(id){
-    this.keyController.keyDown({code: id}, false);
+    this.scene.keyController.keyDown({code: id}, false);
   }
 }
 

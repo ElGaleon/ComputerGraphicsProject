@@ -1,16 +1,15 @@
 {
-  "skybox": {
-    "px": "",
-    "py": "",
-    "pz": "",
-    "nx": "",
-    "ny": "",
-    "nz": ""
-  },
   "camera" : {
     "position": [2.5, 1, 0],
     "target": [0,1,0],
     "up": [0,1,0]
+  },
+  "perspective": {
+    "fieldOfView": 75,
+    "projectionWidth": 2,
+    "projectionHeight": 1,
+    "zNear": 1,
+    "zFar": 30
   },
   "audio": "./assets/audio/bomb.mp3",
   "light": {
@@ -28,20 +27,24 @@
       "rotate": false
     },
     {
-      "name": "Mario",
-      "objSource": "./assets/obj/mario/mario.obj",
-      "mtlSource": "./assets/obj/mario/mario.mtl",
-      "position": [0, 0, 2],
-      "rotate": false
-    },
-    {
       "name": "Frame",
       "objSource": "./assets/obj/frame/frame.obj",
       "mtlSource": "./assets/obj/frame/frame.mtl",
-      "position": [0, -2, -3],
+      "position": [3, -1.75, 0],
       "initialRotation" : {
         "z" : 270
       }
+    },
+    {
+      "name": "Star",
+      "objSource": "./assets/obj/star/star.obj",
+      "mtlSource": "./assets/obj/star/star.mtl",
+      "position": [3, -1.25, 0],
+      "initialRotation" : {
+        "x": 270,
+        "z" : 270
+      },
+      "rotate": true
     }
   ]
 }

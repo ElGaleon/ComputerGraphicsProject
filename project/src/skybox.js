@@ -2,7 +2,7 @@ class SkyBox {
   programInfo;
   quadBufferInfo;
   texture;
-  enable;
+  enabled;
   /**
    *
    * @param {WebGLRenderingContext} gl
@@ -67,11 +67,11 @@ class SkyBox {
     });
     gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
     gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-    this.enable = !!skybox;
+    this.enabled = !!skybox;
   }
 
   toggle() {
-    this.enable = !this.enable;
+    this.enabled = !this.enabled;
   }
 
   #createXYQuadVertices() {

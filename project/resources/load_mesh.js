@@ -30,12 +30,16 @@ async function LoadMesh(gl,mesh) {
 
 //Funzione che serve per recuperare i dati della mesh da un file OBJ
 async function retrieveDataFromSource(mesh){
+  try {
   await loadMeshFromOBJ(mesh);
   if(mesh.fileMTL) {
     await readMTLFile(mesh.fileMTL, mesh.data);
 
     mesh.materials = mesh.data.materials;
     delete mesh.data.materials;
+  }
+  } catch (e) {
+    console.error(e);
   }
 }
 
@@ -176,7 +180,7 @@ function parseMTL(text) {
     const parts = line.split(/\s+/).slice(1);
     const handler = keywords[keyword];
     if (!handler) {
-      console.warn('unhandled keyword:', keyword);  // eslint-disable-line no-console
+      // console.warn('unhandled keyword:', keyword);  // eslint-disable-line no-console
       continue;
     }
     handler(parts, unparsedArgs);

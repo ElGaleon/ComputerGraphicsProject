@@ -33,10 +33,11 @@ function loadMusic(path) {
 async function renderSceneById(sceneId) {
   const jsonScene = await loadScene(sceneId);
   loadMusic(jsonScene.audio);
-  window["scene"] = new Scene("canvas", sceneId, jsonScene);
-
-  add_dat_gui(scene);
+  window["scene"] = new Scene("#canvas", sceneId, jsonScene);
+  scene.gui = new GUI(scene);
+  // add_dat_gui(scene);
   scene.render();
+  return scene;
 }
 
 async function main(){
@@ -44,24 +45,30 @@ async function main(){
 }
 
 document.getElementById('bomb').addEventListener("click", async () => {
+  scene.gui.closeOldController();
   await renderSceneById('bomb');
 });
 
 document.getElementById('castle').addEventListener("click", async () => {
+  scene.gui.closeOldController();
   await renderSceneById('castle');
 });
 
 document.getElementById('bowser').addEventListener("click", async () => {
+  scene.gui.closeOldController();
   await renderSceneById('bowser');
 });
 
 $(document).ready(function(){
-  const bomb = $("#bomb");
-  const bombSpan = $("#bomb > span");
-  const castle = $("#castle");
-  const castleSpan = $("#castle > span");
-  const bowser = $("#bowser");
-  const bowserSpan = $("#bowser > span");
+  // Bomb Selectors
+  let bomb = $("#bomb");
+  let bombSpan = $("#bomb > span");
+  // Castle Selectors
+  let castle = $("#castle");
+  let castleSpan = $("#castle > span");
+  // Castle Selectors
+  let bowser = $("#bowser");
+  let bowserSpan = $("#bowser > span");
 
   function resetButtons() {
     bomb.removeClass("border border-amber-400");
@@ -76,19 +83,19 @@ $(document).ready(function(){
 
   bomb.click(function() {
     resetButtons();
-    $(this).addClass("border border-amber-400");
+    bomb.addClass("border border-amber-400");
     bombSpan.removeClass("bg-gray-200").addClass("bg-amber-500");
   });
 
   castle.click(function() {
     resetButtons();
-    $(this).addClass("border border-amber-400");
+    castle.addClass("border border-amber-400");
     castleSpan.removeClass("bg-gray-200").addClass("bg-amber-500");
   });
 
   bowser.click(function() {
     resetButtons();
-    $(this).addClass("border border-amber-400");
+    bowser.addClass("border border-amber-400");
     bowserSpan.removeClass("bg-gray-200").addClass("bg-amber-500");
   });
 });

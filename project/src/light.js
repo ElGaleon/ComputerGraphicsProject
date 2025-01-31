@@ -16,7 +16,7 @@ class Light {
    */
  ambient;
 
-  constructor(position = [0, 0, 0], direction = [0, 1, 0], color = [1, 1, 1], ambient = [0,0,0]) {
+  constructor(position = [0, 3, 0], direction = [0, 1, 0], color = [1, 1, 1], ambient = [0,0,0]) {
     this.position = position;
     this.direction = direction;
     this.color = color;

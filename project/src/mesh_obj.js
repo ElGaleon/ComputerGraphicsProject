@@ -46,50 +46,51 @@ class MeshObj {
    * @returns {void}
    */
     composeMesh(gl){
-        // Generic material
-        const defaultMaterial = {
-            // Setting default material properties
-            diffuse: [1, 1, 1],
-            diffuseMap: this.mesh.textures.defaultWhite,
-            ambient: [0, 0, 0],
-            specular: [1, 1, 1],
-            shininess: 400,
-            opacity: 1,
+      const defaultMaterial = {
+        // Setting default material properties
+        diffuse: [1, 1, 1],
+        diffuseMap: this.mesh.textures.defaultWhite,
+        ambient: [0, 0, 0],
+        specular: [1, 1, 1],
+        shininess: 400,
+        opacity: 1,
+      };
+
+      /**
+      // Moving to the initial position
+      let z = this.position[2]
+      let y = this.position[1]
+      let x = this.position[0]
+
+      this.mesh.data.geometries.forEach(geom => {
+        // Moving the mesh to the initial position.
+        for (let i = 0; i < geom.data.position.length; i = i+3) {
+          geom.data.position[i] += (y);
+          geom.data.position[i+1] += (z);
+          geom.data.position[i+2] += (x);
+        }
+      })**/
+
+      this.mesh.parts = this.mesh.data.geometries.map(({material, data}) => {
+        if (data.color) {
+          if (data.position.length === data.color.length) {
+            data.color = { numComponents: 3, data: data.color };
+          }
+        } else {
+          data.color = { value: [1, 1, 1, 1] };
+        }
+
+        const bufferInfo = webglUtils.createBufferInfoFromArrays(gl, data);
+        return {
+          material: {
+            ...defaultMaterial,
+            ...this.mesh.materials[material],
+          },
+          bufferInfo,
         };
+      });
 
-        // Moving to the initial position
-        let z = this.position[2]
-        let y = this.position[1]
-        let x = this.position[0]
-
-
-        this.mesh.data.geometries.forEach(geom => {
-            // Moving the mesh to the initial position.
-            for (let i = 0; i < geom.data.position.length; i = i+3) {
-                geom.data.position[i] += (y);
-                geom.data.position[i+1] += (z);
-                geom.data.position[i+2] += (x);
-            }
-        })
-
-        this.mesh.parts = this.mesh.data.geometries.map(({material, data}) => {
-            if (data.color) {
-                if (data.position.length === data.color.length) {
-                    data.color = { numComponents: 3, data: data.color };
-                }
-            } else {
-                data.color = { value: [1, 1, 1, 1] };
-            }
-
-            const bufferInfo = webglUtils.createBufferInfoFromArrays(gl, data);
-            return {
-                material: {
-                    ...defaultMaterial,
-                    ...this.mesh.materials[material],
-                },
-                bufferInfo,
-            };
-        });
+      this.ready = true; // now the mesh is ready to be rendered
     }
 
   /**
@@ -106,34 +107,11 @@ class MeshObj {
         gl.useProgram(programInfo.program);
         webglUtils.setUniforms(programInfo, uniforms);
 
-        // compute the world matrix
-        let u_world = m4.identity()
-
-        // Set initial rotation
-        if (this.initialRotation?.x) {
-          u_world = m4.xRotate(u_world, degToRad(this.initialRotation.x));
-        }
-        if (this.initialRotation?.y) {
-          u_world = m4.yRotate(u_world, degToRad(this.initialRotation.y));
-        }
-        if (this.initialRotation?.z) {
-          u_world = m4.zRotate(u_world, degToRad(this.initialRotation.z));
-        }
-
-        // Set initial scaling
-        if (this.initialScale) {
-          m4.scaling(this.initialScale, this.initialScale, this.initialScale, u_world);
-        }
-
-
-        if (this.rotate === true && uniforms.u_textureMatrix !== m4.identity() ){
-            u_world = m4.yRotate(u_world, degToRad(this.angle));
-            this.angle = this.angle === 360? 0 : this.angle+5;
-        }
+        const u_world = this.#computeModelMatrix();
 
         for (const {bufferInfo, material} of this.mesh.parts) {
             // calls gl.bindBuffer, gl.enableVertexAttribArray, gl.vertexAttribPointer
-            webglUtils.setBuffersAndAttributes(gl, programInfo, bufferInfo);
+           webglUtils.setBuffersAndAttributes(gl, programInfo, bufferInfo);
             // calls gl.uniform
             webglUtils.setUniforms(programInfo, {
                 u_world,
@@ -141,5 +119,41 @@ class MeshObj {
             // calls gl.drawArrays or gl.drawElements
             webglUtils.drawBufferInfo(gl, bufferInfo);
         }
+    }
+
+  /**
+   *
+   * @returns {*}
+   */
+    #computeModelMatrix() {
+    // compute the world matrix
+    let u_world = m4.identity()
+
+    u_world = m4.translate(u_world, ...this.position.map(v => -v));
+
+    if (this.initialRotation) {
+      // Set initial rotation
+      if (this.initialRotation?.x) {
+        u_world = m4.xRotate(u_world, degToRad(this.initialRotation.x));
+      }
+      if (this.initialRotation?.y) {
+        u_world = m4.yRotate(u_world, degToRad(this.initialRotation.y));
+      }
+      if (this.initialRotation?.z) {
+        u_world = m4.zRotate(u_world, degToRad(this.initialRotation.z));
+      }
+    }
+
+    if (this.rotate === true){
+      u_world = m4.zRotate(u_world, degToRad(this.angle));
+      this.angle = this.angle === 360? 0 : this.angle+5;
+    }
+
+    // Set initial scaling
+    if (this.initialScale) {
+      u_world = m4.scale(u_world, [this.initialScale, this.initialScale, this.initialScale]);
+    }
+
+    return u_world;
     }
 }

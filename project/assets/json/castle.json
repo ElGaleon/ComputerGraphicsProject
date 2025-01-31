@@ -35,22 +35,15 @@
       "rotate": false
     },
     {
-      "name": "Frame",
-      "objSource": "./assets/obj/frame/frame.obj",
-      "mtlSource": "./assets/obj/frame/frame.mtl",
-      "position": [0, -2, -3],
-      "initialRotation" : {
-        "z" : 270
-      }
-    },
-    {
-      "name": "Star",
-      "objSource": "./assets/obj/star/star.obj",
-      "mtlSource": "./assets/obj/star/star.mtl",
+      "name": "Coin",
+      "objSource": "./assets/obj/coin/coin.obj",
+      "mtlSource": "./assets/obj/coin/coin.mtl",
       "position": [0, -3, 2],
+      "initialScale": 1,
       "initialRotation" : {
         "y" : 90
-      }
+      },
+      "rotate": true
     }
   ]
 }
