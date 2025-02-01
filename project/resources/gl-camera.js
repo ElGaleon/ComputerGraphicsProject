@@ -67,9 +67,9 @@ fromRotation = (axis, angle) => {
   t = 1 - c;
 
   return new DOMMatrix([
-    x * x * t + c,      y * x * t + z * s,  z * x * t - y * s,   0,
-    x * y * t - z * s,  y * y * t + c,      z * y * t + x * s,   0,
-    x * z * t + y * s,  y * z * t - x * s,  z * z * t + c,       0,
+    x * x * t + c, y * x * t + z * s, z * x * t - y * s, 0,
+    x * y * t - z * s, y * y * t + c, z * y * t + x * s, 0,
+    x * z * t + y * s, y * z * t - x * s, z * z * t + c, 0,
     0, 0, 0, 1
   ]);
 };
@@ -112,7 +112,7 @@ lookAt = (cameraX, cameraY, cameraZ, targetX, targetY, targetZ, upX = 0, upY = 1
     sx, ux, -fx, 0,
     sy, uy, -fy, 0,
     sz, uz, -fz, 0,
-    0,  0,  0,   1
+    0, 0, 0, 1
   ]);
   return ret.translateSelf(-cameraX, -cameraY, -cameraZ);
 }

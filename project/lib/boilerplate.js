@@ -31,7 +31,7 @@ function initWebGLContext(canvas) {
   }
 
   // Set viewport
-  gl.viewport(0,0, canvas.width, canvas.height);
+  gl.viewport(0, 0, canvas.width, canvas.height);
 
   return gl;
 }
@@ -93,10 +93,6 @@ function compileBuffer(gl, data, program, attribute, size, type) {
   const attributeLocation = gl.getAttribLocation(program, attribute);
   gl.vertexAttribPointer(attributeLocation, size, type, false, 0, 0);
   gl.enableVertexAttribArray(attributeLocation);
-}
-
-function textureFinishedLoading(image, texture) {
-
 }
 
 function loadImageForTexture(url, texture) {

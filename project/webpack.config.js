@@ -19,7 +19,7 @@ module.exports = {
       },
     ],
   },
-  resolve : {
+  resolve: {
     extensions: ['.js', '.json'],
   },
 };

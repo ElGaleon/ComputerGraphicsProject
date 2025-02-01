@@ -33,16 +33,23 @@
 <!-- Scene -->
 <div
   class="col-span-1 md:col-span-2 rounded-md flex flex-col p-2 w-full h-fit bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-2">
-  <div class="scene-header flex-row items-start place-content-between">
+  <div class="scene-header flex flex-row items-center place-content-between">
     <h3 class="section-header text-red-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">SCENE</h3>
+    <!-- Audio -->
+    <audio controls id="music" class="flex justify-end w-64 h-8">
+      <source id="music-src" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
   </div>
 
 
   <!-- Canvas -->
-  <div class="canvas-scene relative pb-8">
+  <div class="canvas-scene relative">
     <canvas id="canvas" class="w-full h-2/3 rounded-md">
       HTML5 is not supported in your browser.
     </canvas>
+    <div id="gui" class="absolute bottom-8 right-4">
+    </div>
     <!-- Life Indicator -->
     <div class="indicator absolute top-2 left-4">
       <img src="./assets/images/mario.png" alt="mario" height="32" width="28">
@@ -63,12 +70,6 @@
       <img src="./assets/images/text_and_numbers/X.png" alt="x" height="36" width="28">
       <img src="./assets/images/text_and_numbers/1.png" alt="1" height="36" width="28">
     </div>
-
-    <!-- Audio -->
-    <audio controls id="music" class="absolute bottom-0 flex justify-center ">
-      <source id="music-src" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
   </div>
 
   <!-- Scene Selection -->
@@ -98,18 +99,6 @@
 <!-- Right Side -->
 <div
   class="flex flex-col p-2 w-full rounded-md bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-4">
-  <!-- Control Menu -->
-  <div class="menu mb-12">
-    <details>
-      <summary class="title">
-        Settings
-      </summary>
-      <div id="gui">
-      </div>
-
-    </details>
-  </div>
-
   <div
     class="touch-keyboard rounded-md flex flex-col p-2 w-fullbg-green-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 gap-4 border border-green-400">
     <h3 class="text-green-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">Touch Keyboard</h3>
@@ -217,10 +206,8 @@
 <script src="./lib/boilerplate.js"></script>
 <script src="./lib/functions.js"></script>
 <script src="./lib/gl-math.js"></script>
-<script src="./lib/shapes.js"></script>
 <script src="./lib/canvas-utils.js"></script>
 <script src="./lib/file-utils.js"></script>
-<script src="./lib/shaders-utils.js"></script>
 
 <!-- External Resources -->
 <script src="./resources/dat_gui.js"></script>

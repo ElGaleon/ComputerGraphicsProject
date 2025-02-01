@@ -3,6 +3,7 @@ class SkyBox {
   quadBufferInfo;
   texture;
   enabled;
+
   /**
    *
    * @param {WebGLRenderingContext} gl
@@ -11,7 +12,7 @@ class SkyBox {
    */
   constructor(gl, scene, skybox = null) {
     this.programInfo = webglUtils.createProgramInfo(gl, ["skybox-vertex-shader", "skybox-fragment-shader"]);
-    const arrays = this.#createXYQuadVertices(null,  Array.prototype.slice.call(arguments, 1));
+    const arrays = this.#createXYQuadVertices(null, Array.prototype.slice.call(arguments, 1));
     this.quadBufferInfo = webglUtils.createBufferInfoFromArrays(gl, arrays);
     this.texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, this.texture);
@@ -58,7 +59,7 @@ class SkyBox {
       const image = new Image();
       image.src = url;
 
-      image.addEventListener('load', function() {
+      image.addEventListener('load', function () {
         // Now that the image has loaded make copy it to the texture.
         gl.bindTexture(gl.TEXTURE_CUBE_MAP, scene.skybox.texture);
         gl.texImage2D(target, level, internalFormat, format, type, image);
@@ -83,9 +84,9 @@ class SkyBox {
         numComponents: 2,
         data: [
           xOffset + -1 * size, yOffset + -1 * size,
-          xOffset +  size, yOffset + -1 * size,
-          xOffset + -1 * size, yOffset +  size,
-          xOffset +  size, yOffset +  size,
+          xOffset + size, yOffset + -1 * size,
+          xOffset + -1 * size, yOffset + size,
+          xOffset + size, yOffset + size,
         ],
       },
       normal: [
@@ -100,7 +101,7 @@ class SkyBox {
         0, 1,
         1, 1,
       ],
-      indices: [ 0, 1, 2, 2, 1, 3 ],
+      indices: [0, 1, 2, 2, 1, 3],
     };
   }
 

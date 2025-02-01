@@ -1,8 +1,8 @@
 /*========== Loading and storing the geometry ==========*/
-async function LoadMesh(gl,mesh) {
+async function LoadMesh(gl, mesh) {
   await retrieveDataFromSource(mesh);
 
-  mesh.textures =[];
+  mesh.textures = [];
   mesh.textures = {defaultWhite: create1PixelTexture(gl, [255, 255, 255, 255]),};
 
 
@@ -29,20 +29,19 @@ async function LoadMesh(gl,mesh) {
 
 
 //Funzione che serve per recuperare i dati della mesh da un file OBJ
-async function retrieveDataFromSource(mesh){
+async function retrieveDataFromSource(mesh) {
   try {
-  await loadMeshFromOBJ(mesh);
-  if(mesh.fileMTL) {
-    await readMTLFile(mesh.fileMTL, mesh.data);
+    await loadMeshFromOBJ(mesh);
+    if (mesh.fileMTL) {
+      await readMTLFile(mesh.fileMTL, mesh.data);
 
-    mesh.materials = mesh.data.materials;
-    delete mesh.data.materials;
-  }
+      mesh.materials = mesh.data.materials;
+      delete mesh.data.materials;
+    }
   } catch (e) {
     console.error(e);
   }
 }
-
 
 
 //Funzione che utilizza la libreria glm_utils per leggere un file OBJ
@@ -57,11 +56,11 @@ async function loadMeshFromOBJ(mesh) {
     error: handleError,
   });
 
-  function parseObjFile(result){
+  function parseObjFile(result) {
     mesh.data = parseOBJ(result)
   }
 
-  function handleError(jqXhr, textStatus, errorMessage){
+  function handleError(jqXhr, textStatus, errorMessage) {
     console.error('Error : ' + errorMessage);
   }
 }
@@ -82,12 +81,12 @@ async function loadTexture(gl, path, fileName) {
   gl.texImage2D(gl.TEXTURE_2D, level, internalFormat,
     width, height, border, srcFormat, srcType, pixel);
 
-  if(fileName){
+  if (fileName) {
     const image = new Image();
-    image.onload = function() {
+    image.onload = function () {
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
       gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.texImage2D(gl.TEXTURE_2D, level, internalFormat,srcFormat, srcType, image);
+      gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, image);
       if (isPowerOf2(image.width) && isPowerOf2(image.height))
         gl.generateMipmap(gl.TEXTURE_2D); // Yes, it's a power of 2. Generate mips.
       else {
@@ -104,7 +103,7 @@ async function loadTexture(gl, path, fileName) {
 
 //Funzione che utilizza la libreria glm_utils per leggere un eventuale
 //file MTL associato alla mesh
-async function readMTLFile(MTLfileName, mesh){
+async function readMTLFile(MTLfileName, mesh) {
   return $.ajax({
     type: "GET",
     url: MTLfileName,
@@ -113,17 +112,19 @@ async function readMTLFile(MTLfileName, mesh){
     success: parseMTLFile,
     error: handleError,
   });
-  function parseMTLFile(result){
+
+  function parseMTLFile(result) {
     //glmReadMTL(result, mesh);
     mesh.materials = parseMTL(result);
   }
-  function handleError(jqXhr, textStatus, errorMessage){
+
+  function handleError(jqXhr, textStatus, errorMessage) {
     console.error('Error : ' + errorMessage);
   }
 }
 
 
-async function getMTLFile(MTLfileName, mesh){
+async function getMTLFile(MTLfileName, mesh) {
   return $.ajax({
     type: "GET",
     url: MTLfileName,
@@ -132,11 +133,13 @@ async function getMTLFile(MTLfileName, mesh){
     success: parseMTLFile,
     error: handleError,
   });
-  function parseMTLFile(result){
+
+  function parseMTLFile(result) {
     let mtl = parseMTL(result)
 
   }
-  function handleError(jqXhr, textStatus, errorMessage){
+
+  function handleError(jqXhr, textStatus, errorMessage) {
     console.error('Error : ' + errorMessage);
   }
 }
@@ -152,17 +155,39 @@ function parseMTL(text) {
       materials[unparsedArgs] = material;
     },
     /* eslint brace-style:0 */
-    Ns(parts)       { material.shininess      = parseFloat(parts[0]); },
-    Ka(parts)       { material.ambient        = parts.map(parseFloat); },
-    Kd(parts)       { material.diffuse        = parts.map(parseFloat); },
-    Ks(parts)       { material.specular       = parts.map(parseFloat); },
-    Ke(parts)       { material.emissive       = parts.map(parseFloat); },
-    map_Kd(parts, unparsedArgs)   { material.diffuseMap = unparsedArgs; },
-    map_Ns(parts, unparsedArgs)   { material.specularMap = unparsedArgs; },
-    map_Bump(parts, unparsedArgs) { material.normalMap = unparsedArgs; },
-    Ni(parts)       { material.opticalDensity = parseFloat(parts[0]); },
-    d(parts)        { material.opacity        = parseFloat(parts[0]); },
-    illum(parts)    { material.illum          = parseInt(parts[0]); },
+    Ns(parts) {
+      material.shininess = parseFloat(parts[0]);
+    },
+    Ka(parts) {
+      material.ambient = parts.map(parseFloat);
+    },
+    Kd(parts) {
+      material.diffuse = parts.map(parseFloat);
+    },
+    Ks(parts) {
+      material.specular = parts.map(parseFloat);
+    },
+    Ke(parts) {
+      material.emissive = parts.map(parseFloat);
+    },
+    map_Kd(parts, unparsedArgs) {
+      material.diffuseMap = unparsedArgs;
+    },
+    map_Ns(parts, unparsedArgs) {
+      material.specularMap = unparsedArgs;
+    },
+    map_Bump(parts, unparsedArgs) {
+      material.normalMap = unparsedArgs;
+    },
+    Ni(parts) {
+      material.opticalDensity = parseFloat(parts[0]);
+    },
+    d(parts) {
+      material.opacity = parseFloat(parts[0]);
+    },
+    illum(parts) {
+      material.illum = parseInt(parts[0]);
+    },
   };
 
   const keywordRE = /(\w*)(?: )*(.*)/;
@@ -202,11 +227,11 @@ async function createTexture(gl, url) {
   // Asynchronously load an image
   const image = new Image();
   image.src = url;
-  image.addEventListener('load', function() {
+  image.addEventListener('load', function () {
     // Now that the image has loaded make copy it to the texture.
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA,gl.UNSIGNED_BYTE, image);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
     // Check if the image is a power of 2 in both dimensions.
     if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
@@ -252,7 +277,8 @@ function parseOBJ(text) {
   let material = 'default';
   let object = 'default';
 
-  const noop = () => {};
+  const noop = () => {
+  };
 
   function newGeometry() {
     if (geometry && geometry.data.position.length) {

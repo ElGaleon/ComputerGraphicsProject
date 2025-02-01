@@ -25,14 +25,13 @@ class TouchController {
   isScaling;
 
 
-
   /**
    * @param {Scene} scene
    * @param {number} step
    */
   constructor(scene, step = 0.05) {
     this.scene = scene;
-    this.touchStart = {x: 0, y:0};
+    this.touchStart = {x: 0, y: 0};
     this.isTouching = false;
     this.isPinching = false;
     this.pinchDistance = 0;
@@ -79,8 +78,7 @@ class TouchController {
    * @return void
    */
   onTouchMove(event) {
-    if (this.isTouching && event.touches.length === 1)
-    {
+    if (this.isTouching && event.touches.length === 1) {
       const touch = event.touches[0];
       const deltaX = touch.clientX - this.touchStart.x;
       const deltaY = touch.clientY - this.touchStart.y;
@@ -107,7 +105,7 @@ class TouchController {
     event.preventDefault(); // Previene il comportamento di default del touch
   }
 
-  onKeyClick(id){
+  onKeyClick(id) {
     this.scene.keyController.keyDown({code: id}, false);
   }
 }

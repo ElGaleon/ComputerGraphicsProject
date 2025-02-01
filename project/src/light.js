@@ -2,19 +2,19 @@ class Light {
   /**
    * @type {Vector3}
    */
- position;
+  position;
   /**
    * @type {Vector3}
    */
- direction;
+  direction;
   /**
    * @type {Vector3}
    */
- color;
+  color;
   /**
    * @type {Vector3}
    */
- ambient;
+  ambient;
   /**
    *
    */
@@ -24,7 +24,7 @@ class Light {
   zNear;
   zFar;
 
-  constructor(position = [0, 3, 0], direction = [0, 1, 0], color = [1, 1, 1], ambient = [0,0,0], fieldOfView = 60, projectionWidth = 1, projectionHeight = 1, zNear = 1, zFar = 25) {
+  constructor(position = [0, 3, 0], direction = [0, 1, 0], color = [1, 1, 1], ambient = [0, 0, 0], fieldOfView = 60, projectionWidth = 1, projectionHeight = 1, zNear = 1, zFar = 25) {
     this.position = position;
     this.direction = direction;
     this.color = color;

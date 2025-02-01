@@ -27,5 +27,5 @@ function resizeCanvasToDisplaySize(canvas) {
  * @return boolean
  */
 function toResize(canvas) {
-    return canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight;
+  return canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight;
 }

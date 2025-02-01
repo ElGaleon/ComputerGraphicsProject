@@ -35,11 +35,11 @@ class Camera {
     this.right = m4.normalize(m4.cross(this.forward, up));
     this.up = m4.normalize(m4.cross(this.right, this.forward));
     // Camera perspective
-    this.fieldOfView = perspective.fieldOfView ?? 60;
-    this.projectionWidth = perspective.projectionWidth ?? 1;
-    this.projectionHeight = perspective.projectionHeight ?? 1;
-    this.zNear = perspective.zNear ?? 1;
-    this.zFar = perspective.zFar ?? 100;
+    this.fieldOfView = perspective?.fieldOfView ?? 60;
+    this.projectionWidth = perspective?.projectionWidth ?? 1;
+    this.projectionHeight = perspective?.projectionHeight ?? 1;
+    this.zNear = perspective?.zNear ?? 1;
+    this.zFar = perspective?.zFar ?? 100;
   }
 
   /**

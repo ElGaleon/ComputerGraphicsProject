@@ -4,7 +4,7 @@
  * @returns {number}
  */
 function radToDeg(rad) {
-    return rad * Math.PI / 180;
+  return rad * Math.PI / 180;
 }
 
 /**
@@ -13,7 +13,7 @@ function radToDeg(rad) {
  * @returns {number}
  */
 function degToRad(deg) {
-    return deg * Math.PI / 180;
+  return deg * Math.PI / 180;
 }
 
 /**
@@ -22,5 +22,5 @@ function degToRad(deg) {
  * @returns {boolean}
  */
 function isPowerOf2(value) {
-    return (value & (value - 1)) === 0;
+  return (value & (value - 1)) === 0;
 }

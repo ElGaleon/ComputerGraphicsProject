@@ -35,6 +35,7 @@ class GUI {
     // Lights
     this.lightFolder = this.#initLightFolder();
     document.getElementById("gui").append(this.gui.domElement);
+    this.gui.close();
   }
 
   #initCameraFolder() {

@@ -12,34 +12,26 @@ body {
 @tailwind components;
 @tailwind utilities;
 
-.section-header{
+.section-header {
   font-size: 24px;
 }
 
-.scenes{
+.scenes {
   display: flex;
   gap: 8px;
 }
 
-.scene-selection{
+.scene-selection {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-#music{
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#castle, #bomb, #bowser :hover{
+#castle, #bomb, #bowser :hover {
   cursor: pointer;
 }
 
-.scene{
+.scene {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -48,13 +40,13 @@ body {
   text-align: center;
 }
 
-.keyboard{
+.keyboard {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.keyboard-control{
+.keyboard-control {
   @apply flex-row items-center gap-2
 }
 
@@ -64,7 +56,7 @@ body {
   gap: 2px;
 }
 
-.kbd{
+.kbd {
   cursor: pointer;
   @apply px-3 py-2 text-sm font-semibold text-gray-900 bg-white border border-gray-200 rounded-lg;
 }
