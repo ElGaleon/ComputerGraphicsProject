@@ -10,7 +10,7 @@ class GUI {
   /**
    * @type {any[]}
    */
-  perspectiveFolder;
+  cameraFolder;
   lightPositionFolder;
   lightDirectionFolder;
   lightColorFolder;
@@ -27,7 +27,7 @@ class GUI {
     this.scene = scene;
     this.gui = new dat.gui.GUI({autoPlace: false});
     // Projection
-    this.perspectiveFolder = this.#initPerspectiveFolder();
+    this.cameraFolder = this.#initCameraFolder();
     // Shadow
     this.shadowFolder = this.#initShadowFolder();
     // Skybox
@@ -37,16 +37,16 @@ class GUI {
     document.getElementById("gui").append(this.gui.domElement);
   }
 
-#initPerspectiveFolder() {
-  const perspectiveFolder = this.gui.addFolder('Perspective');
-  perspectiveFolder.add(scene.perspective, "fieldOfView").min(30).max(180).step(15).name("Field of View (FOV)").listen();
-  perspectiveFolder.add(scene.perspective, "projectionWidth").min(1).max(10).step(1).name("Projection Width").listen();
-  perspectiveFolder.add(scene.perspective, "projectionHeight").min(1).max(10).step(1).name("Projection Height").listen();
-  perspectiveFolder.add(scene.perspective, "zNear").min(1).max(30).step(1).name("z Near Projection").listen();
-  perspectiveFolder.add(scene.perspective, "zFar").min(1).max(30).step(1).name("z Far Projection").listen();
+  #initCameraFolder() {
+    const cameraFolder = this.gui.addFolder('Camera');
+    cameraFolder.add(scene.camera, "fieldOfView").min(30).max(180).step(15).name("Field of View (FOV)").listen();
+    cameraFolder.add(scene.camera, "projectionWidth").min(1).max(10).step(1).name("Projection Width").listen();
+    cameraFolder.add(scene.camera, "projectionHeight").min(1).max(10).step(1).name("Projection Height").listen();
+    cameraFolder.add(scene.camera, "zNear").min(1).max(30).step(1).name("z Near Projection").listen();
+    cameraFolder.add(scene.camera, "zFar").min(1).max(100).step(1).name("z Far Projection").listen();
 
-  return perspectiveFolder;
-}
+    return cameraFolder;
+  }
 
   #initLightFolder() {
     const lightFolder = this.gui.addFolder('Light');
@@ -58,14 +58,14 @@ class GUI {
   }
 
   #initLightPositionFolder(lightFolder) {
-    const lightPosition =  lightFolder.addFolder('Position');
-    lightPosition.add(scene.light.position, 0).min(-10).max(10).step(0.25).name("X").listen();
-    lightPosition.add(scene.light.position, 1).min(0).max(10).step(0.25).name("Y").listen();
-    lightPosition.add(scene.light.position, 2).min(-10).max(10).step(0.25).name("Z").listen();
+    const lightPosition = lightFolder.addFolder('Position');
+    lightPosition.add(scene.light.position, 0).min(-10).max(10).step(1).name("X").listen();
+    lightPosition.add(scene.light.position, 1).min(-10).max(10).step(1).name("Y").listen();
+    lightPosition.add(scene.light.position, 2).min(-10).max(10).step(1).name("Z").listen();
   }
 
   #initLightDirectionFolder(lightFolder) {
-    const lightDirection =  lightFolder.addFolder('Direction');
+    const lightDirection = lightFolder.addFolder('Direction');
     lightDirection.add(scene.light.direction, 0).min(-10).max(10).step(0.25).name("X").listen();
     lightDirection.add(scene.light.direction, 1).min(-10).max(10).step(0.25).name("Y").listen();
     lightDirection.add(scene.light.direction, 2).min(-10).max(10).step(0.25).name("Z").listen();
@@ -87,17 +87,26 @@ class GUI {
     lightProjection.add(scene.light, "zFar").min(1).max(30).step(1).name("z Far Projection").listen();
   }
 
-  #initShadowFolder(){
+  #initShadowFolder() {
     const shadowFolder = this.gui.addFolder('Shadow');
+    shadowFolder.add(scene.shadow, "bias").min(0.005).max(0.1).step(0.001).name("Bias").listen();
     this.#initToggleShadow(shadowFolder);
+    this.#initToggleShowFrustum(shadowFolder);
     return shadowFolder;
   }
 
   #initToggleShadow(shadowFolder) {
     this.scene['Toggle shadows'] = function () {
-      scene.shadows.toggle();
+      scene.shadow.toggle();
     };
     shadowFolder.add(this.scene, 'Toggle shadows');
+  }
+
+  #initToggleShowFrustum(shadowFolder) {
+    this.scene['Show Frustum'] = function () {
+      scene.shadow.toggleShowFrustum();
+    };
+    shadowFolder.add(this.scene, 'Show Frustum');
   }
 
   #initSkybox() {
@@ -109,7 +118,7 @@ class GUI {
     return skyboxFolder;
   }
 
-  closeOldController(){
+  closeOldController() {
     const dg = $('.dg.main');
     dg.hide();
   }

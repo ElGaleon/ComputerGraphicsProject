@@ -6,24 +6,104 @@
     "zNear": 1,
     "zFar": 30
   },
-  "camera" : {
-    "position": [3, 1, -2],
-    "target": [0,0,0],
-    "up": [0,2,0]
+  "camera": {
+    "position": [
+      3,
+      1,
+      -2
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "up": [
+      0,
+      2,
+      0
+    ]
   },
   "audio": "./assets/audio/bowser.mp3",
   "light": {
-    "position": [10, 5, 2],
-    "direction": [4.8, 2.8, 0],
-    "ambient": [0.1, 0.1, 0.1],
-    "color": [1, 1, 1]
+    "position": [
+      10,
+      5,
+      2
+    ],
+    "direction": [
+      4.8,
+      2.8,
+      0
+    ],
+    "ambient": [
+      0.1,
+      0.1,
+      0.1
+    ],
+    "color": [
+      1,
+      1,
+      1
+    ]
   },
-  "meshes":[
+  "meshes": [
     {
-      "name": "Bowser",
-      "objSource": "./lib/OBJ/bowser/bowser.obj",
-      "mtlSource": "./lib/OBJ/bowser/bowser.mtl",
-      "position": [0, 0, 0],
+      "name": "Goomba Platform",
+      "objSource": "./assets/obj/bowser/first_platform.obj",
+      "mtlSource": "./assets/obj/bowser/first_platform.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false,
+      "initialScale": 1
+    },
+    {
+      "name": "Central",
+      "objSource": "./assets/obj/bowser/central_platform.obj",
+      "mtlSource": "./assets/obj/bowser/central_platform.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false,
+      "initialScale": 1
+    },
+    {
+      "name": "Bridge",
+      "objSource": "./assets/obj/bowser/bridge.obj",
+      "mtlSource": "./assets/obj/bowser/bridge.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false,
+      "initialScale": 1
+    },
+    {
+      "name": "Bridge",
+      "objSource": "./assets/obj/bowser/final_platform.obj",
+      "mtlSource": "./assets/obj/bowser/final_platform.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false,
+      "initialScale": 1
+    },
+    {
+      "name": "Tube",
+      "objSource": "./assets/obj/bowser/tube.obj",
+      "mtlSource": "./assets/obj/bowser/tube.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
       "rotate": false,
       "initialScale": 1
     },
@@ -31,7 +111,11 @@
       "name": "Column 1",
       "objSource": "./assets/obj/column/column.obj",
       "mtlSource": "../assets/obj/column/column.mtl",
-      "position": [-6, -2, 1.5],
+      "position": [
+        0.5,
+        0.15,
+        0.3
+      ],
       "rotate": false,
       "initialScale": 0.1
     },
@@ -39,7 +123,11 @@
       "name": "Column 2",
       "objSource": "./assets/obj/column/column.obj",
       "mtlSource": "./assets/obj/column/column.mtl",
-      "position": [6, -2, 1.5],
+      "position": [
+        0.5,
+        0.15,
+        -0.3
+      ],
       "rotate": false,
       "initialScale": 0.1
     },
@@ -47,25 +135,53 @@
       "name": "Column 3",
       "objSource": "./assets/obj/column/column.obj",
       "mtlSource": "../assets/obj/column/column.mtl",
-      "position": [4, 4, 1],
+      "position": [
+        -0.5,
+        0.15,
+        0.5
+      ],
       "rotate": false,
-      "initialScale": 0.1
+      "initialScale": 0.125
     },
     {
       "name": "Column 4",
       "objSource": "./assets/obj/column/column.obj",
       "mtlSource": "./assets/obj/column/column.mtl",
-      "position": [-4, 4, 1],
+      "position": [
+        -0.5,
+        0.15,
+        -0.5
+      ],
       "rotate": false,
-      "initialScale": 0.1
+      "initialScale": 0.125
     },
     {
       "name": "Red coin",
       "objSource": "./assets/obj/coin/red-coin.obj",
       "mtlSource": "./assets/obj/coin/red-coin.mtl",
-      "position": [2, 0, 1.5],
-      "rotate": true,
+      "position": [
+        -1.15,
+        -0.075,
+        0
+      ],
+      "rotate": {
+        "y": true
+      },
       "initialScale": 0.1
+    },
+    {
+      "name": "Heart",
+      "objSource": "./assets/obj/heart/heart.obj",
+      "mtlSource": "./assets/obj/heart/heart.mtl",
+      "position": [
+        0,
+        0.3,
+        0
+      ],
+      "rotate": {
+        "y": true
+      },
+      "initialScale": 0.05
     }
   ]
 }

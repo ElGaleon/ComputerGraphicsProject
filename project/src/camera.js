@@ -5,24 +5,41 @@ const Direction = {
 }
 
 class Camera {
+  /**
+   * @type {Vector3}
+   */
   position;
-  target;
+  /**
+   * @type {Vector3}
+   */
   forward;
+  /**
+   * @type {Vector3}
+   */
   right;
+  /**
+   * @type {Vector3}
+   */
   up;
+
   /**
    *
    * @param {Vector3} position
-   * @param {Vector3} target
    * @param {Vector3} lookAt
    * @param {Vector3} up
+   * @param perspective
    */
-  constructor(position = [0, 0, 0], target = [0,0,0], lookAt = [0, 0, 0], up= [0, 0, 0]) {
+  constructor(position = [0, 0, 0], lookAt = [0, 0, 0], up = [0, 0, 0], perspective) {
     this.position = position;
-    this.target = target
     this.forward = m4.normalize(m4.subtractVectors(lookAt, position));
     this.right = m4.normalize(m4.cross(this.forward, up));
     this.up = m4.normalize(m4.cross(this.right, this.forward));
+    // Camera perspective
+    this.fieldOfView = perspective.fieldOfView ?? 60;
+    this.projectionWidth = perspective.projectionWidth ?? 1;
+    this.projectionHeight = perspective.projectionHeight ?? 1;
+    this.zNear = perspective.zNear ?? 1;
+    this.zFar = perspective.zFar ?? 100;
   }
 
   /**
@@ -73,9 +90,9 @@ class Camera {
           this.position[2] += (this.up[2] * distance);
           break;
         case Direction.RIGHT:
-          this.position[0] += + (this.right[0] * distance);
-          this.position[1] += + (this.right[1] * distance);
-          this.position[2] += + (this.right[2] * distance);
+          this.position[0] += +(this.right[0] * distance);
+          this.position[1] += +(this.right[1] * distance);
+          this.position[2] += +(this.right[2] * distance);
           break;
         case Direction.FORWARD:
           this.position[0] += (this.forward[0] * distance);
@@ -101,7 +118,7 @@ class Camera {
    * This is a rotation about a camera’s n axis.
    * @param {number} step
    */
-  cant(step){
+  cant(step) {
     let rotation = m4.axisRotation(this.forward, (step / 2));
     this.#rotate([Direction.RIGHT, Direction.UP], rotation);
   }
@@ -133,21 +150,10 @@ class Camera {
     this.#move([Direction.FORWARD], distance);
   }
 
-    // Realign the camera
-    align(){
-        this.up=[0,1,0];
-        this.forward[1] = 0;
-        this.right = m4.normalize(m4.cross(this.forward, this.up));
-    }
-
   get viewMatrix() {
     const look = m4.addVectors(this.position, this.forward);
     const cameraMatrix = m4.lookAt(this.position, look, this.up);
     return m4.inverse(cameraMatrix);
-  }
-
-  get worldMatrix() {
-    return m4.inverse(this.viewMatrix);
   }
 
   get lookAt() {
@@ -166,9 +172,7 @@ class Camera {
     this.right = m4.normalize(m4.cross(this.forward, this.up));
   }
 
-    // Return this.position
-    getPosition(){
-        return this.position
-    }
-
+  get aspectRatio() {
+    return this.projectionWidth / this.projectionHeight;
+  }
 }

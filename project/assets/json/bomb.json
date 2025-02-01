@@ -1,54 +1,131 @@
 {
-  "camera" : {
-    "position": [2.5, 1, 0],
-    "target": [0,1,0],
-    "up": [0,1,0]
+  "camera": {
+    "position": [
+      2.5,
+      1,
+      0
+    ],
+    "target": [
+      0,
+      1,
+      0
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "perspective": {
+      "fieldOfView": 75,
+      "projectionWidth": 2,
+      "projectionHeight": 1,
+      "zNear": 1,
+      "zFar": 30
+    }
   },
-  "perspective": {
+  "audio": "./assets/audio/bomb.mp3",
+  "light": {
+    "position": [
+      3,
+      3,
+      0
+    ],
+    "direction": [
+      10,
+      9,
+      0
+    ],
+    "ambient": [
+      0.1,
+      0.1,
+      0.1
+    ],
+    "color": [
+      1.0,
+      1.0,
+      1.0
+    ],
     "fieldOfView": 75,
     "projectionWidth": 2,
     "projectionHeight": 1,
     "zNear": 1,
     "zFar": 30
   },
-  "audio": "./assets/audio/bomb.mp3",
-  "light": {
-    "position": [10, 5, 2],
-    "direction": [4.8, 2.8, 0],
-    "ambient": [0.1, 0.1, 0.1],
-    "color": [1, 1, 1]
-  },
-  "meshes":[
+  "meshes": [
     {
-      "name": "Bomb",
-      "objSource": "./lib/OBJ/bomb/bomb-omb.obj",
-      "mtlSource": "./lib/OBJ/bomb/bomb-omb.mtl",
-      "position": [0, 0, 0],
+      "name": "Room",
+      "objSource": "./assets/obj/bomb/room.obj",
+      "mtlSource": "./assets/obj/bomb/room.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Stage",
+      "objSource": "./assets/obj/bomb/stage.obj",
+      "mtlSource": "./assets/obj/bomb/stage.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Stairs",
+      "objSource": "./assets/obj/bomb/stairs.obj",
+      "mtlSource": "./assets/obj/bomb/stairs.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
       "rotate": false
     },
     {
       "name": "Frame",
-      "objSource": "./assets/obj/frame/frame.obj",
-      "mtlSource": "./assets/obj/frame/frame.mtl",
-      "position": [-3, 1.8, 0],
-      "initialScale": 1.3,
-      "initialRotation" : {
-        "z" : 270
-      }
+      "objSource": "./assets/obj/bomb/frame.obj",
+      "mtlSource": "./assets/obj/bomb/frame.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Door",
+      "objSource": "./assets/obj/bomb/door.obj",
+      "mtlSource": "./assets/obj/bomb/door.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
     },
     {
       "name": "Star",
-      "objSource": "./assets/obj/star/star.obj",
-      "mtlSource": "./assets/obj/star/star.mtl",
-      "position": [-2, 1.25, 0],
-      "initialScale": 0.5,
-      "initialRotation" : {
-        "x": -30,
-        "z" : 90
-      },
-      "rotate": {
-        "x": true
-      }
+      "objSource": "./assets/obj/bomb/star.obj",
+      "mtlSource": "./assets/obj/bomb/star.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Columns",
+      "objSource": "./assets/obj/bomb/columns.obj",
+      "mtlSource": "./assets/obj/bomb/columns.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ]
     }
   ]
 }

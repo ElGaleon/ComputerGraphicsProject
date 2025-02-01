@@ -35,13 +35,11 @@ async function renderSceneById(sceneId) {
   loadMusic(jsonScene.audio);
   window["scene"] = new Scene("#canvas", sceneId, jsonScene);
   scene.gui = new GUI(scene);
-  // add_dat_gui(scene);
-  scene.render();
-  // draw(scene);
+  render(scene);
   return scene;
 }
 
-async function main(){
+async function main() {
   await renderSceneById('bomb');
 }
 
@@ -60,7 +58,7 @@ document.getElementById('bowser').addEventListener("click", async () => {
   await renderSceneById('bowser');
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
   // Bomb Selectors
   let bomb = $("#bomb");
   let bombSpan = $("#bomb > span");
@@ -82,19 +80,19 @@ $(document).ready(function(){
     bowserSpan.removeClass("bg-amber-500").addClass("bg-gray-200");
   }
 
-  bomb.click(function() {
+  bomb.click(function () {
     resetButtons();
     bomb.addClass("border border-amber-400");
     bombSpan.removeClass("bg-gray-200").addClass("bg-amber-500");
   });
 
-  castle.click(function() {
+  castle.click(function () {
     resetButtons();
     castle.addClass("border border-amber-400");
     castleSpan.removeClass("bg-gray-200").addClass("bg-amber-500");
   });
 
-  bowser.click(function() {
+  bowser.click(function () {
     resetButtons();
     bowser.addClass("border border-amber-400");
     bowserSpan.removeClass("bg-gray-200").addClass("bg-amber-500");

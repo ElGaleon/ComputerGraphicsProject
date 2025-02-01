@@ -7,44 +7,84 @@
     "ny": "",
     "nz": ""
   },
-  "camera" : {
-    "position": [6, 6, -2],
-    "target": [0,6,0],
-    "up": [0,1,0]
+  "camera": {
+    "position": [
+      6,
+      6,
+      -2
+    ],
+    "target": [
+      0,
+      6,
+      0
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ]
   },
   "audio": "./assets/audio/castle.mp3",
   "light": {
-    "position": [10, 5, 2],
-    "direction": [4.8, 2.8, 0],
-    "ambient": [0.1, 0.1, 0.1],
-    "color": [1, 1, 1]
+    "position": [
+      10,
+      5,
+      2
+    ],
+    "direction": [
+      4.8,
+      2.8,
+      0
+    ],
+    "ambient": [
+      0.1,
+      0.1,
+      0.1
+    ],
+    "color": [
+      1,
+      1,
+      1
+    ]
   },
-  "meshes":[
+  "meshes": [
     {
-      "name": "Castle",
-      "objSource": "./lib/OBJ/castle/castle.obj",
-      "mtlSource": "./lib/OBJ/castle/castle.mtl",
-      "position": [0, 0, 0],
+      "name": "Floor",
+      "objSource": "./assets/obj/castle/floor.obj",
+      "mtlSource": "../assets/obj/castle/floor.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
       "rotate": false
     },
     {
       "name": "Mario",
       "objSource": "./assets/obj/mario/mario.obj",
       "mtlSource": "./assets/obj/mario/mario.mtl",
-      "position": [0, 0, 2],
+      "position": [
+        0,
+        0,
+        2
+      ],
       "rotate": false
     },
     {
       "name": "Coin Left",
       "objSource": "./assets/obj/coin/coin.obj",
       "mtlSource": "./assets/obj/coin/coin.mtl",
-      "position": [-4, 4.5, 3.5],
+      "position": [
+        -4,
+        4.5,
+        3.5
+      ],
       "initialScale": 0.5,
-      "initialRotation" : {
+      "initialRotation": {
         "x": 0,
-        "z" : 0
+        "z": 0
       },
-      "rotate" : {
+      "rotate": {
         "y": true
       }
     },
@@ -52,13 +92,17 @@
       "name": "Coin Right",
       "objSource": "./assets/obj/coin/coin.obj",
       "mtlSource": "./assets/obj/coin/coin.mtl",
-      "position": [-4, 4.5, -3.5],
+      "position": [
+        -4,
+        4.5,
+        -3.5
+      ],
       "initialScale": 0.5,
-      "initialRotation" : {
+      "initialRotation": {
         "x": 0,
-        "z" : 0
+        "z": 0
       },
-      "rotate" : {
+      "rotate": {
         "y": true
       }
     }
