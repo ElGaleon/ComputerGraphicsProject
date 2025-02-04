@@ -11,9 +11,6 @@ class GUI {
    * @type {any[]}
    */
   cameraFolder;
-  lightPositionFolder;
-  lightDirectionFolder;
-  lightColorFolder;
   shadowFolder;
   lightFolder;
   skyboxFolder;

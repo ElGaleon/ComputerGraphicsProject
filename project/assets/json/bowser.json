@@ -1,4 +1,12 @@
 {
+  "skybox": {
+    "px": "./assets/images/skybox/bowser/px.png",
+    "py": "./assets/images/skybox/bowser/py.png",
+    "pz": "./assets/images/skybox/bowser/pz.png",
+    "nx": "./assets/images/skybox/bowser/nx.png",
+    "ny": "./assets/images/skybox/bowser/ny.png",
+    "nz": "./assets/images/skybox/bowser/nz.png"
+  },
   "perspective": {
     "fieldOfView": 75,
     "projectionWidth": 2,
@@ -168,6 +176,17 @@
         "y": true
       },
       "initialScale": 0.05
+    },
+    {
+      "name": "Coin",
+      "objSource": "./assets/obj/coin/red-coin.obj",
+      "mtlSource": "./assets/obj/coin/red-coin.mtl",
+      "position": [
+        -11,
+        -1,
+        0
+      ],
+      "initialScale": 0.1
     }
   ]
 }

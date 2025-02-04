@@ -51,24 +51,24 @@
     <div id="gui" class="absolute bottom-8 right-4">
     </div>
     <!-- Life Indicator -->
-    <div class="indicator absolute top-2 left-4">
-      <img src="./assets/images/mario.png" alt="mario" height="32" width="28">
-      <img src="./assets/images/text_and_numbers/X.png" alt="x" height="32" width="28">
-      <img src="./assets/images/text_and_numbers/3.png" alt="3" height="32" width="28">
+    <div class="indicator absolute left-6">
+      <img src="./assets/images/mario.png" alt="mario" class="scale-[2]" height="16" width="14">
+      <img src="./assets/images/text_and_numbers/X.png" class="scale-[2]" alt="x" height="16" width="16">
+      <img src="./assets/images/text_and_numbers/3.png" class="scale-[2]" alt="3" height="16" width="16">
     </div>
     <!-- Power Meter -->
     <img src="./assets/images/power-meter.png" alt="power-meter" height="46" width="50" class="absolute top-2 left-48">
     <!-- Coin Indicator -->
-    <div class="indicator absolute top-2 left-96">
-      <img src="./assets/images/coin.png" alt="coin" height="32" width="28">
-      <img src="./assets/images/text_and_numbers/X.png" alt="x" height="32" width="28">
-      <img src="./assets/images/text_and_numbers/8.png" alt="8" height="32" width="28">
+    <div class="indicator absolute left-96">
+      <img src="./assets/images/coin.png" alt="coin" class="scale-[2]" height="16" width="14">
+      <img src="./assets/images/text_and_numbers/X.png" alt="x" class="scale-[2]" height="16" width="16">
+      <img src="./assets/images/text_and_numbers/8.png" alt="8" class="scale-[2]" height="16" width="16">
     </div>
     <!-- Star Indicator -->
-    <div class="indicator absolute top-2 right-4">
-      <img src="./assets/images/star.png" alt="star" height="36" width="32" class="">
-      <img src="./assets/images/text_and_numbers/X.png" alt="x" height="36" width="28">
-      <img src="./assets/images/text_and_numbers/1.png" alt="1" height="36" width="28">
+    <div class="indicator absolute right-4">
+      <img src="./assets/images/star.png" alt="star" class="scale-[2]" height="16" width="16">
+      <img src="./assets/images/text_and_numbers/X.png" class="scale-[2]" alt="x" height="16" width="16">
+      <img src="./assets/images/text_and_numbers/1.png" class="scale-[2]" alt="1" height="16" width="16">
     </div>
   </div>
 
@@ -99,11 +99,15 @@
 <!-- Right Side -->
 <div
   class="flex flex-col p-2 w-full rounded-md bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-4">
+
   <div
-    class="touch-keyboard rounded-md flex flex-col p-2 w-fullbg-green-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 gap-4 border border-green-400">
-    <h3 class="text-green-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">Touch Keyboard</h3>
+    class="rounded-md flex flex-col p-2 w-fullbg-green-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 gap-4 border border-green-400">
+    <h3 class="text-green-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">Touch Controller</h3>
+    <!-- Touch Controller -->
+    <canvas id="controller2D"></canvas>
     <!-- Touch Keyboard -->
-    <div class="flex flex-col px-2 py-4 gap-2">
+    <!-- Touch Keyboard -->
+    <div id="touch-keyboard" class="flex flex-col gap-2 h-36 justify-center hidden">
       <div class="flex flex-row justify-evenly">
         <!-- WASD Keys -->
         <div class="flex flex-col gap-0.5">
@@ -137,15 +141,25 @@
         <kbd id="KeyR" class="kbd" onclick="scene.touchController.onKeyClick(this.id)">R</kbd>
       </div>
     </div>
+
+    <label class="relative flex justify-center cursor-pointer items-center">
+      <input type="checkbox" value="" class="peer sr-only"/>
+      <span
+        class="peer flex h-8 items-center justify-around gap-6 rounded-full px-4 w-full bg-green-500 after:absolute after:w-1/2 after:right-1 after:left-1 after:pr-2 after:h-6 after:rounded-full after:bg-white/40 after:transition-all after:content-[''] peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-focus:outline-none text-sm text-white"
+      >
+        <span class="ml-3">Gamepad</span>
+        <span>Keyboard</span>
+      </span>
+    </label>
   </div>
 
   <div
-    class="touch-keyboard rounded-md flex flex-col p-2 w-full bg-green-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-4 border border-green-400">
+    class="rounded-md flex flex-col p-2 w-full bg-green-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-4 border border-green-400">
 
     <span class="section-header text-green-500 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]">CONTROLS</span>
 
     <!-- Keyboard Menu -->
-    <div class="keyboard text-gray-800">
+    <div id="keyboard" class="keyboard text-gray-800">
       <!-- W -->
       <div class="keyboard-control">
         <kbd class="kbd">W</kbd> Forward
@@ -198,8 +212,13 @@
   </div>
 </div>
 <!-- Credits -->
-<div class="credits col-span-3 bg-blue-500 rounded-md">
-  Christian Galeone
+<div
+  class="credits col-span-3 rounded-md flex flex-col w-full bg-blue-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 gap-4 border border-blue-400 p-2 text-[14px] text-blue-800">
+  <h3 class="text-[16px]">Credits</h3>
+  Project done for Unibo Computer Graphics Exam - A.Y. 2024/25
+  <br/>Author Christian Galeone
+  <a class="m-0" href="https://github.com/ElGaleon">GitHub Profile</a>
+  <br/>Copyright © 2025 www.github.com/ElGaleon. All rights reserved.
 </div>
 
 <!-- Libraries -->
@@ -234,9 +253,10 @@
 <script src="./src/controllers/key_controller.js"></script>
 <script src="./src/controllers/touch_controller.js"></script>
 <script src="./src/controllers/mouse_controller.js"></script>
-<script src="./src/animated_camera.js"></script>
+<script src="./src/controllers/controller_2d.js"></script>
 
-<!-- Shaders -->
+<!-- SHADERS -->
+<!-- Base -->
 <script id="base-vertex-shader" type="x-shader/x-vertex">
   attribute vec4 a_position;
   attribute vec3 a_normal;
@@ -309,7 +329,7 @@
   }
 </script>
 
-
+<!-- Skybox -->
 <script id="skybox-vertex-shader" type="x-shader/x-vertex">
   attribute vec4 a_position;
   varying vec4 v_position;
@@ -334,7 +354,7 @@
   }
 </script>
 
-
+<!-- 3D perspective -->
 <script id="vertex-shader-3d" type="x-shader/x-vertex">
   attribute vec4 a_position;
   attribute vec2 a_texcoord;
@@ -427,7 +447,7 @@
   }
 </script>
 
-
+<!-- Color -->
 <script id="color-vertex-shader" type="x-shader/x-vertex">
   attribute vec4 a_position;
 
@@ -449,6 +469,7 @@
   }
 </script>
 
+<!-- Solid -->
 <script id="solid-color-vertex-shader" type="x-shader/x-vertex">
   attribute vec3 a_position;
   uniform mat4 u_projectionMatrix;
@@ -458,7 +479,6 @@
     gl_Position = u_projectionMatrix * u_viewMatrix * vec4(a_position, 1.0);
   }
 </script>
-<!-- fragment shader -->
 <script id="solid-color-fragment-shader" type="x-shader/x-fragment">
   precision mediump float;
 

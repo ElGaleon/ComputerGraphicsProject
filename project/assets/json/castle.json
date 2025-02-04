@@ -60,13 +60,145 @@
       "rotate": false
     },
     {
-      "name": "Mario",
-      "objSource": "./assets/obj/mario/mario.obj",
-      "mtlSource": "./assets/obj/mario/mario.mtl",
+      "name": "Front Wall",
+      "objSource": "./assets/obj/castle/front_walls.obj",
+      "mtlSource": "./assets/obj/castle/front_walls.mtl",
       "position": [
         0,
         0,
-        2
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Back Wall",
+      "objSource": "./assets/obj/castle/back_walls.obj",
+      "mtlSource": "./assets/obj/castle/back_walls.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Left Wall",
+      "objSource": "./assets/obj/castle/left_walls.obj",
+      "mtlSource": "./assets/obj/castle/left_walls.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Right Wall",
+      "objSource": "./assets/obj/castle/right_walls.obj",
+      "mtlSource": "./assets/obj/castle/right_walls.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Rugs",
+      "objSource": "./assets/obj/castle/rugs.obj",
+      "mtlSource": "./assets/obj/castle/rugs.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Stairs",
+      "objSource": "./assets/obj/castle/stairs.obj",
+      "mtlSource": "./assets/obj/castle/stairs.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Tunnel",
+      "objSource": "./assets/obj/castle/tunnel.obj",
+      "mtlSource": "./assets/obj/castle/tunnel.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Entrance Door",
+      "objSource": "./assets/obj/castle/entrance_door.obj",
+      "mtlSource": "./assets/obj/castle/entrance_door.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Key Door",
+      "objSource": "./assets/obj/castle/keydoor.obj",
+      "mtlSource": "./assets/obj/castle/keydoor.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Star Door",
+      "objSource": "./assets/obj/castle/star_door.obj",
+      "mtlSource": "./assets/obj/castle/star_door.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "First Door",
+      "objSource": "./assets/obj/castle/first_door.obj",
+      "mtlSource": "./assets/obj/castle/first_door.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Peach",
+      "objSource": "./assets/obj/castle/peach.obj",
+      "mtlSource": "./assets/obj/castle/peach.mtl",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotate": false
+    },
+    {
+      "name": "Ceil",
+      "objSource": "./assets/obj/castle/ceil.obj",
+      "mtlSource": "./assets/obj/castle/ceil.mtl",
+      "position": [
+        0,
+        0,
+        0
       ],
       "rotate": false
     },
@@ -75,17 +207,14 @@
       "objSource": "./assets/obj/coin/coin.obj",
       "mtlSource": "./assets/obj/coin/coin.mtl",
       "position": [
-        -4,
-        4.5,
-        3.5
+        -10,
+        9,
+        7
       ],
       "initialScale": 0.5,
       "initialRotation": {
         "x": 0,
         "z": 0
-      },
-      "rotate": {
-        "y": true
       }
     },
     {
@@ -93,17 +222,14 @@
       "objSource": "./assets/obj/coin/coin.obj",
       "mtlSource": "./assets/obj/coin/coin.mtl",
       "position": [
-        -4,
-        4.5,
-        -3.5
+        -10,
+        9,
+        -7
       ],
       "initialScale": 0.5,
       "initialRotation": {
         "x": 0,
         "z": 0
-      },
-      "rotate": {
-        "y": true
       }
     }
   ]

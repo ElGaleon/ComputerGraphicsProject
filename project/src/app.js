@@ -27,7 +27,7 @@ function loadMusic(path) {
   const music = $("#music");
   $("#music-src").attr('src', path);
   music[0].pause();
-  music[0].load();//suspends and restores all audio element
+  music[0].load();
 }
 
 async function renderSceneById(sceneId) {
@@ -35,12 +35,13 @@ async function renderSceneById(sceneId) {
   loadMusic(jsonScene.audio);
   window["scene"] = new Scene("#canvas", sceneId, jsonScene);
   scene.gui = new GUI(scene);
+  scene.controller2D = new Controller2D(scene);
   render(scene);
   return scene;
 }
 
 async function main() {
-  await renderSceneById('bomb');
+  await renderSceneById('castle');
 }
 
 document.getElementById('bomb').addEventListener("click", async () => {
@@ -68,6 +69,28 @@ $(document).ready(function () {
   // Castle Selectors
   let bowser = $("#bowser");
   let bowserSpan = $("#bowser > span");
+  // Touch selector
+  let touchSelector = $(".peer");
+  showTouchControllerOrKeyboard();
+
+
+  $('input:checkbox').change(
+    function() {
+      showTouchControllerOrKeyboard();
+    }
+  )
+
+  function showTouchControllerOrKeyboard() {
+    if (touchSelector.is(':checked')) {
+      // keyboard
+      $('#controller2D').hide();
+      $('#touch-keyboard').show();
+    } else {
+      // gamepad
+      $('#controller2D').show();
+      $('#touch-keyboard').hide();
+    }
+  }
 
   function resetButtons() {
     bomb.removeClass("border border-amber-400");

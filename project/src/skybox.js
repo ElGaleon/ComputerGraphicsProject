@@ -11,6 +11,7 @@ class SkyBox {
    * @param skybox
    */
   constructor(gl, scene, skybox = null) {
+    console.log(skybox?.nx)
     this.programInfo = webglUtils.createProgramInfo(gl, ["skybox-vertex-shader", "skybox-fragment-shader"]);
     const arrays = this.#createXYQuadVertices(null, Array.prototype.slice.call(arguments, 1));
     this.quadBufferInfo = webglUtils.createBufferInfoFromArrays(gl, arrays);
@@ -20,38 +21,37 @@ class SkyBox {
     const faceInfos = [
       {
         target: gl.TEXTURE_CUBE_MAP_POSITIVE_X,
-        url: skybox.px,
+        url: skybox?.px,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
-        url: skybox.px,
+        url: skybox?.nx,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
-        url: skybox.px,
+        url: skybox?.py,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
-        url: skybox.px,
+        url: skybox?.ny,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
-        url: skybox.px,
+        url: skybox?.pz,
       },
       {
         target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
-        url: skybox.px,
+        url: skybox?.nz,
       },
 
     ];
 
     faceInfos.forEach((faceInfo) => {
       const {target, url} = faceInfo;
-
       const level = 0;
       const internalFormat = gl.RGBA;
-      const width = 1024;
-      const height = 1024;
+      const width = 514;
+      const height = 514;
       const format = gl.RGBA;
       const type = gl.UNSIGNED_BYTE;
       gl.texImage2D(target, level, internalFormat, width, height, 0, format, type, null);

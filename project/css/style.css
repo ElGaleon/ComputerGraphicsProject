@@ -51,9 +51,7 @@ body {
 }
 
 .indicator {
-  display: flex;
-  flex-direction: row;
-  gap: 2px;
+  @apply flex flex-row gap-4 top-4;
 }
 
 .kbd {
