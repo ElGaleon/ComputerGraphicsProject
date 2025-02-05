@@ -1,94 +1,93 @@
 import * as THREE from 'three';
 import {OBJLoader} from "three/addons/loaders/OBJLoader.js";
 import {MTLLoader} from "three/addons/loaders/MTLLoader.js";
+import {FBXLoader} from "three/addons/loaders/FBXLoader.js";
 import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import {Reflector} from "three/addons/objects/Reflector.js";
-
-const renderer = new THREE.WebGLRenderer();
-
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-
-const geometry = new THREE.PlaneGeometry(5, 5);
-const material = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide});
-const plane = new THREE.Mesh(geometry, material);
-plane.rotateX(Math.PI/2);
-scene.add(plane);
+import { loadMario } from './loaders.js';
+import { createMirrors } from './mirrors.js';
+import { initLighting } from './lighting.js';
+import {camera} from './camera.js';
+import {World} from './scene.js';
 
 
-const color = new THREE.Color().setHex( 0x112233 );
-scene.background = color;
+const world = new World();
 
-const ambientLight = new THREE.AmbientLight( 0xffffff, 1 );
-scene.add( ambientLight );
+// Orbit Controls
+const controls = new OrbitControls(camera, world.renderer.domElement);
+// controls.enableDamping = true;
 
-const pointLight = new THREE.PointLight( 0xffffff, 15 );
-camera.add( pointLight );
-
-renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setAnimationLoop( animate );
-document.body.appendChild( renderer.domElement );
-
-const controls = new OrbitControls(camera, renderer.domElement);
-
+// Loaders
 const objLoader = new OBJLoader();
 const mtlLoader = new MTLLoader();
+mtlLoader.setMaterialOptions({side: THREE.DoubleSide});
 const gltfLoader = new GLTFLoader();
+const fbxLoader = new FBXLoader();
 
-let room, columns, stage, frame, entrance, door, mario;
-/**
-gltfLoader.load('../assets/gltf/mario/scene.gltf', function (gltf) {
-    console.log(gltf);
-    mario = gltf;
-    scene.add(gltf.scene);
-    gltf.scene; // THREE.Group
-    gltf.scenes; // Array<THREE.Group>
-    gltf.asset; // Object
-},
-    // called while loading is progressing
-    function ( xhr ) {
+const carpetBumpTexture = new THREE.TextureLoader().load('./assets/images/carpet2.jpg');
+carpetBumpTexture.wrapS = THREE.RepeatWrapping;
+carpetBumpTexture.wrapT = THREE.RepeatWrapping;
 
-        console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+const brickBumpTexture = new THREE.TextureLoader().load('./assets/images/brick.jpg');
+brickBumpTexture.wrapS = THREE.RepeatWrapping;
+brickBumpTexture.wrapT = THREE.RepeatWrapping;
 
-    },
-    // called when loading has errors
-    function ( error ) {
-
-        console.log( 'An error happened: ' + error);
-
-    });
-**/
+const wallkBumpTexture = new THREE.TextureLoader().load('./assets/images/wall.jpg');
+wallkBumpTexture.wrapS = THREE.RepeatWrapping;
+wallkBumpTexture.wrapT = THREE.RepeatWrapping;
 
 
-const mirrorFront1 = new Reflector(new THREE.PlaneGeometry(2, 2), {
-    color: new THREE.Color(0x7f7f7f),
-    //clipBias: 0.003,
-    textureWidth: window.innerWidth * window.devicePixelRatio,
-    textureHeight: window.innerHeight * window.devicePixelRatio,
-})
-mirrorFront1.position.y = 1
-mirrorFront1.position.z = -2
-//mirrorFront1.rotateY(Math.PI)
-scene.add(mirrorFront1);
+let room, columns, stage, frame, entrance, door;
+let mario = new THREE.Object3D();
 
-mtlLoader.load("../assets/obj/mirror/mirror_room.mtl", function (materials) {
+loadMario(world.scene);
+createMirrors(world.scene);
+initLighting(world.scene);
+
+// Room
+mtlLoader.load("./assets/obj/mirror/mirror_room.mtl", function (materials) {
     materials.preload();
-    materials.transparent = false;
-    materials.opacity = 1;
-    console.log(materials);
+    // Moquette 
+    materials.materials["Moquette"].transparent = false;
+    materials.materials["Moquette"].reflectivity = 0;
+    materials.materials["Moquette"].shininess = 10;
+    materials.materials["Moquette"].bumpMap = carpetBumpTexture;
+    materials.materials["Moquette"].bumpScale = 0.7;
+    // Brick
+    materials.materials["Brick"].transparent = false;
+    materials.materials["Brick"].bumpMap = brickBumpTexture;
+    materials.materials["Brick"].bumpScale = 1;
+    // Floor
+    materials.materials["Floor"].transparent = false;
+    // Wall
+    materials.materials["Wall"].transparent = false;
+    materials.materials["Wall"].bumpMap = wallkBumpTexture;
+    materials.materials["Wall"].bumpScale = 1;
+
+
     objLoader.setMaterials(materials);
-    objLoader.load("../assets/obj/mirror/mirror_room.obj", function(object) {
+    objLoader.load("./assets/obj/mirror/mirror_room.obj", function(object) {
         console.log(object);
             object.traverse(function (node) {
+                if (node.name === 'Entrance' || node.name === 'Room') {
+                    node.receiveShadow = true;
+                } else
+                if (node.name === 'Marbles') {
+                    node.castShadow = true;
+                }
+                if (node.isMesh) {
+                    node.material.transparent = false;
+                    node.material.opacity = 1;
+                    node.receiveShadow = true;
+                    node.castShadow = true;
+                }
                 if (node.material) {
                     node.material.side = THREE.DoubleSide;
                 }
             });
        room = object;
-       scene.add(room);
+       world.scene.add(room);
     },
         // called when loading is in progress
         function ( xhr ) {
@@ -104,88 +103,40 @@ mtlLoader.load("../assets/obj/mirror/mirror_room.mtl", function (materials) {
         });
 })
 
-
-/**
-mtlLoader.load("../assets/obj/bomb/stage.mtl", function (materials) {
-    materials.preload();
-    objLoader.setMaterials(materials);
-    objLoader.load("../assets/obj/bomb/stage.obj", function(object) {
-        stage = object;
-        scene.add(stage);
-    },
-        // called when loading is in progress
-        function ( xhr ) {
-
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-        },
-        // called when loading has errors
-        function ( error ) {
-
-            console.log( 'An error happened' );
-
-        });
-})
-
-mtlLoader.load("../assets/obj/bomb/columns.mtl", function (materials) {
-    materials.preload();
-    objLoader.setMaterials(materials);
-    objLoader.load("../assets/obj/bomb/columns.obj", function(object) {
-        object.traverse(function (node) {
-            if (node.isMesh) {
-                node.castShadow = true;
-            }
-        });
-        columns = object;
-        scene.add(columns);
-    },
-        // called when loading is in progress
-        function ( xhr ) {
-
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-        },
-        // called when loading has errors
-        function ( error ) {
-
-            console.log( 'An error happened' );
-
-        });
-});
-
-mtlLoader.load("../assets/obj/bomb/frame.mtl", function (materials) {
-    materials.preload();
-    objLoader.setMaterials(materials);
-    objLoader.load("../assets/obj/bomb/frame.obj", function(object) {
-            object.traverse(function (node) {
-                if (node.isMesh) {
-                    node.castShadow = true;
-                }
-            });
-            frame = object;
-            scene.add(frame);
-        },
-        // called when loading is in progress
-        function ( xhr ) {
-
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-        },
-        // called when loading has errors
-        function ( error ) {
-
-            console.log( 'An error happened' );
-
-        });
-});
-**/
-camera.position.x = 2;
-camera.position.z = 2;
-camera.position.y = 2;
 controls.update();
 
-function animate() {
-    renderer.render( scene, camera );
+window.onkeydown = function(e) {
+    console.log(e); 
+    if (e.code === 'Space') {
+        e.preventDefault();
+        playRandomAnimation();
+    }
+    if (e.code === 'KeyW') {
+        e.preventDefault();
+        mario.position.z-= 0.05;
+    }
+    if (e.code === 'KeyS') {
+        e.preventDefault();
+        mario.position.z+= 0.05;
+    }
 }
 
-animate();
+let mixer = new THREE.AnimationMixer(mario);
+let clock = new THREE.Clock();
+
+const update = (t) => {
+    mixer.update(0.02);
+}
+
+function playRandomAnimation() {
+    const action =  mixer.clipAction( animations[1]);
+    action.play();    
+}
+
+
+function animateLoop() {
+    world.animate();
+    requestAnimationFrame(animateLoop);
+}
+
+animateLoop();
