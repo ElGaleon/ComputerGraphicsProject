@@ -41,7 +41,7 @@ async function renderSceneById(sceneId) {
 }
 
 async function main() {
-  await renderSceneById('castle');
+  await renderSceneById('bomb');
 }
 
 document.getElementById('bomb').addEventListener("click", async () => {
