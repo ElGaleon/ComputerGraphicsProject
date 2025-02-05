@@ -28,7 +28,7 @@ const fbxLoader = new FBXLoader();
 const carpetBumpTexture = new THREE.TextureLoader().load('./assets/images/carpet2.jpg');
 carpetBumpTexture.wrapS = THREE.RepeatWrapping;
 carpetBumpTexture.wrapT = THREE.RepeatWrapping;
-
+/** 
 const brickBumpTexture = new THREE.TextureLoader().load('./assets/images/brick.jpg');
 brickBumpTexture.wrapS = THREE.RepeatWrapping;
 brickBumpTexture.wrapT = THREE.RepeatWrapping;
@@ -36,10 +36,10 @@ brickBumpTexture.wrapT = THREE.RepeatWrapping;
 const wallkBumpTexture = new THREE.TextureLoader().load('./assets/images/wall.jpg');
 wallkBumpTexture.wrapS = THREE.RepeatWrapping;
 wallkBumpTexture.wrapT = THREE.RepeatWrapping;
+*/
 
 
 let room, columns, stage, frame, entrance, door;
-let mario = new THREE.Object3D();
 
 loadMario(world.scene);
 createMirrors(world.scene);
@@ -56,14 +56,14 @@ mtlLoader.load("./assets/obj/mirror/mirror_room.mtl", function (materials) {
     materials.materials["Moquette"].bumpScale = 0.7;
     // Brick
     materials.materials["Brick"].transparent = false;
-    materials.materials["Brick"].bumpMap = brickBumpTexture;
-    materials.materials["Brick"].bumpScale = 1;
+    // materials.materials["Brick"].bumpMap = brickBumpTexture;
+    // materials.materials["Brick"].bumpScale = 1;
     // Floor
     materials.materials["Floor"].transparent = false;
     // Wall
     materials.materials["Wall"].transparent = false;
-    materials.materials["Wall"].bumpMap = wallkBumpTexture;
-    materials.materials["Wall"].bumpScale = 1;
+    // materials.materials["Wall"].bumpMap = wallkBumpTexture;
+    // materials.materials["Wall"].bumpScale = 1;
 
 
     objLoader.setMaterials(materials);

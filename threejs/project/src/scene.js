@@ -5,7 +5,8 @@ class World {
     renderer;
     scene;
     constructor() {
-        this.renderer = new THREE.WebGLRenderer();
+        const canvReference = document.getElementById("canvas");
+        this.renderer = new THREE.WebGLRenderer({antialias: true, canvas: canvReference});
         this.renderer.setSize( window.innerWidth, window.innerHeight );
         this.renderer.setAnimationLoop( this.animate );
         this.renderer.shadowMap.enabled = true;
