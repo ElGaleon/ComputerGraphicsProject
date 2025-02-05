@@ -7,13 +7,6 @@
     "ny": "./assets/images/skybox/bowser/ny.png",
     "nz": "./assets/images/skybox/bowser/nz.png"
   },
-  "perspective": {
-    "fieldOfView": 75,
-    "projectionWidth": 2,
-    "projectionHeight": 1,
-    "zNear": 1,
-    "zFar": 30
-  },
   "camera": {
     "position": [
       3,

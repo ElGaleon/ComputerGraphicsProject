@@ -107,7 +107,6 @@ class Scene {
     this.keyController = new KeyController(this.camera, 0.5);
     this.mouseController = new MouseController(this.camera);
     this.touchController = new TouchController(this);
-    // this.controller2D = new Controller2D(this);
   }
 
   // Get the projection matrix

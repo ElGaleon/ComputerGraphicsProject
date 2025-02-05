@@ -47,9 +47,6 @@ class MeshObj {
     this.objSource = obj.objSource;   // Path to obj file
     this.mtlSource = obj.mtlSource;   // Path to mtl file
     this.position = obj.position;       // Where to move the mesh once loaded
-    this.mesh = [];                         // This object stores all the mesh information
-    this.mesh.sourceMesh = this.objSource; // .sourceMesh is used in load_mesh.js
-    this.mesh.fileMTL = this.mtlSource;    // .fileMTL is used in load_mesh.js
 
     if (obj.initialRotation) {
       this.initialRotation = obj.initialRotation;

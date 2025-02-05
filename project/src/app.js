@@ -9,14 +9,8 @@
  * @returns {Promise<JSON>}
  */
 async function loadScene(sceneId) {
-  try {
-    const scenePath = `./assets/json/${sceneId}.json`;
-    const response = await fetch(scenePath);
-    return await response.json();
-  } catch (e) {
-    console.error(e);
-    throw Error("Error while loading json scene: " + e);
-  }
+  const scenePath = `./assets/json/${sceneId}.json`;
+  await loadJsonFile(scenePath);
 }
 
 /**
