@@ -5,7 +5,7 @@
     <meta name="generator" content="pandoc" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 
-    <title>Documentation</title>
+    <title>Documentazione</title>
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../project/css/style.css">
@@ -15,17 +15,27 @@
 </head>
 
 <body class="bg-gray-50 py-8 px-16 flex flex-col gap-4 items-center">
-<header class="text-2xl flex flex-col justify-center items-center text-gray-800">
-    <h1 class="font-extrabold text-center text-gray-800">Documentazione progetto di Fondamenti di Computer Graphics M - Modulo 1</h1>
-    <h3 class="text-xl text-gray-600">Christian Galeone</h3>
-    <h5 class="text-lg text-gray-600">A.A. 2024-2025</h5>
+<header class="flex flex-col justify-center items-center text-gray-800 gap-2">
+    <h1 class="text-[48px] font-extrabold text-center text-gray-800">Progetto di Fondamenti di Computer Graphics M</h1>
+    <div class="flex flex-row justify-center gap-2 items-center">
+        <div class="rounded-full bg-amber-100 py-0.5 px-3 border text-xl text-amber-600 transition-all border-amber-400">
+            MODULO 1
+        </div>
+        <div class="rounded-full bg-blue-100 py-0.5 px-3 border text-xl text-blue-600 transition-all border-blue-400">
+            DOCUMENTAZIONE
+        </div>
+    </div>
+    <h3 class="text-2xl text-gray-600">Christian Galeone - Matricola 1103454</h3>
+    <h5 class="text-xl text-gray-600">A.A. 2024-2025</h5>
 </header>
 
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
 
-<div class="w-full bg-gray-100 px-4 py-3 text-left text-gray-800 break-words max-w-md rounded">
+<!-- Indice -->
+<div class="w-full bg-gray-100 p-8 text-left text-gray-800 break-words max-w-md rounded-lg">
     <div class="mx-auto text-xl font-semibold"><strong>Indice</strong></div>
-    <ul class="mt-2 list-disc px-2 pl-6">
+    <ul class="mt-2 px-2">
         <li>
             <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#introduzione">Introduzione</a>
         </li>
@@ -48,46 +58,35 @@
             <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#controllo-scena">Controllo scena</a>
         </li>
         <li>
-            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#best-practices">Luci e Ombre</a>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#scene">Scene.js</a>
         </li>
         <li>
-            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#code-samples">MeshObj</a>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#config">Config.json</a>
         </li>
         <li>
-            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#conclusion">Conclusion</a>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#render">Render.js</a>
         </li>
         <li>
-            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#change-theme-color">Changing Theme Color in
-                Bootstrap</a>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#mesh-obj">MeshObj.js</a>
         </li>
         <li>
-            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#using-theme-color">Using Theme Color in
-                Bootstrap</a>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#camera">Camera.js</a>
         </li>
         <li>
-            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#number-of-colors">Number of Colors in
-                Bootstrap</a>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#shadow">Shadow.js</a>
         </li>
         <li>
-            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#customize-theme">Customizing a Bootstrap
-                Theme</a>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#riferimenti">Riferimenti</a>
         </li>
     </ul>
 </div>
 
-<h1 id="indice">Indice</h1>
-<ul>
-    <li><a href="#introduzione">Introduzione</a></li>
-    <li><a href="#scene.js">Scene</a></li>
-    <li><a href="#camera.js">Camera</a></li>
-    <li><a href="#mesh_obj.js">MeshObj</a></li>
-    <li><a href="#riferimenti">Riferimenti</a></li>
-</ul>
-<hr />
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
 
 <!-- Introduzione -->
-<section id="introduzione">
-<h1 class="text-xl font-semibold text-gray-800">Introduzione</h1>
+<section id="introduzione" class="flex flex-col gap-2">
+<h1 class="text-[32px] font-bold text-gray-800">Introduzione</h1>
 <p> Il progetto 'Super Mario 64 in WebGL' è stato realizzato come prova finale del corso "Fondamenti di Computer Graphics M".
     L'obiettivo del progetto è quello di sviluppare un'applicazione web interattiva con scena tridimensionale, utilizzando la libreria grafica WebGL, Javascript e il linguaggio di shading OpenGL ES SL.
     Per scoprire tutti i requisiti del progetto, visitare <a href="../README.md" target="_blank">README.md</a>
@@ -98,10 +97,13 @@
 </p>
     <img src="./resources/images/SM64.png" alt="Super Mario 64" class="w-2/5 block ml-auto mr-auto py-2">
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Architettura -->
-<section id="architettura">
-    <h1 class="text-xl font-semibold text-gray-800">Architettura</h1>
+<section id="architettura" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Architettura</h1>
     L'architettura del progetto parte da un template HTML di Intellij IDEA, ed è stato strutturato in directories nel seguente modo:
 <ul class="list-disc mb-4">
     <li><code class="text-red-600 bg-gray-200 rounded-md p-1">assets</code>
@@ -152,10 +154,13 @@
         <li><code class="text-red-600 bg-gray-200 rounded-md p-1">Skybox</code> gestisce le skybox della scena (se presenti)</li>
     </ul>
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Interfaccia -->
-<section id="interfaccia">
-    <h1 class="text-xl font-semibold text-gray-800">Interfaccia</h1>
+<section id="interfaccia" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Interfaccia</h1>
     <div class="flex flex-row justify-center items-center gap-2">
         <img src="./resources/images/interfaccia.png" title="Interfaccia mobile applicazione" alt="Interfaccia mobile applicazione" class="w-3/5 block ml-auto mr-auto py-2">
         <img src="./resources/images/interfaccia_mobile.png" title="Interfaccia mobile applicazione" alt="Interfaccia mobile applicazione" class="w-1/5 block ml-auto mr-auto py-2">
@@ -170,10 +175,13 @@
     inserito le canzoni di ogni scena, che si caricano ogni volta che se ne seleziona una. In questo modo l'esperienza diventa del tutto immersiva!
 </p>
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Scena 1 -->
-<section id="scena1">
-    <h1 class="text-xl font-semibold text-gray-800">Scena 1 (Bomb-Omb Battlefield)</h1>
+<section id="scena1" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Scena 1 (Bomb-Omb Battlefield)</h1>
     Per soddisfare il requisito di inserire una immagine texture con la mia foto, ho pensato di riprodurre la stanza del primo livello, chiamato "Bomb-Omb Battlefield"
     La stanza è molto semplice, e si presenta con un immenso quadro del livello con un palco sotto. In aggiunta, ho voluto inserire anche l'iconica stella del gioco, che in realtà non compare nella scena.
     <div class="flex flex-row justify-center items-center gap-2">
@@ -181,10 +189,13 @@
         <img src="./resources/images/bomb-ref.png" alt="Bomb-Omb Ref" class="w-2/5 block ml-auto mr-auto py-2">
     </div>
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Scena 2 -->
-<section id="scena2">
-    <h1 class="text-xl font-semibold text-gray-800">Scena 2 (Peach Castle)</h1>
+<section id="scena2" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Scena 2 (Peach Castle)</h1>
     Questa scena è stata quello che ha fatto iniziare tutto, il mio punto di ispirazione. Essendo una costruzione un po' più complessa, ho cercato
     di semplificarla il più possibile, ma questo comunque mi ha portato alcuni problemi: sebbene se su Blender i modelli non avessero distorsioni,
     su Web, invece, sono venuti fuori alcuni effetti che sono un po' fastidiosi. <br/>
@@ -194,10 +205,13 @@
         <img src="./resources/images/castle-ref.jpeg" alt="Castle-Ref" class="w-1/2 block ml-auto mr-auto py-2">
     </div>
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Scena 3 -->
-<section id="scena3">
-    <h1 class="text-xl font-semibold text-gray-800">Scena 3 (Bowser In the Sky)</h1>
+<section id="scena3" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Scena 3 (Bowser In the Sky)</h1>
     Proprio come nel gioco, questa rappresenta l'ultima scena prima del boss finale: una volta entrato in quel tubo,
     per salvare Peach, Mario dovrà sfidare il suo acerrimo nemico Bowser. Per questo motivo, ho voluto inserire anche questa scena,
     in cui ho potuto sperimentare l'utilizzo delle <b>skybox</b>. Ho cercato di utilizzare l'immagine originale, che non ha
@@ -216,12 +230,15 @@
         <img src="./resources/images/bowser-heart-ref.png" alt="Bowser heart ref" class="w-1/2 block ml-auto mr-auto py-2">
     </div>
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Controllo scena -->
-<section id="controllo-scena">
-    <h1 class="text-xl font-semibold text-gray-800">Controllo Scena</h1>
-    Per il controllo delle impostazioni della scena, è stata utilizzata la libreria <a href="https://github.com/dataarts/dat.gui">dat.GUI</a>.
-    Grazie a questa è possibile gestire le impostazioni della camera, l'attivazione/disattivazione delle ombre e la gestione delle luci.<br/>
+<section id="controllo-scena" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Controllo Scena</h1>
+    <p>Per il controllo delle impostazioni della scena, è stata utilizzata la libreria <a href="https://github.com/dataarts/dat.gui">dat.GUI</a>.
+    Grazie a questa è possibile gestire le impostazioni della camera, l'attivazione/disattivazione delle ombre e la gestione delle luci.</p>
 
     Riguardo l'interazione con l'utente, quest'ultimo può muoversi nella scena in tre modi diversi:
     <ul class="list-disc ml-8">
@@ -231,17 +248,26 @@
             <ul class="list-disc ml-16">
                 <li>Movimento del dito</li>
                 <li>Interfaccia Tastiera </li>
-                <li>Interfaccia Gamepad</li>
+                <img src="./resources/images/keyboard.png" alt="Touch Keyboard" class="w-1/4 block ml-auto mr-auto py-2">
+                <li>Interfaccia Gamepad (prende ispirazione da Controller N64)</li>
+                <div class="flex flex-row justify-center items-center gap-2">
+                    <img src="./resources/images/gamepad.png" alt="Touch Gamepad" class="w-1/4 block ml-auto mr-auto py-2">
+                    <img src="./resources/images/n64-controller.png" alt="Controller N64" class="w-1/4 block ml-auto mr-auto py-2">
+                </div>
+
             </ul>
         </li>
     </ul>
     I tasti per controllare il movimento la direzione di vista sono visibili nel menù laterale a destra.
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Scene.js -->
-<section>
-    <h1 class="text-xl font-semibold text-gray-800">Scene.js</h1>
-    <p>Il file <code>scene.js</code> è il cuore dell'applicazione: agisce da orchestratore inizializzando tutte le classi di cui ha
+<section id="scene">
+    <h1 class="text-[32px] font-bold text-gray-800">Scene.js</h1>
+    <p>Il file <code class="text-red-600 bg-gray-200 rounded-md p-1">scene.js</code> è il cuore dell'applicazione: agisce da orchestratore inizializzando tutte le classi di cui ha
     bisogno si occupa del rendering della scena. Il suo costruttore è così formato:
     </p>
     <div class="flex flex-row gap-8 items-center">
@@ -253,15 +279,35 @@
                 <li>Inizializzazione WebGL Program a partire dagli shader</li>
                 <li>Lettura del file di configurazione <strong>json</strong> per caricare gli elementi della scena</li>
             </ul>
-
         </div>
     </div>
+    <h1 class="text-lg font-semibold text-gray-800">Metodi</h1>
+    <p>La classe scene non presenta metodi, ma soltanto un getter utilizzato per calcolare la projection matrix della scena utilizzando la libreria m4.js.</p>
+    <!-- Code Block -->
+    <div class="relative max-w-2xl mx-auto mt-8">
+        <div class="bg-gray-900 text-white p-1 rounded-md">
+            <pre id="code" class="text-gray-300">
+        <code class="text-red-600 bg-gray-200 rounded-md p-1">
+            <span class="text-orange-500">get</span> <span class="text-blue-500">projectionMatrix</span>() {
+            <span class="text-orange-500">return</span> m4.perspective(
+            <span class="text-blue-500">degToRad</span>(scene.camera.fieldOfView),
+                scene.camera.<span class="text-blue-500">aspectRatio</span>,
+                scene.camera.zNear,
+                scene.camera.zFar
+            );
+        </code>
+</pre>
+            </div>
+        </div>
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Config.json -->
-<section>
-    <h1 class="text-xl font-semibold text-gray-800">File di configurazione JSON</h1>
-    <p>Il file <code>scene.json</code> è lo scheletro di ogni scena: qui vengono settate le impostazioni iniziali della scena.
+<section id="config">
+    <h1 class="text-[32px] font-bold text-gray-800">File di configurazione JSON</h1>
+    <p>Il file <code class="text-red-600 bg-gray-200 rounded-md p-1">scene.json</code> è lo scheletro di ogni scena: qui vengono settate le impostazioni iniziali della scena.
     </p>
     <div class="flex flex-row gap-8 items-center">
         <div class="">
@@ -271,7 +317,7 @@
                 <li>Inizializzazione impostazioni camera - modificabili poi da menù</li>
                 <li>Localizzato audio mp3 da caricare</li>
                 <li>Inizializzazione impostazioni luce - modificabili poi da menù</li>
-                <li>Caricamento modelli 3D Mesh - per ogni mesh viene specificato nome, path file <code>.obj</code> e path file <code>.mtl</code></li>
+                <li>Caricamento modelli 3D Mesh - per ogni mesh viene specificato nome, path file <code class="text-red-600 bg-gray-200 rounded-md p-1">.obj</code> e path file <code class="text-red-600 bg-gray-200 rounded-md p-1">.mtl</code></li>
                 <li>Inizializzazione Camera</li>
                 <li>Inizializzazione Luci</li>
                 <li>Inizializzazione Controller</li>
@@ -281,64 +327,101 @@
         <img src="resources/images/code/json.png" alt="JSON Config" class="w-1/2 block ml-auto mr-auto py-2">
     </div>
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Render.js -->
 <section id="render" class="flex flex-col gap-2">
-    <h1 class="text-xl font-semibold text-gray-800">Render.js</h1>
-    <p>Il file <code>render.js</code> viene utilizzato per renderizzare l'intera scena. Per motivi di scope, questa funzione è stata messa all'esterno della classe <code>Scene</code>
+    <h1 class="text-[32px] font-bold text-gray-800">Render.js</h1>
+    <p>Il file <code class="text-red-600 bg-gray-200 rounded-md p-1">render.js</code> viene utilizzato per renderizzare l'intera scena. Per motivi di scope, questa funzione è stata messa all'esterno della classe <code class="text-red-600 bg-gray-200 rounded-md p-1">Scene</code>
     </p>
-    <h3 class="text-lg font-semibold text-gray-800">Render base</h3>
+    <h3 class="text-xl font-semibold text-gray-800">Render base</h3>
     La scene disegnata con il rendering base ha queste caratteristiche:
     <ul class="list-disc ml-8">
     <li>supporto per texture e colori - grazie agli shaders</li>
     <li>luce diffusa</li>
     <li>specular lightning</li>
     </ul>
-    <h3 class="text-lg font-semibold text-gray-800">Render avanzato</h3>
+    <h3 class="text-xl font-semibold text-gray-800">Render avanzato</h3>
     <p>La tecnica di rendering avanzato che ho scelto per il mio progetto sono le ombre, realizzate con tecnica di shadow mapping.<br/>
 
         Per poter generare le ombre la scena viene disegnata due volta, prima dal punto di vista della luce per generare una shadowmap,
         poi dal punto di vista dell’osservatore utilizzando la shadowmap generata per capire se un punto è in ombra o meno.<br/>
-        Per la realizzazione, è necessario attivare il culling, tramite il comando <code>gl.enable(gl.CULL_FACE)</code>. Per questo motivo le pareti della stanza diventano invisibili.
+        Per la realizzazione, è necessario attivare il culling, tramite il comando <code class="text-red-600 bg-gray-200 rounded-md p-1">gl.enable(gl.CULL_FACE)</code>. Per questo motivo le pareti della stanza diventano invisibili.
     </p>
 
     <div class="flex flex-row gap-8 items-center">
         <img src="resources/images/shadow-1.png" alt="Shadow First" class="w-1/2 block ml-auto mr-auto py-2">
         <img src="resources/images/shadow-2.png" alt="Shadow Second" class="w-1/2 block ml-auto mr-auto py-2">
     </div>
-</section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
-<!-- MeshObj.js -->
-<section>
-    <h1 class="text-xl font-semibold text-gray-800">File di configurazione JSON</h1>
-    <p>Il file <code>scene.json</code> è lo scheletro di ogni scena: qui vengono settate le impostazioni iniziali della scena.
-    </p>
-    <div class="flex flex-row gap-8 items-center">
-        <div class="">
-            In questo file viene impostato:
-            <ul class="list-disc ml-8">
-                <li>Skybox</li>
-                <li>Inizializzazione impostazioni camera - modificabili poi da menù</li>
-                <li>Localizzato audio mp3 da caricare</li>
-                <li>Inizializzazione impostazioni luce - modificabili poi da menù</li>
-                <li>Caricamento modelli 3D Mesh - per ogni mesh viene specificato nome, path file <code>.obj</code> e path file <code>.mtl</code></li>
-                <li>Inizializzazione Camera</li>
-                <li>Inizializzazione Luci</li>
-                <li>Inizializzazione Controller</li>
-            </ul>
 
-        </div>
-        <img src="resources/images/code/json.png" alt="JSON Config" class="w-1/2 block ml-auto mr-auto py-2">
-    </div>
+    <h3 class="text-xl font-semibold text-gray-800">Metodi</h3>
+    <p>Nel file <code class="text-red-600 bg-gray-200 rounded-md p-1">render.js</code> troviamo i metodi per il render della scena. Questo file copre tutte le situazioni che possono essere gestite anche dal pannello della scena.</p>
+    <ul class="list-disc ml-8">
+        <li><b>render</b> funzione che si occupa di effettuare il render della scena e chiama i metodi privati sottostanti</li>
+        <li><b>renderWithShadows</b> si occupa di effettuare il render mostrando le ombre della scena</li>
+        <li><b>renderWithoutShadows</b> funzione complementare di quella sopra</li>
+        <li><b>renderSkybox</b> funzione che effettua il rendering della skybox (se necessario)</li>
+        <li><b>showFrustum</b> funzione che permette di visualizzare il frustum della luce</li>
+    </ul>
+    <img src="resources/images/code/render.png" alt="Render Function" class="w-1/2 block ml-auto mr-auto py-2">
+    <p>Per il render è stato attivato <code class="text-red-600 bg-gray-200 rounded-md p-1">gl.BLEND</code> per cui, se un materiale di un oggetto ha opacità minore di uno, questo verrà disegnato con una trasparenza.</p>
+    <img src="resources/images/heart.png" alt="Heart" class="block ml-auto mr-auto py-2">
 </section>
-<hr class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- MeshObj.js -->
+<section id="mesh-obj" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">MeshObj.js</h1>
+    <p>Il file <code class="text-red-600 bg-gray-200 rounded-md p-1">mesh_obj.js</code> contiene la classe per il caricamento, l'inizializzazione e il rendering delle figure mesh 3D da caricare nella scena.
+    </p>
+    <div class=" my-2 mx-2 bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+        <div class="flex">
+            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+            <div>
+                <p class="font-bold text-lg">Blender</p>
+                <p class="text-md">Tutti i modelli 3D presenti nella scena sono stati creati dall'autore utilizzando Blender. Successivamente, questi sono stati esportati in formato <code class="text-red-600 bg-gray-200 rounded-md p-1">.obj</code> e integrati nel codice. I file <code class="text-red-600 bg-gray-200 rounded-md p-1">.blender</code> sono presenti nel codice.</p>
+            </div>
+        </div>
+    </div>
+    <h4 class="text-lg font-semibold text-gray-800">Inizializzazione</h4>
+    <p>Per l'inizializzazione della mesh viene in supporto il file json di configurazione, il quale riporta per ogni mesh le seguenti specifiche:</p>
+    <ul class="list-disc ml-8">
+        <li><b>nome</b> identifica la mesh</li>
+        <li><b>objSource</b> identifica il percorso del file <code class="text-red-600 bg-gray-200 rounded-md p-1">.obj</code></li>
+        <li><b>mtlSource</b> identifica il percorso del file <code class="text-red-600 bg-gray-200 rounded-md p-1">.mtl</code></li>
+        <li><b>position</b> identifica la posizione iniziale della mesh rispetto alla scena [0,0,0 di default]</li>
+        <li><b>initialRotation</b> (<i>facoltativo</i>) indica che la mesh deve essere ruotata in base agli assi specificati </li>
+        <li><b>initialScale</b> (<i>facoltativo</i>) indica che la mesh deve essere scalata per il valore riportato </li>
+        <li><b>rotate</b> (<i>facoltativo</i>) indica che la mesh deve essere ruotata dinamicamente in base agli assi specificati </li>
+    </ul>
+
+    <h4 class="text-lg font-semibold text-gray-800">Caricamento</h4>
+    <p>Per la fase di caricamento si utilizza la funzione <code class="text-red-600 bg-gray-200 rounded-md p-1">loadMesh()</code>, presa dalla libreria fornita <code class="text-red-600 bg-gray-200 rounded-md p-1">load_mesh.js</code>. Il risultato di questa funzione viene dato in pasto a una funzione che si occupa di comporre la mesh, chiamata <code class="text-red-600 bg-gray-200 rounded-md p-1">composeMesh()</code>.<br/>
+    Questa funzione si occupa di assegnare un materiale (di default) alle mesh, assegnare la posizione iniziale e si occupa di passare gli attribute al vertex shader, sfruttando la funzione <code class="text-red-600 bg-gray-200 rounded-md p-1">createBufferInfoFromArrays(gl, data)</code> della libreria
+    <code class="text-red-600 bg-gray-200 rounded-md p-1">WebGLUtils</code>.</p>
+
+    <h4 class="text-lg font-semibold text-gray-800">Render</h4>
+    <p>Per il render delle mesh è stata creata una funzione apposita. Questa disegna l’oggetto utilizzando il programma e le uniform specificate nei parametri. Viene chiamata dalla funzione render che si occupa di scegliere programInfo e uniform a seconda del tipo di rendering scelto.
+        Avendo program e uniforms parametrizzati la funzione di rendering è unica per tutti le modalità di disegno.
+    </p>
+    <img src="resources/images/code/render_mesh.png" alt="JSON Config" class="w-1/2 block ml-auto mr-auto py-2">
+    <p>La funzione <code class="text-red-600 bg-gray-200 rounded-md p-1">computeModelMatrix()</code> si occupa di generare il model matrix seguendo tutte le direttive del file json riguardo posizione, rotazione statica e dinamica, e scaling.
+    </p>
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
 <!-- Camera.js -->
-<section>
-    <h1 class="text-xl font-semibold text-gray-800">Camera.js</h1>
+<section id="camera">
+    <h1 class="text-[32px] font-bold text-gray-800">Camera.js</h1>
     Rappresenta la camera da cui viene osservata la scena.
     Il punto di vista può essere spostato all'interno dell'ambiente 3D in maniera libera.
     L'orientamento della camera viene definito (ma anche modificato) dai seguenti tre assi ortogonali espressi in coordinate globali:
-
     <div class="flex flex-col gap-2 p-4 rounded-md bg-gray-200">
         <span><b>position</b> posizione nello spazio della camera.</span>
         <span><b>forward</b> vettore che punta davanti la camera.</span>
@@ -351,351 +434,73 @@
 
 </section>
 
-<h1 id="scene.js">scene.js</h1>
-<p>
-    Rappresenta la scena 3D e si occupa di orchestrare
-    tutte le operazioni: dall'inizializzazione del canvas
-    al rendering della scena stessa.
-</p>
-<p>
-    All'istanziazione di un nuovo oggetto Scene, il metodo constructor
-    esegue le seguenti operazioni:
-<ul>
-    <li>estrazione il contesto WebGL dal canvas</li>
-    <li>impostazione delle dimensioni della viewport</li>
-    <li>compilazione degli shader program</li>
-    <li>lettura del file <strong>json</strong> contenente le mesh da mostrare</li>
-    <li>per ogni mesh indicata nel file json viene istanziato un
-        <strong>mesh_obj</strong> che viene salvato in una lista interna
-        all'oggetto Scene</li>
-    <li>inizializzazione della <strong>camera</strong>, binding dei metodi di
-        input agli eventi: <strong>keys</strong> (tastiera), <strong>touch</strong>,
-        <strong>mouse</strong> e <strong>light</strong> (oggetto luce di scena)</li>
-</ul>
-</p>
-<p>
-    Le mesh che verranno caricate e visalizzate sono indicate nel file json.
-    Questa metodologia rende possibile creare più scene diverse semplicemente
-    modificando i file json.
-</p>
-<p>
-    Di seguito è riportata la struttura del file json:
-</p>
-<div class="sourceCode" id="cb1"><pre
-        class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="er">&quot;meshes&quot;:</span><span class="ot">[</span></span>
-        <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-        <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;mesh_1&quot;</span><span class="fu">,</span></span>
-        <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;obj_source&quot;</span><span class="fu">:</span><span class="st">&quot;./path/mesh.obj&quot;</span><span class="fu">,</span></span>
-        <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;mtl_source&quot;</span><span class="fu">:</span><span class="st">&quot;./path/mesh&quot;</span><span class="fu">,</span></span>
-        <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;position&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">]</span></span>
-        <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-        <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span></code></pre></div>
-<p>
-    Ogni entry ha le seguenti proprietà:
-<ul>
-    <li><strong>name:</strong>
-        nome della mesh, usato per il debug</li>
-    <li><strong>obj_source:</strong>
-        percorso del file .obj</li>
-    <li><strong>mtl_source:</strong>
-        percorso del file .mtl</li>
-    <li><strong>position:</strong>
-        posizione iniziale della mesh.</li>
-</ul>
-</p>
-<p>
-    Il valore dell'attributo <strong>position</strong>
-    viene sommato alle coordinate della geometria
-    della mesh, traslandolo nella posizione desiderata.
-</p>
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
 
-<h2 id="metodi">Metodi</h2>
+<!-- Shadow.js -->
+<section id="shadow">
+    <h1 class="text-[32px] font-bold text-gray-800">Shadow.js</h1>
+    <p>Classe che si occupa della preparazione e della gestione dei dati delle ombre. Il costruttore esegue le seguenti funzioni:</p>
+    <ul class="list-disc ml-8">
+        <li>compilazione shaders corrispondenti.</li>
+        <li>creazione di una texture utilizzata come depth map.</li>
+        <li>impostazione dei valori utilizzati in fase di rendering.</li>
+    </ul>
+    <h3 class="text-xl font-semibold text-gray-800 mt-4">Metodi</h3>
+    <p>La classe presenta i metodi <code class="text-red-600 bg-gray-200 rounded-md p-1">toggle()</code> per l'attivazione/disattivazione delle ombre e <code class="text-red-600 bg-gray-200 rounded-md p-1">toggleShowFrustum()</code> per l'attivazione/disattivazione del frustum di luce.</p>
+</section>
 
-<h3 id="async-loadMesh">async loadMesh( jsonPath )</h3>
-<p>
-    Si occupa di leggere il file json contenente le mesh da caricare e
-    per ciascuno istanzia un oggetto mesh_obj che viene salvato in
-    <code class="text-red-600 bg-gray-200 rounded-md p-1">scene.mesh_list</code>.
-</p>
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
 
-<h3 id="getProjectionMatrix">getProjectionMatrix()</h3>
-<p>
-    Si occupa di calcolare la projection matrix utilizzando la funzione
-    <code class="text-red-600 bg-gray-200 rounded-md p-1">perspective(...)</code> della libreria m4.js.
-</p>
+<!-- Riferimenti -->
+<section id="riferimenti">
+    <h1 class="text-[32px] font-bold text-gray-800">Riferimenti</h1>
+    <p>Per la realizzazione del progetto, oltre alle slide e al codice visto durante il corso, è stato fatto riferimento ai seguenti articoli:</p>
+    <ul class="list-disc ml-8">
+        <li>
+            <a href="https://webglfundamentals.org/webgl/lessons/webgl-drawing-multiple-things.html">
+                WebGL Fundamentals: Drawing Multiple Things</a>
+        </li>
+        <li>
+            <a href="http://learnwebgl.brown37.net/07_cameras/camera_introduction.html">
+                Learn WebGL: Introduction to camera</a>
+        </li>
+        <li>
+            <a href="https://webglfundamentals.org/webgl/lessons/webgl-3d-camera.html">
+                WebGL Fundamentals: 3D Camera</a>
+        </li>
+        <li>
+            <a href="https://webglfundamentals.org/webgl/lessons/webgl-load-obj-w-mtl.html">
+                WebGL Fundamentals: Loading .obj with Mtl</a>
+        </li>
+        <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants">
+                MDN web docs: WebGL constants</a>
+        </li>
+        <li>
+            <a href="https://webglfundamentals.org/webgl/lessons/webgl-shadows.html">
+                WebGL Fundamentals: Shadows</a>
+        </li>
+        <li>
+            <a href="https://webglfundamentals.org/webgl/lessons/webgl-skybox.html">
+                WebGL SkyBox</a>
+        </li>
+        <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Multi-touch_interaction">
+                MDN web docs: Multi-touch interaction</a>
+        </li>
+        <li>
+            <a href="https://www.textures-resource.com/nintendo_64/mario64/">
+                Super Mario 64 Textures</a>
+        </li>
+    </ul>
+</section>
 
-<h3 id="keyController">keyController()</h3>
-<p>
-    Si occupa di intercettare gli input da tastiera e invoca le funzioni
-    che modificano la posizione e la direzione della camera. <br>
-    Questo metodo è realizzato in modo da poter gestire più input
-    contemporanei e consentire, ad esempio, di muoversi e girare la
-    camera nello stesso istante. <br>
-    Viene invocata ogni qualvolta viene disegnato un frame.
-</p>
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
 
-<h3 id="async-prepareskybox">async prepareSkybox()</h3>
-<p>
-    Si occupa di caricare la cubemap texture utilizzata per lo skybox. <br>
-    I dati vengono poi salvati in <code class="text-red-600 bg-gray-200 rounded-md p-1">scene.skybox</code>.
-</p>
-
-<h3 id="async-prepareshadow">async prepareShadow()</h3>
-<p>
-    Si occupa di preparare i dati per la gestione delle ombre,
-    ovvero:
-<ul>
-    <li>compilazione degli shaders necessari</li>
-    <li>creazione di una texture utilizzata come depth map</li>
-    <li>impostazione dei valori utilizzati durante il rendering.</li>
-</ul>
-</p>
-
-<h3 id="toggleShadows">toggleShadows()</h3>
-<p>
-    Si occupa gestire lo switch dallo shader program
-    con ombre a quello senza e viceversa.
-</p>
-
-<h3 id="draw">draw()</h3>
-<p>
-    Per motivi di scope non è un metodo della classe
-    Scene, ma una funzione a sé.<br>
-    Si occupa di eseguire le seguenti operazioni:
-<ul>
-    <li>ridimensionare canvas e viewport in base alla grandezza della
-        finestra</li>
-    <li>chiamare il metodo <code class="text-red-600 bg-gray-200 rounded-md p-1">keyController()</code> per la
-        gestione degli input da tastiera</li>
-    <li>calcolare la projection e la view matrix</li>
-    <li>la matrice di vista viene ottenuta da
-        <code class="text-red-600 bg-gray-200 rounded-md p-1">scene.camera</code> che è un oggetto
-        <code class="text-red-600 bg-gray-200 rounded-md p-1">Camera</code></li>
-    <li>in base al valore di <code class="text-red-600 bg-gray-200 rounded-md p-1">scene.shadow.enable</code>:
-        <ul>
-            <li>viene eseguito il rendering con ombre</li>
-            <li>viene eseguito il rendering senza ombre</li>
-        </ul>
-    </li>
-</ul>
-</p>
-<p>
-    Per il rendering è abilitato <code class="text-red-600 bg-gray-200 rounded-md p-1">gl.BLEND</code> quindi,
-    se il materiale di una mesh ha opacità minore di uno,
-    questo verrà disegnato con una trasparenza.
-</p>
-
-<p class="aligncenter">
-    <img src="./resources/images/transparency.jpg" title="Oggetto con trasparenza" height="500"/>
-</p>
-
-<h3 id="rendering-base">Rendering base</h3>
-<p>
-    La scena disegnata con lo shader program di base ha
-    le seguenti caratteristiche:
-<ul>
-    <li>supporto per texture e colori</li>
-    <li>luce diffusa</li>
-    <li>specular lightning</li>
-</ul>
-</p>
-
-<p class="aligncenter">
-    <img src="./resources/images/scene.jpg" title="Scena disegnata con rendering base" height="400"/>
-</p>
-
-<h3 id="rendering-con-ombre">Rendering con ombre</h3>
-<p>
-    La tecnica di rendering avanzata implementata nel progetto
-    è il calcolo delle ombre, realizzata grazie alla tecnica
-    dello shadow mapping.
-</p>
-<p>
-    Per disegnare le ombre si disegna la scena dal punto di vista
-    della luce, che applica l'algoritmo dello Shadow Buffer, il
-    cui funzionamento è analogo a quello del Depth Buffer. <br>
-    Il risultato di questo algoritmo è la Shadow Map, che descrive
-    quali punti delle mesh sono illuminate e quali no. Questa
-    mappa viene considerata insieme alla Depth Map generata dal
-    punto di vista dell'osservatore e si determina quali punti
-    sono da disegnare in ombra e quali no.
-</p>
-
-<p class="aligncenter">
-    <img src="./resources/images/shadow_rendering.jpg" title="Scena disegnata con le ombre" height="400" />
-</p>
-
-<p><a href="#indice">Torna all’indice</a></p>
-<hr />
-
-<h1 id="camera.js">camera.js</h1>
-<p>
-    Rappresenta la camera da cui viene osservata la scena.<br>
-    Il punto di vista può essere spostato all'interno
-    dell'ambiente 3D in maniera libera.<br>
-    L'orientamento della camera viene definito (ma anche
-    modificato) dai seguenti tre assi ortogonali espressi
-    in coordinate globali:
-<ul>
-    <li><strong>position:</strong> posizione nello spazio</li>
-    <li><strong>forward:</strong> vettore che punta di fronte alla camera</li>
-    <li><strong>right:</strong> vettore che punta alla destra della camera</li>
-    <li><strong>up:</strong> View-up vector, punta verso l’alto</li>
-</ul>
-</p>
-
-<h2 id="metodi-1">Metodi</h2>
-<p>
-    I movimenti della camera sono presi da quelli utilizzati nella
-    produzione video.
-</p>
-<p class="aligncenter">
-    <img src="./resources/images/camera_movements.jpg" title="Movimenti di camera" height="500" >
-</p>
-<h3 id="tiltstep">tilt( step )</h3>
-<p>
-    Ruota la visuale in alto o in basso, si ottiene ruotando
-    la camera rispetto al vettore right.
-</p>
-
-<h3 id="panstep">pan( step )</h3>
-<p>
-    Ruota la visuale orizzontalmente, si ottiene ruotando
-    la camera rispetto al View-up vector.
-</p>
-
-<h3 id="truckdist">truck( dist )</h3>
-<p>
-    Modifica la posizione della camera lateralmente, lasciando
-    invariata la direzione della visuale. Si ottiene
-    moltiplicando il vettore right per <code class="text-red-600 bg-gray-200 rounded-md p-1">dist</code> e
-    sommando il risultato alla posizione attuale della camera.
-</p>
-
-<h3 id="pedestaldist">pedestal( dist )</h3>
-<p>
-    Alza o abbassa la posizione della camera, si ottiene sommando
-    il prodotto tra il View-up vector e <code class="text-red-600 bg-gray-200 rounded-md p-1">dist</code> alla
-    posizione attuale della camera.
-</p>
-
-<h3 id="dollystep">dolly( step )</h3>
-<p>
-    Avvicina o allontana la camera al punto osservato,
-    si ottiene sommando alla posizione attuale il
-    prodotto tra <code class="text-red-600 bg-gray-200 rounded-md p-1">dist</code> e il vettore forward.
-</p>
-
-<h3 id="realign">realign()</h3>
-<p>
-    Riallinea la vista della camera all'orizzonte.
-</p>
-
-<h3 id="getviewmatrix">getViewMatrix()</h3>
-<p>
-    Calcola e restituisce la viewMatrix. Il calcolo
-    viene eseguito utilizzando i metodi della
-    libreria m4.js.
-</p>
-
-<h3 id="getposition">getPosition()</h3>
-<p>
-    Restituisce la posizione della camera.
-</p>
-
-<p><a href="#indice">Torna all’indice</a></p>
-
-<h1 id="mesh_obj.js">mesh_obj.js</h1>
-<p>
-    Questa classe si occupa di gestire le mesh visibili, dal
-    loro caricamento fino al rendering.<br>
-    Il costruttore prende le informazioni relative a una
-    mesh contenute in una entry del file json, quali:
-<ul>
-    <li>percorso del file .obj</li>
-    <li>percorso del file .mtl</li>
-    <li>posizione della mesh rispetto all’origine</li>
-</ul>
-</p>
-<p>
-    Le mesh sono salvate nella cartella <code class="text-red-600 bg-gray-200 rounded-md p-1">project/data</code>,
-    alcuni sono stati scaricati da internet, mentre altri sono
-    stati disegnati su Blender.<br>
-    Il formato utilizzato per l'utilizzo con WebGL è Wavefront obj,
-    a cui è associato il file mtl che descrive le proprietà dei
-    materiali che compongono le mesh.
-</p>
-
-<h2 id="metodi-2">Metodi</h2>
-
-<h3 id="prepareMeshgl">prepareMesh( gl )</h3>
-<p>
-    Si occupa di creare i buffer per passare gli attribute al
-    vertex shader, per fare ciò sfrutta la funzione
-    <code class="text-red-600 bg-gray-200 rounded-md p-1">createBufferInfoFromArrays(gl, data)</code> della
-    libreria webglUtils.js.
-</p>
-
-<h3 id="rendergl-programinfo-uniforms">render( gl, programInfo,
-    uniforms )</h3>
-<p>
-    Si occupa di disegnare la mesh utilizzando lo shader
-    program e gli uniform specificati nei parametri.<br>
-    Tramite le funzioni della libreria webglUtils.js
-    vengono passati attribute e uniform allo shader
-    program. Utilizzando la funzione
-    <code class="text-red-600 bg-gray-200 rounded-md p-1">webglUtils.drawBufferInfo(gl, bufferInfo)</code>
-    viene invocata la <code class="text-red-600 bg-gray-200 rounded-md p-1">gl.drawElements</code> o la
-    <code class="text-red-600 bg-gray-200 rounded-md p-1">gl.drawArrays</code> in base alla presenza degli
-    indici o meno.
-</p>
-
-<p><a href="#indice">Torna all’indice</a></p>
-
-<hr />
-
-<h1 id="riferimenti">Riferimenti</h1>
-<p>
-    Per la realizzazione del progetto, oltre alle slide e al codice visto
-    durante il corso, è stato fatto riferimento ai seguenti articoli:
-<ul>
-    <li>
-        <a href="https://webglfundamentals.org/webgl/lessons/webgl-drawing-multiple-things.html">
-            WebGL Fundamentals: Drawing Multiple Things</a>
-    </li>
-    <li>
-        <a href="http://learnwebgl.brown37.net/07_cameras/camera_introduction.html">
-            Learn WebGL: Introduction to camera</a>
-    </li>
-    <li>
-        <a href="https://webglfundamentals.org/webgl/lessons/webgl-3d-camera.html">
-            WebGL Fundamentals: 3D Camera</a>
-    </li>
-    <li>
-        <a href="https://webglfundamentals.org/webgl/lessons/webgl-load-obj-w-mtl.html">
-            WebGL Fundamentals: Loading .obj with Mtl</a>
-    </li>
-    <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants">
-            MDN web docs: WebGL constants</a>
-    </li>
-    <li>
-        <a href="https://webglfundamentals.org/webgl/lessons/webgl-shadows.html">
-            WebGL Fundamentals: Shadows</a>
-    </li>
-    <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Multi-touch_interaction">
-            MDN web docs: Multi-touch interaction</a>
-    </li>
-    <li>
-        <a href="https://stackoverflow.com/questions/44456764/how-to-simulate-pinch-zoom-in-google-chrome">
-            How to simulate pinch zoom in Google Chrome</a>
-    </li>
-</ul>
-</p>
-
-<p><a href="#indice">Torna all’indice</a></p>
-<hr />
-
+<a href="https://github.com/ElGaleon/ComputerGraphicsProject">
+    Github Repository</a>
 </body>
 </html>
