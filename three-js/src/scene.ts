@@ -71,15 +71,9 @@ function init() {
 
   // ===== 📦 OBJECTS =====
   {
-    if (myScene.showRoom) {
         loadRoom(scene, myScene.showBumpMap);
-    }
-    if (myScene.showMirrors) {
         loadMirrors(scene);
-    }
-    if (myScene.showMario) {
         loadMario(scene, camera, cameraControls);
-    }
   }
 
   // spotLight.target = mario;
@@ -179,7 +173,7 @@ document.addEventListener("keydown", function(event) {
     }
 }, false)
 
-document.addEventListener("keyup", function(event) {
+document.addEventListener("keyup", function(event){
     if (!event.shiftKey) {
     (keysPressed as any)[event.key.toLowerCase()] = false
     }

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" class="scroll-smooth" lang="it-IT">
+<head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <title>Documentazione</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../project/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../project/css/output.css">
+    <link rel="stylesheet" type="text/css" href="./style/style.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-50 py-8 px-16 flex flex-col gap-4 items-center">
+<header class="flex flex-col justify-center items-center text-gray-800 gap-2">
+    <h1 class="text-[48px] font-extrabold text-center text-gray-800">Progetto di Fondamenti di Computer Graphics M</h1>
+    <div class="flex flex-row justify-center gap-2 items-center">
+        <div class="rounded-full bg-amber-100 py-0.5 px-3 border text-xl text-amber-600 transition-all border-amber-400">
+            MODULO 2
+        </div>
+        <div class="rounded-full bg-blue-100 py-0.5 px-3 border text-xl text-blue-600 transition-all border-blue-400">
+            DOCUMENTAZIONE
+        </div>
+    </div>
+    <h3 class="text-2xl text-gray-600">Christian Galeone - Matricola 1103454</h3>
+    <h5 class="text-xl text-gray-600">A.A. 2024-2025</h5>
+</header>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- Indice -->
+<div class="w-full bg-gray-100 p-8 text-left text-gray-800 break-words max-w-md rounded-lg">
+    <div class="mx-auto text-xl font-semibold"><strong>Indice</strong></div>
+    <ul class="mt-2 px-2">
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#introduzione">Introduzione</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#architettura">Architettura</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#interfaccia">Interfaccia</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#scena1">Scena #1</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#scena2">Scena #2</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#scena3">Scena #3</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#controllo-scena">Controllo scena</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#scene">Scene.js</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#config">Config.json</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#render">Render.js</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#mesh-obj">MeshObj.js</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#camera">Camera.js</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#shadow">Shadow.js</a>
+        </li>
+        <li>
+            <a class="block hover:bg-gray-200 px-2 py-1 rounded" href="#riferimenti">Riferimenti</a>
+        </li>
+    </ul>
+</div>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- Introduzione -->
+<section id="introduzione" class="flex flex-col gap-2">
+<h1 class="text-[32px] font-bold text-gray-800">Introduzione</h1>
+<p> Il progetto 'Super Mario 64 in WebGL' è stato realizzato come prova finale del corso "Fondamenti di Computer Graphics M".
+    L'obiettivo del progetto è quello di sviluppare un'applicazione web interattiva con scena tridimensionale, utilizzando HTML5, CSS e Three.js.
+</p>
+
+<p>
+    Il risultato del progetto è le realizzazione di una stanza del gioco <a href="https://it.wikipedia.org/wiki/Super_Mario_64">Super Mario 64</a>, coerentemente con quanto fatto nel modulo 1<br>
+</p>
+    <img src="./resources/images/mirror-room.jpeg" alt="Mirror Room" class="w-2/5 block ml-auto mr-auto py-2">
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- Architettura -->
+<section id="architettura" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Architettura</h1>
+    L'architettura del progetto è stato strutturata in directories nel seguente modo:
+<ul class="list-disc mb-4">
+    <li><code class="text-red-600 bg-gray-200 rounded-md p-1">assets</code>
+                directory che contiene tutte le immagini, i file .glb e file obj necessari alla realizzazione della scena.
+    </li>
+    <li><code class="text-red-600 bg-gray-200 rounded-md p-1">style</code>
+                contiene i fogli di stile. Per conoscenze e comodità è stato utilizzato il framework TailwindCSS, che ha velocizzato il processo di realizzazione dello stile del sito.
+    </li>
+    <li><code class="text-red-600 bg-gray-200 rounded-md p-1">src</code>
+                cartella sorgente che contiene la logica dell'applicazione.
+    </li>
+</ul>
+    <div class=" my-2 mx-2 bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+        <div class="flex">
+            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+            <div>
+                <p class="font-bold">Scelta progettuale</p>
+                <p class="text-sm">Per rendere il codice meglio strutturato e fornire una efficienza maggiore nella gestione delle risorse, sono stati utilizzati gli strumenti Typescript e Vite.</p>
+            </div>
+        </div>
+    </div>
+
+<p>Di seguito viene mostrata la struttura della directory <code class="text-red-600 bg-gray-200 rounded-md p-1">src</code></p>
+    <img src="./resources/images/src-2.png" alt="src directory" class="w-1/5 block ml-auto mr-auto py-2">
+
+    <p>Per la realizzazione del progetto è stato seguito il principio di separazione previsto dal clean code, in questo modo ogni classe esegue soltanto ciò che è di sua competenza.</p>
+    <p>La classe scene agisce come <b>orchestratore</b>: le classi vengono inizializzate e utilizzate al suo interno.</p>
+    Breve spiegazione di cosa si occupa ogni file in breve:
+    <ul class="list-disc">
+        <li><code class="text-red-600 bg-gray-200 rounded-md p-1">Character Controls</code> classe che permette di gestire i movimenti del soggetto (Mario) e le animazioni </li>
+        <li><code class="text-red-600 bg-gray-200 rounded-md p-1">FullScreen</code> gestisce il passaggio di contesto a fullScreen e viceversa </li>
+        <li><code class="text-red-600 bg-gray-200 rounded-md p-1">Helpers</code> Gestisce gli helpers di Three.js (Grid, axis e lights)  </li>
+        <li><code class="text-red-600 bg-gray-200 rounded-md p-1">Responsiveness</code> rende il sito responsive </li>
+        <li><code class="text-red-600 bg-gray-200 rounded-md p-1">Controls</code> gestisce la camera della scena e i controlli (Orbit Controls)</li>
+        <li><code class="text-red-600 bg-gray-200 rounded-md p-1">Light</code> gestisce le luci della scena</li>
+        <li><code class="text-red-600 bg-gray-200 rounded-md p-1">Objects</code> si occupa del caricamento e della gestione dei model 3D </li>
+        <li><code class="text-red-600 bg-gray-200 rounded-md p-1">Scene</code> orchestratore e punto nevralgico dell'applicazione</li>
+    </ul>
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- Interfaccia -->
+<section id="interfaccia" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Interfaccia</h1>
+    <div class="flex flex-row justify-center items-center gap-2">
+        <img src="./resources/images/interfaccia-2.png" title="Interfaccia applicazione" alt="Interfaccia mobile applicazione" class="w-3/5 block ml-auto mr-auto py-2">
+    </div>
+<p>
+    L'interfaccia dell'applicazione rappresenta Mario 64 dentro la stanza degli specchi.</p>
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+        <span class="font-medium">Attenzione!</span> Per un problema sconosciuto dell'ultimo minuto, non vengono applicate le texture della stanza.
+    </div>
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- Controllo scena -->
+<section id="controllo-scena" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Controllo Scena</h1>
+    <p>Per il controllo delle impostazioni della scena, è stata utilizzata la libreria <a href="https://lil-gui.georgealways.com/">lil-gui</a>, in quanto più leggera rispetto a dat.gui.
+    Grazie a questa è possibile gestire le impostazioni della camera, degli helpers, delle bump map, l'attivazione/disattivazione delle ombre e la gestione delle luci.</p>
+
+    Riguardo l'interazione con l'utente, può muovere Mario nella scena in diversi modi
+    <ul class="list-disc ml-8">
+        <li>Tasto W: avanti</li>
+        <li>Tasto S: indietro</li>
+        <li>Tasto A: sinistra</li>
+        <li>Tasto D: destra</li>
+        <li>Spazio: salto</li>
+        <li>Tasto B: balletto</li>
+        <li>Tasto M: equilibrio</li>
+    </ul>
+    Se non si esegue alcuna azione, Mario sarà in posizione <code>IDLE</code>
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- Scene.js -->
+<section id="scene">
+    <h1 class="text-[32px] font-bold text-gray-800">Scene.ts</h1>
+    Raccoglie i metodi di inizializzazione e rendering della scena 3D.
+
+    <div class="flex flex-row gap-8 items-center">
+        <img src="resources/images/code/scene.png" alt="Scene constructor" class="w-1/2 block ml-auto mr-auto py-2">
+        <div class="">
+                Il costruttore di Scene esegue le seguenti operazioni:
+            <ul class="list-disc ml-8">
+                <li>Inizializzazione contesto WebGL da canvas</li>
+                <li>Inizializzazione WebGL Program a partire dagli shader</li>
+                <li>Lettura del file di configurazione <strong>json</strong> per caricare gli elementi della scena</li>
+            </ul>
+        </div>
+    </div>
+    <h1 class="text-lg font-semibold text-gray-800">init</h1>
+    <p>La funzione init() si occupa di creare tutto il necessario:</p>
+    <ul class="list-disc ml-8">
+        <li>Scena</li>
+        <li>Camera</li>
+        <li>GUI</li>
+        <li>Mesh</li>
+        <li>Luci</li>
+        <li>Helpers</li>
+        <li>Loading Manager - si occupa del caricamento degli oggetti</li>
+        <li>Animazioni</li>
+    </ul>
+    <h1 class="text-lg font-semibold text-gray-800">animate</h1>
+    <p>Si occupa di gestire la scena frame per frame, aggiornando i parametri di posizione del giocatore le sue animazioni.
+        <img src="./resources/images/code/animate.png" title="Interfaccia applicazione" alt="Interfaccia mobile applicazione" class="w-3/5 block ml-auto mr-auto py-2">
+
+
+
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- Render.js -->
+<section id="render" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Rendering</h1>
+    <h1 class="text-xl font-bold text-gray-800">Ombre</h1>
+    Quello che con WebGL base richiedeva un po' più di complessità quanto a implementazione, con Three.js è estremamente semplificato, riducendosi alla modifica del parametro castShadow sia per le mesh che per le luci.
+    Nel caso in cui una mesh debba ricevere l'ombra proiettata da un'altra mesh si deve modificare il parametro receiveShadow.
+
+    Abilitando i parametri di <code>castShadow</code> e <code>receiveShadow</code> su tutte le mesh presenti nella scena, il carico computazionale sulla GPU aumenta, portando a un frame rate più basso.
+    Un'ottimizzazione basilare è quella di ridurre il numero di mesh che ricevono l'ombra: così facendo si perde di realismo della scena ma si ottiene una fluidità maggiore, preferibile in un videogioco.
+
+    <h3 class="text-xl font-semibold text-gray-800">Bump map</h3>
+    Anche questa operazione in Three.js è estremamente semplificata, riducendosi all'assegnazione di una bumpMapTexture ad un determinato material.
+
+    Di conseguenza, però, il carico computazionale sulla GPU aumenta, portando a un frame rate più basso.
+
+    <h3 class="text-xl font-semibold text-gray-800">Riflessione</h3>
+    Dato che l'implementazione delle ombre è risultata molto semplice, si è optato per l'aggiungere un'altra tecnica avanzata di rendering: la riflessione su di uno specchio.
+    In questo modo si rende la scena fedele all'originale.
+    <img src="./resources/images/specchio.png" title="specchio" alt="specchio" class="w-3/5 block ml-auto mr-auto py-2">
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<!-- Animazioni -->
+<section id="animazioni" class="flex flex-col gap-2">
+    <h1 class="text-[32px] font-bold text-gray-800">Animazioni</h1>
+    <p>Per la gestione delle animazioni, ho utilizzato la classe AnimationMixer fornita da Three.js. Inoltre, ho collegato al modello delle animazioni direttamente dal sito di Mixamo.
+    </p>
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+
+<!-- Riferimenti -->
+<section id="riferimenti">
+    <h1 class="text-[32px] font-bold text-gray-800">Riferimenti</h1>
+    <p>Per la realizzazione del progetto, oltre alle slide e al codice visto durante il corso, è stato fatto riferimento ai seguenti articoli:</p>
+    <ul class="list-disc ml-8">
+        <li>
+            <a href="https://threejs.org/docs/">
+                ThreeJS Doc</a>
+        </li>
+        <li>
+            <a href="https://threejs.org/docs/#api/en/animation/AnimationMixer">
+                Three JS Animation Mixer</a>
+        </li>
+    </ul>
+</section>
+
+<!-- Divider -->
+<hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
+
+<a href="https://github.com/ElGaleon/ComputerGraphicsProject">
+    Github Repository</a>
+</body>
+</html>

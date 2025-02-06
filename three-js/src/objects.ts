@@ -35,9 +35,9 @@ marbleBumpTexture.wrapS = marbleBumpTexture.wrapT = RepeatWrapping;
 export function loadRoom(scene: Scene, showBumpMap: boolean) {
     mtlLoader.load("./assets/obj/mirror/mirror_room.mtl", function (materials: MTLLoader.MaterialCreator) {
         materials.preload();
-        const materialList = materials.materials;
+        console.log(materials);
       // Moquette     
-        materialList["Moquette"].transparent = false;
+        materials.materials["Moquette"].transparent = false;
         materials.materials["Moquette"].transparent = false;
         // @ts-ignore
         materials.materials["Moquette"].reflectivity = 0;
@@ -49,7 +49,7 @@ export function loadRoom(scene: Scene, showBumpMap: boolean) {
         materials.materials["Moquette"].bumpScale = 0.7;
   
         // Bricks
-        materialList["Brick"].transparent = false;
+        materials.materials["Brick"].transparent = false;
         // @ts-ignore
         materials.materials["Brick"].bumpMap = showBumpMap ? brickBumpTexture : null;
         // @ts-ignore
@@ -58,9 +58,9 @@ export function loadRoom(scene: Scene, showBumpMap: boolean) {
         materials.materials["Brick"].shininess = 10;
 
         // Floor
-        materialList["Floor"].transparent = false;
+        materials.materials["Floor"].transparent = false;
         // Marble
-        materialList["Marble"].transparent = false;
+        materials.materials["Marble"].transparent = false;
         // @ts-ignore
         materials.materials["Marble"].bumpMap = showBumpMap ? marbleBumpTexture : null;
         // @ts-ignore
@@ -68,7 +68,7 @@ export function loadRoom(scene: Scene, showBumpMap: boolean) {
         // @ts-ignore
         materials.materials["Marble"].shininess = 60;
         // Wall
-        materialList["Wall"].transparent = false;
+        materials.materials["Wall"].transparent = false;
         // @ts-ignore
         materials.materials["Wall"].bumpMap = showBumpMap ? wallBumpTexture : null;
         // @ts-ignore
@@ -76,13 +76,18 @@ export function loadRoom(scene: Scene, showBumpMap: boolean) {
         // @ts-ignore
         materials.materials["Wall"].shininess = 10;
         // Frames
-        materialList["Snow"].transparent = false;
-        materialList["Whomps"].transparent = false;
-        materialList["Goomba_Frame"].transparent = false;
-        materialList["Bomb-Omb"].transparent = false;
-        materialList["Bay"].transparent = false;
-    
-      
+        materials.materials["Snow"].transparent = false;
+        materials.materials["Whomps"].transparent = false;
+        materials.materials["Goomba_Frame"].transparent = false;
+        materials.materials["Bomb-Omb"].transparent = false;
+        materials.materials["Bay"].transparent = false;
+
+        materials.materials["Moquette"].needsUpdate = true;
+        materials.materials["Brick"].needsUpdate = true;
+        materials.materials["Marble"].needsUpdate = true;
+        materials.materials["Wall"].needsUpdate = true;
+        console.log(materials);
+
         objLoader.setMaterials(materials);
         objLoader.load("./assets/obj/mirror/mirror_room.obj", function(data) {
             console.log(data);
