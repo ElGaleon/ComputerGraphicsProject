@@ -15,12 +15,12 @@ Si progetti e implementi un'applicazione 3D interattiva composta da almeno un og
 ### Richieste grafiche obbligatorie
 - [x] geometria 3D visualizzata in proiezione prospettica;
 - [x] input utente (si gestisca l'interazione 3D usando sia la tastiera che il mouse e opzionalmente un gamepad);
-- [] illuminazione e sfumatura (gli oggetti 3D devono essere illuminati da almeno una luce);
+- [x] illuminazione e sfumatura (gli oggetti 3D devono essere illuminati da almeno una luce);
 - [x] texture mapping (almeno due oggetti 3D devono avere una texture applicata e almeno una deve essere una foto dell'autore);
-- [] pannello di controllo su schermo (si preveda un pannello di controllo in cui usando testo e grafica 2D si visualizzino le opzioni a disposizione dell'utente, ecc.);
-- [ ] si ponga attenzione che il tutto sia fruibile anche da un dispositivo mobile (gestione eventi touch);
+- [x] pannello di controllo su schermo (si preveda un pannello di controllo in cui usando testo e grafica 2D si visualizzino le opzioni a disposizione dell'utente, ecc.);
+- [x] si ponga attenzione che il tutto sia fruibile anche da un dispositivo mobile (gestione eventi touch);
 ### Richieste grafiche opzionali
-- [ ] advanced rendering (da menu' si preveda l'attivazione/disattivazione di almeno una tecnica di resa avanzata come per esempio: ombre, trasparenze, riflessioni, bump-mapping, ecc.)
+- [x] advanced rendering (da menu' si preveda l'attivazione/disattivazione di almeno una tecnica di resa avanzata come per esempio: ombre, trasparenze, riflessioni, bump-mapping, ecc.)
 
 ## Elementi di Giudizio
 Elementi qualificanti il progetto saranno l'originalità delle scelte (tipo di applicazione, oggetti, scenografia, texture, ecc.) e le funzionalità dal punto di vista grafico del codice realizzato. Si rammenti che il progetto è sulla grafica 3D.
