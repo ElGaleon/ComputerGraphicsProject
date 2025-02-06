@@ -51,10 +51,6 @@ class Shadow {
       this.depthTexture,          // texture
       0);                   // mip level
 
-    this.fov = 60;
-    this.projWidth = 2;
-    this.projHeight = 2;
-    this.zFarProj = 20;
     this.bias = -0.0001;
     this.showFrustum = false;
   }

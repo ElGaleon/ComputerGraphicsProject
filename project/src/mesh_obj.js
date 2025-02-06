@@ -42,11 +42,14 @@ class MeshObj {
    */
   isReady;
 
-  constructor(obj, gl) {
-    this.name = obj.name;               // Obj name, used only for debugging
-    this.objSource = obj.objSource;   // Path to obj file
-    this.mtlSource = obj.mtlSource;   // Path to mtl file
-    this.position = obj.position;       // Where to move the mesh once loaded
+    constructor(obj,gl) {
+        this.name = obj.name;               // Obj name, used only for debugging
+        this.objSource = obj.objSource;   // Path to obj file
+        this.mtlSource = obj.mtlSource;   // Path to mtl file
+        this.position = obj.position;       // Where to move the mesh once loaded
+        this.mesh = [];                         // This object stores all the mesh information
+        this.mesh.sourceMesh = this.objSource; // .sourceMesh is used in load_mesh.js
+        this.mesh.fileMTL = this.mtlSource;    // .fileMTL is used in load_mesh.js
 
     if (obj.initialRotation) {
       this.initialRotation = obj.initialRotation;
@@ -157,7 +160,6 @@ class MeshObj {
   computeModelMatrix(elapsedTime) {
     let modelMatrix = m4.identity();
 
-    // 3️⃣ Applica lo scaling PRIMA della rotazione
     if (this.initialScale) {
       modelMatrix = m4.scale(modelMatrix, this.initialScale, this.initialScale, this.initialScale);
     }
@@ -183,6 +185,4 @@ class MeshObj {
     }
     return modelMatrix;
   }
-
-
 }

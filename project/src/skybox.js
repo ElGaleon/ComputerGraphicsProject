@@ -11,7 +11,6 @@ class SkyBox {
    * @param skybox
    */
   constructor(gl, scene, skybox = null) {
-    console.log(skybox?.nx)
     this.programInfo = webglUtils.createProgramInfo(gl, ["skybox-vertex-shader", "skybox-fragment-shader"]);
     const arrays = this.#createXYQuadVertices(null, Array.prototype.slice.call(arguments, 1));
     this.quadBufferInfo = webglUtils.createBufferInfoFromArrays(gl, arrays);
@@ -103,27 +102,5 @@ class SkyBox {
       ],
       indices: [0, 1, 2, 2, 1, 3],
     };
-  }
-
-  /**
-   * Render SkyBox from a given scene
-   * @param {Scene} scene
-   */
-  render(scene) {
-    // Removing translation from view matrix
-    scene.camera.viewMatrix[12] = 0;
-    scene.camera.viewMatrix[13] = 0;
-    scene.camera.viewMatrix[14] = 0;
-    scene.gl.depthFunc(scene.gl.LEQUAL);
-    scene.gl.useProgram(scene.skybox.programInfo.program);
-
-    webglUtils.setBuffersAndAttributes(scene.gl, scene.skybox.programInfo, scene.skybox.quadBufferInfo);
-    webglUtils.setUniforms(scene.skybox.programInfo, {
-      u_viewDirectionProjectionInverse: m4.inverse(m4.multiply(scene.projectionMatrix, scene.camera.viewMatrix)),
-      u_skybox: scene.skybox.texture,
-      u_lightColor: scene.light.color,
-    });
-    webglUtils.drawBufferInfo(scene.gl, scene.skybox.quadBufferInfo);
-    scene.gl.depthFunc(scene.gl.LESS);
   }
 }

@@ -1,8 +1,7 @@
 # ComputerGraphicsProject
 ---
----
 ### Title
-Golf Club
+Super Mario 64
 ### Author
 - [Christian Galeone](https://github.com/ElGaleon)
 ___

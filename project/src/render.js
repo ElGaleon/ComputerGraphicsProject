@@ -1,3 +1,6 @@
+/**
+ * Render the whole scene by given settings
+ */
 function render() {
   // Resizing the canvas to the window size
   resizeCanvasToDisplaySize(scene.canvas);
@@ -5,6 +8,7 @@ function render() {
 
   scene.gl.enable(scene.gl.CULL_FACE);
   scene.gl.enable(scene.gl.DEPTH_TEST);
+  // Blend
   scene.gl.enable(scene.gl.BLEND);
   scene.gl.blendFunc(scene.gl.SRC_ALPHA, scene.gl.ONE_MINUS_SRC_ALPHA);
 
