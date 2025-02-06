@@ -207,7 +207,7 @@
         <li>Tasto B: balletto</li>
         <li>Tasto M: equilibrio</li>
     </ul>
-    Se non si esegue alcuna azione, Mario sarà in posizione <code>IDLE</code>
+    Se non si esegue alcuna azione, Mario sarà in posizione <code class="text-red-600 bg-gray-200 rounded-md p-1">IDLE</code>
 </section>
 
 <!-- Divider -->
@@ -245,7 +245,7 @@
     <p>Quello che con WebGL base richiedeva un po' più di complessità quanto a implementazione, con Three.js è estremamente semplificato, riducendosi alla modifica del parametro castShadow sia per le mesh che per le luci.
     Nel caso in cui una mesh debba ricevere l'ombra proiettata da un'altra mesh si deve modificare il parametro receiveShadow.
 
-    Abilitando i parametri di <code>castShadow</code> e <code>receiveShadow</code> su tutte le mesh presenti nella scena, il carico computazionale sulla GPU aumenta, portando a un frame rate più basso.
+    Abilitando i parametri di <code class="text-red-600 bg-gray-200 rounded-md p-1">castShadow</code> e <code class="text-red-600 bg-gray-200 rounded-md p-1">receiveShadow</code> su tutte le mesh presenti nella scena, il carico computazionale sulla GPU aumenta, portando a un frame rate più basso.
     Un'ottimizzazione basilare è quella di ridurre il numero di mesh che ricevono l'ombra: così facendo si perde di realismo della scena ma si ottiene una fluidità maggiore, preferibile in un videogioco.</p>
 
     <h3 class="text-xl font-semibold text-gray-800">Bump map</h3>
@@ -259,6 +259,11 @@
     Dato che l'implementazione delle ombre è risultata molto semplice, si è optato per l'aggiungere un'altra tecnica avanzata di rendering: la riflessione su di uno specchio.
     In questo modo si rende la scena fedele all'originale.
     <img src="./resources/images/specchio.png" title="specchio" alt="specchio" class="w-3/5 block ml-auto mr-auto py-2">
+
+    <h3 class="text-xl font-semibold text-gray-800">Proprietà dei materiali</h3>
+    <p>Per rendere la scena il più realistica possibile, sono state applicate diverse proprietà ai materiali, in base alla loro "natura". Al pavimento è stata data una proprietà riflettente della luce più alta rispetto al tappeto, la cui luce viene attenuata.
+    Questa soluzione è stata possibile grazie alle proprietà dei materiali <code class="text-red-600 bg-gray-200 rounded-md p-1">shininess</code> e <code class="text-red-600 bg-gray-200 rounded-md p-1">reflectivity</code>.</p>
+    <img src="./resources/images/materials-light.png" alt="materiali" class="w-3/5 block ml-auto mr-auto py-2">
 </section>
 
 <!-- Divider -->
