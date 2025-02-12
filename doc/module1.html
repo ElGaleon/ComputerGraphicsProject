@@ -5,13 +5,14 @@
     <meta name="generator" content="pandoc" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 
-    <title>Documentazione</title>
+    <title>Modulo 1</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../project/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../project/css/output.css">
     <link rel="stylesheet" type="text/css" href="./style/style.css">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <link rel="icon" href="../project/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../project/icon.png">
 </head>
 
 <body class="bg-gray-50 py-8 px-16 flex flex-col gap-4 items-center">
@@ -201,8 +202,25 @@
     su Web, invece, sono venuti fuori alcuni effetti che sono un po' fastidiosi. <br/>
     In ogni caso ho deciso di tenere anche questa scena per mostrare il frutto del mio lavoro.
     <div class="flex flex-row justify-center items-center gap-2">
-        <img src="./resources/images/castle.png" alt="Castle" class="w-1/2 block ml-auto mr-auto py-2">
-        <img src="./resources/images/castle-ref.jpeg" alt="Castle-Ref" class="w-1/2 block ml-auto mr-auto py-2">
+        <div class="flex flex-col justify-center items-center w-1/2">
+        <img src="./resources/images/castle.png" alt="Castle" class="block ml-auto mr-auto py-2">
+            <span class="text-gray-500">Risultato su WebGL</span>
+        </div>
+            <div class="flex flex-col justify-center items-center w-1/2">
+        <img src="./resources/images/castle-ref.jpeg" alt="Castle-Ref" class="block ml-auto mr-auto py-2">
+                <span class="text-gray-500">Scena di riferimento</span>
+            </div>
+    </div>
+    <div class="flex flex-row justify-center items-center gap-2">
+        <div class="flex flex-col justify-center items-center w-1/2">
+            <img src="./resources/images/castle-blender.png" alt="Castle Blender" class="w-full block ml-auto mr-auto py-2">
+            <span class="text-gray-500">Render n.1 del Castello su Blender</span>
+        </div>
+        <div class="flex flex-col justify-center items-center w-1/2">
+        <img src="./resources/images/castle-1-blender.png" alt="Castle 1 Blender" class="w-full block ml-auto mr-auto py-2">
+            <span class="text-gray-500">Render n.2 del Castello su Blender</span>
+        </div>
+
     </div>
 </section>
 
@@ -282,12 +300,12 @@
         </div>
     </div>
     <h1 class="text-lg font-semibold text-gray-800">Metodi</h1>
-    <p>La classe scene non presenta metodi, ma soltanto un getter utilizzato per calcolare la projection matrix della scena utilizzando la libreria m4.js.</p>
+    <p>La classe scene non presenta metodi, ma soltanto un getter utilizzato per calcolare la projection matrix della scena utilizzando la libreria  <code class="text-red-600 bg-gray-200 rounded-md p-1">m4.js</code>.</p>
     <!-- Code Block -->
     <div class="relative max-w-2xl mx-auto mt-8">
         <div class="bg-gray-900 text-white p-1 rounded-md">
             <pre id="code" class="text-gray-300">
-        <code class="text-red-600 bg-gray-200 rounded-md p-1">
+        <code class="rounded-md p-1">
             <span class="text-orange-500">get</span> <span class="text-blue-500">projectionMatrix</span>() {
             <span class="text-orange-500">return</span> m4.perspective(
             <span class="text-blue-500">degToRad</span>(scene.camera.fieldOfView),
@@ -332,7 +350,7 @@
 <hr class="my-12 h-0.5 border-t-0 bg-neutral-200 w-full" />
 
 <!-- Render.js -->
-<section id="render" class="flex flex-col gap-2">
+<section id="render" class="flex flex-col gap-3">
     <h1 class="text-[32px] font-bold text-gray-800">Render.js</h1>
     <p>Il file <code class="text-red-600 bg-gray-200 rounded-md p-1">render.js</code> viene utilizzato per renderizzare l'intera scena. Per motivi di scope, questa funzione è stata messa all'esterno della classe <code class="text-red-600 bg-gray-200 rounded-md p-1">Scene</code>
     </p>
@@ -367,7 +385,10 @@
     </ul>
     <img src="resources/images/code/render.png" alt="Render Function" class="w-1/2 block ml-auto mr-auto py-2">
     <p>Per il render è stato attivato <code class="text-red-600 bg-gray-200 rounded-md p-1">gl.BLEND</code> per cui, se un materiale di un oggetto ha opacità minore di uno, questo verrà disegnato con una trasparenza.</p>
-    <img src="resources/images/heart.png" alt="Heart" class="block ml-auto mr-auto py-2">
+    <div class="flex flex-col justify-center items-center w-full">
+        <img src="./resources/images/heart.png" alt="Heart" class=" block ml-auto mr-auto py-2">
+        <span class="text-gray-500">Cuore presente nella scena "<i>Bowser in the Sky</i>"</span>
+    </div>
 </section>
 
 <!-- Divider -->
