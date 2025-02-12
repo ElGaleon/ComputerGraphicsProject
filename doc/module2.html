@@ -207,7 +207,7 @@
         <li>Tasto B: balletto</li>
         <li>Tasto M: equilibrio</li>
     </ul>
-    Se non si esegue alcuna azione, Mario sarà in posizione <code class="text-red-600 bg-gray-200 rounded-md p-1">IDLE</code>
+    <p>Se non si esegue alcuna azione, Mario sarà in posizione <code class="text-red-600 bg-gray-200 rounded-md p-1">IDLE</code>.</p>
 </section>
 
 <!-- Divider -->
@@ -275,9 +275,18 @@
     <p>Per la gestione delle animazioni, ho utilizzato la classe AnimationMixer fornita da Three.js. Inoltre, ho collegato al modello delle animazioni direttamente dal sito di Mixamo.
     </p>
     <div class="flex flex-row justify-center items-center gap-2">
-        <img src="./resources/gifs/idle.gif" alt=Idle" class="w-1/3 block ml-auto mr-auto py-2">
-        <img src="./resources/gifs/jump.gif" alt=Jump" class="w-1/3 block ml-auto mr-auto py-2">
-        <img src="./resources/gifs/dance.gif" alt=Dance" class="w-1/3 block ml-auto mr-auto py-2">
+        <div class="flex flex-col justify-center items-center w-1/3">
+            <img src="./resources/gifs/idle.gif" alt=Idle" class="w-full block ml-auto mr-auto py-2">
+        <span class="text-gray-500">Animazione <code class="text-red-600 bg-gray-200 rounded-md p-1">IDLE</code></span>
+    </div>
+        <div class="flex flex-col justify-center items-center w-1/3">
+            <img src="./resources/gifs/jump.gif" alt=Idle" class="w-full block ml-auto mr-auto py-2">
+            <span class="text-gray-500">Animazione <code class="text-red-600 bg-gray-200 rounded-md p-1">JUMP</code></span>
+        </div>
+        <div class="flex flex-col justify-center items-center w-1/3">
+            <img src="./resources/gifs/dance.gif" alt=Idle" class="w-full block ml-auto mr-auto py-2">
+            <span class="text-gray-500">Animazione <code class="text-red-600 bg-gray-200 rounded-md p-1">DANCE</code></span>
+        </div>
     </div>
 </section>
 
