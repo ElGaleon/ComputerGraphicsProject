@@ -167,7 +167,7 @@ function animate() {
 const keysPressed = {}
 document.addEventListener("keydown", function(event) {
     if (event.shiftKey && characterControls) {
-        characterControls.swithRunToToggle()
+        characterControls.switchRunToToggle()
     } else {
         (keysPressed as any)[event.key.toLowerCase()] = true
     }

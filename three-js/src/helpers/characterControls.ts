@@ -58,7 +58,7 @@ export class CharacterControls {
             this.camera = camera;
         }
 
-    public swithRunToToggle() {
+    public switchRunToToggle() {
         this.toggleRun = !this.toggleRun;
     }
 
@@ -70,7 +70,7 @@ export class CharacterControls {
         } else if (keysPressed["ArrowDown"]) {
             play = 'Slide'
         } else if (keysPressed["m"]) {
-            play = 'Moonwalk.001'
+            play = 'Moonwalk'
         }
         else if (keysPressed["b"]) {
             play = 'Dance'
@@ -105,7 +105,7 @@ if (this.currentAction != play) {
         this.rotateQuarternion.setFromAxisAngle(this.rotateAngle, angleYCameraDirection + directionOffset);
         this.model.quaternion.rotateTowards(this.rotateQuarternion, 0.2);
 
-        // Calculate firection
+        // Calculate direction
         this.camera.getWorldDirection(this.walkDirection);
         this.walkDirection.y = 0;
         this.walkDirection.normalize();
